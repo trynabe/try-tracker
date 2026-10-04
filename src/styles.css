@@ -80,3 +80,5 @@
 
 .sidebar .brand,.auth-story .brand{min-height:37px}
 .sidebar .brand{justify-content:center;width:100%;text-align:center}
+
+@media(min-width:701px){.main-content.account-content{max-width:none}.account-content>.profile-page,.account-content>.settings-layout.settings-only{width:100%;max-width:none;min-width:0}}
