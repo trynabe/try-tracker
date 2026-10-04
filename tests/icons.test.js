@@ -1,0 +1,6 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {resolveIcon,iconChoices} from '../src/iconCatalog.js';
+import {normalizeBackup,splitSession} from '../src/domain.js';
+test('all selectable icon IDs round-trip and legacy emoji map to equivalent icons',()=>{for(const icon of iconChoices)assert.equal(resolveIcon(icon.id),icon.id);assert.equal(resolveIcon('🏋️'),'exercise');assert.equal(resolveIcon('🧘‍♂️'),'meditate');assert.equal(resolveIcon('🎮'),'gaming');assert.equal(resolveIcon('📚'),'book');assert.equal(resolveIcon('not-an-icon'),'target');});
+test('backup migration retains chosen icons and converts legacy emoji',()=>{const data=normalizeBackup({data:{habits:[{id:'h',name:'Study',emoji:'study',logs:[]}],subjects:[{id:'s',name:'Exercise',emoji:'🏋️'}],profile:[{id:'profile',avatar:'gaming'}],focusSessions:[{id:'f',emoji:'📚',subject:'Study',timestamp:Date.now(),durationSeconds:60}]}});assert.equal(data.habits[0].emoji,'study');assert.equal(data.subjects[0].emoji,'exercise');assert.equal(data.profile[0].avatar,'gaming');assert.equal(data.focusSessions[0].emoji,'book');const start=Date.now();assert.equal(splitSession({id:'timer',emoji:'health',subject:'Health',startedAt:start},start+60000)[0].emoji,'health');});
