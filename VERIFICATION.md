@@ -1,5 +1,15 @@
 # Verification — 2026-10-10
 
+Mobile navigation with central Add task: production build passing; 26 automated tests passing.
+
+- Replaced the mobile tab bar with a symmetric layout and a raised 56px Add task button at its center. It opens the existing task editor from any page. Today and Tasks use the central action; other pages retain their own entity add action beside the heading.
+- Preserved the selected shortcut order and the 1–5-page preferences. Narrow bars show the first three shortcuts, with all seven pages and Settings available through More. Wider bars display all selected shortcuts. Updated the Thai/English settings description to explain this behavior.
+- Checked 320px, 390px, and 600px: the Add button measured 56 × 56px and was centered exactly; navigation touch targets were at least 46 × 48px with no document horizontal overflow. At 1280px, the mobile bar remained hidden and the desktop add action remained visible.
+- Verified navigation to Habits and Tasks, opening/canceling Add task from Habits and Schedule, and opening Schedule through More. More displayed all seven pages and marked itself active for an overflow page. Browser warning/error logs were empty. No user records were changed for verification.
+- Screenshot: outputs/mobile-nav-center-task.png. Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier habit date toolbar — 2026-10-10
+
 Habit date toolbar: production build passing.
 
 - Moved Today to the right edge of the Habits date toolbar on desktop. The date input remains 320px wide; both controls are 48px high.
