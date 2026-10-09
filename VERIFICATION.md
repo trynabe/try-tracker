@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+Equal Cancel/Save buttons: production build passing.
+
+- Shared modal footers and inline form footers now use two equal-width columns. This applies to all entity add/edit editors and profile forms.
+- Opened the add editors from Today, Habits, Tasks, Focus, Notes, and Schedule at 320px. Cancel and Save each measured 122.2 × 48px and stayed visible with no document horizontal overflow. In the task editor, both buttons measured 157 × 48px at 390px and 230 × 48px at 1280px.
+- Canceled all editor checks without changing records. Browser warning/error logs were empty. Screenshot: outputs/editor-buttons-equal.png. Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier five-button contextual mobile navigation — 2026-10-10
+
 Five equal mobile navigation buttons with contextual Add: production build passing; 26 automated tests passing.
 
 - Mobile navigation always has five buttons: three ordered shortcuts, a central Add action, and More. All five buttons measure 48 × 48px with a 14px corner radius. The central action sits on the same row without a circular shape, raised position, or halo.
