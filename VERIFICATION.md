@@ -1,5 +1,19 @@
 # Verification — 2026-10-10
 
+Focus category layout fix and consolidated usage history: 26 automated tests passing; production build passing.
+
+- Focus category rows reserve space for the name. In narrow category panels, Start/Edit/Delete move to a second row aligned to the right; wider panels retain one row. The layout responds to the panel width, including narrow desktop columns. Mobile buttons remain 44 × 44px.
+- Checked Thai category names at 320px, 390px, 851px, 1102px, 1280px, and 1600px. Names stayed readable and delete buttons stayed at the right. A long Thai category name wrapped onto two normal lines at 320px; its original name was restored after testing.
+- Moved habit heatmaps, current/best streaks, historical date selection, completed-task history, and saved focus history into the Habits/Tasks/Focus history tabs on Insights. Today and Habits show current-day records; Focus shows the active timer and categories. Habit card/list selection and edit/delete/count/reset controls remain available.
+- Historical habit editing updates the selected date while preserving today's value. Verified a partial increment on October 6, its heatmap state, reset back to the original value, and today's unchanged October 10 value. Future days, dates before creation, and unscheduled days cannot be changed through the history cards.
+- Completed-task history uses completion dates, newest first, with a created-date fallback for legacy completed tasks. A regression test covers 7/30-day filtering, older-created tasks completed recently, future dates, and preserving the source task order.
+- Verified all three history tabs at 320px and 1280px, 7/30-day focus history, the Habits-to-Insights shortcut, and Thai/English labels. No document horizontal overflow occurred. A fresh browser document loaded Insights and retained the restored demo values with no warning/error logs.
+- Browser mutations used the separate localhost demo. User records on 127.0.0.1 were not modified for testing. Screenshots are saved in outputs/focus-layout-mobile-fixed.png and outputs/insights-history.png.
+
+Limitations: physical iPhone Safari and live cloud synchronization were not tested in this fix. Build retains the existing large JavaScript chunk warning. No push or deployment was performed.
+
+## Earlier HabitKit-inspired redesign — 2026-10-10
+
 HabitKit-inspired redesign: 25 automated tests passing; production build passing.
 
 - Updated the shared visual system across Today, Habits, Tasks, Focus, Schedule, Notes, Insights, Profile, Settings, Auth, and editor dialogs. Existing account, cloud storage, backup, task, schedule, note, and timer handlers remain connected.

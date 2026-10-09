@@ -172,7 +172,7 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .subtask-list {gap:8px;margin-top:13px;padding-top:12px;border-top:1px solid var(--border)}
 .subtask-list label {font-size:.78rem;align-items:flex-start}
 .subtask-list input {margin-top:4px;accent-color:var(--highlight);width:15px;height:15px;flex-shrink:0}
-.focus-layout {grid-template-columns:1fr 1fr;gap:24px}
+.focus-layout {grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
 .focus-panel {padding:26px;min-width:0;width:100%}
 .focus-panel .segmented {margin-bottom:16px}
 .focus-duration-fields {margin-top:16px}
@@ -183,15 +183,21 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .timer-circle .eyebrow {color:var(--muted);font-size:.61rem;letter-spacing:.1em}
 .timer-circle>span:last-child {font-size:.76rem}
 .timer-controls {margin-top:18px;gap:9px}
-.subject-row {--item-ink:color-mix(in srgb,var(--item-color) 60%,#18181d);flex-wrap:nowrap;gap:12px;padding:15px 0;min-width:0}
+.focus-categories {min-width:0;container-type:inline-size}
+.subject-row {--item-ink:color-mix(in srgb,var(--item-color) 60%,#18181d);display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:8px 12px;padding:15px 0;min-width:0}
 :root[data-theme=dark] .subject-row {--item-ink:var(--item-color)}
 .subject-row .emoji-tile {background:color-mix(in srgb,var(--item-color) 12%,transparent);color:var(--item-ink);border-radius:12px;width:42px;height:42px;flex-shrink:0}
 .subject-row .row-main {min-width:0;flex:1}
+.subject-row .row-main>strong {overflow-wrap:break-word;word-break:normal;line-height:1.6}
 .subject-row .row-meta {color:var(--muted);font-variant-numeric:tabular-nums}
 .subject-row.active {background:color-mix(in srgb,var(--item-color) 8%,transparent);padding:13px 8px;border-radius:12px}
-.subject-actions {gap:2px;display:flex;align-items:center;flex-shrink:0;margin-left:auto}
-.subject-actions .icon-btn {width:32px;min-width:32px;height:40px;min-height:40px}
+.subject-actions {grid-column:1/-1;justify-self:end;gap:4px;display:flex;align-items:center;flex-shrink:0;margin-left:0}
+.subject-actions .icon-btn {width:40px;min-width:40px;height:44px;min-height:44px}
 .subject-actions .icon-btn:first-child {color:var(--item-ink)}
+@container (min-width:340px) {
+ .subject-row {grid-template-columns:auto minmax(0,1fr) auto}
+ .subject-actions {grid-column:auto}
+}
 .history-list>div:not(.empty) {gap:12px;padding:14px 0}
 .history-list .emoji-tile {width:36px;height:36px;border-radius:11px;background:var(--surface-2);color:var(--highlight)}
 .history-list .row-main>strong {font-size:.78rem}
@@ -343,8 +349,6 @@ dialog.modal:not([open]) {display:none}
  .dashboard-habits {display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
  .habit-collection-items.cards {grid-template-columns:1fr}
  .notes-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
- .focus-layout>.stack {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
- .subject-actions {gap:0}.subject-actions .icon-btn {min-width:28px;width:28px}
  .schedule-day-picker .weekday-full {display:none}.schedule-day-picker .weekday-short {display:inline}
 }
 @media (max-width:850px) {
@@ -414,10 +418,10 @@ dialog.modal:not([open]) {display:none}
  .focus-panel {padding:22px}.focus-panel .section-head h2 {font-size:.85rem}
  .timer-orbit {max-width:250px;margin:28px auto}.timer-circle strong {font-size:2.4rem}
  .timer-circle>span:last-child {font-size:.73rem}.timer-circle .eyebrow {font-size:.59rem}
- .subject-row {gap:10px;padding:15px 0;flex-wrap:nowrap}
+ .subject-row {gap:8px 10px;padding:15px 0}
  .subject-row .emoji-tile {width:38px;height:38px;border-radius:11px}
  .subject-row .row-main {min-width:0}.subject-row .row-main>strong {font-size:.81rem}
- .subject-actions {gap:1px}.subject-actions .icon-btn {width:34px;min-width:34px;height:44px;min-height:44px}
+ .subject-actions {gap:4px}.subject-actions .icon-btn {width:44px;min-width:44px;height:44px;min-height:44px}
  .history-list>div>strong {font-size:.69rem}.history-list .row-main>strong {font-size:.75rem}
  .schedule-day-picker {order:2;flex-basis:100%;width:100%;gap:5px}
  .schedule-day-picker button {min-height:44px;padding:8px 2px;font-size:.72rem;border-radius:10px}
@@ -483,7 +487,7 @@ dialog.modal:not([open]) {display:none}
  .habit-complete {width:39px;height:39px}.habit-history-grid {gap:2px}
  .history-weekdays {width:15px}.history-months {margin-left:21px}
  .habit-chips>span {padding:2px 5px;font-size:.55rem}.habit-card-tools .icon-btn {width:31px;min-width:31px}
- .subject-row {gap:8px}.subject-actions .icon-btn {width:30px;min-width:30px}
+ .subject-row {gap:8px}
  .subject-row .emoji-tile {width:33px;height:36px}.subject-row .row-main>strong {font-size:.75rem}
  .modal-body {padding:17px}.modal>header {padding-inline:17px}
  .schedule-color-panel {padding:7px 5px}.schedule-color-picker {gap:3px}
@@ -497,3 +501,23 @@ dialog.modal:not([open]) {display:none}
 .page-habits>.toolbar>input[type=date] {width:100%;max-width:none;min-height:44px}
 .page-habits>.toolbar>.secondary {min-height:44px}
 .page-habits>.page-heading .eyebrow,.page-tasks>.page-heading .eyebrow,.page-focus>.page-heading .eyebrow,.page-schedule>.page-heading .eyebrow,.page-notes>.page-heading .eyebrow,.page-insights>.page-heading .eyebrow,.page-settings>.page-heading .eyebrow,.page-profile>.page-heading .eyebrow {display:none}
+
+.habit-page-toolbar {justify-content:space-between;gap:12px;flex-wrap:wrap}
+.habit-page-toolbar>span {font-size:.8rem}
+.usage-history {margin:26px 0;min-width:0}
+.usage-history-heading {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.usage-history-heading h2 {margin:0;font-size:1rem}
+.history-tabs {margin:0!important;min-width:0}
+.history-tabs button {min-width:70px;min-height:42px}
+.history-caption {font-size:.76rem;line-height:1.7;margin:0 0 16px}
+.history-date-toolbar {gap:10px;flex-wrap:wrap;align-items:center}
+.history-selected-date {font-size:.78rem;margin-left:auto}
+.history-duration {font-size:.8rem;white-space:nowrap;font-variant-numeric:tabular-nums;flex-shrink:0}
+.task-history-list .row-meta {flex-wrap:wrap}
+@media (max-width:700px) {
+ .usage-history-heading {gap:12px}
+ .history-tabs {width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+ .history-tabs button {min-width:0}
+ .history-selected-date {width:100%;margin:0}
+ .usage-history .habit-collection-items.cards {grid-template-columns:minmax(0,1fr)}
+}

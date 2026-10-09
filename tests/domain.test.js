@@ -19,3 +19,22 @@ test('duplicate subtask names retain independent IDs and completion state after 
 test('editing repairs existing duplicate subtask IDs while preserving completion state',()=>{const list=reconcileSubtasks('Repeat\nRepeat',[{id:'a',text:'Repeat',done:true},{id:'a',text:'Repeat',done:false}]);assert.notEqual(list[0].id,list[1].id);assert.deepEqual(list.map(s=>s.done),[true,false]);});
 
 test('timer retains saved elapsed seconds when resumed before the next clock tick',()=>{const timer={startedAt:10000,elapsedBefore:52,paused:false};assert.equal(timerElapsedSeconds(timer,9500),52);assert.equal(timerElapsedSeconds(timer,12000),54);assert.equal(timerElapsedSeconds({...timer,paused:true},20000),52);assert.equal(timerElapsedSeconds(null,20000),0);});
+
+test('task history uses completion dates, sorts newest first and respects the selected period',()=>{
+ const data=emptyData();
+ const timestamp=date=>new Date(date+'T12:00:00').getTime();
+ data.tasks=[
+  {id:'older-created',done:true,createdAt:timestamp('2026-08-01'),completedAt:timestamp('2026-10-09')},
+  {id:'recent-created',done:true,createdAt:timestamp('2026-10-09'),completedAt:timestamp('2026-10-01')},
+  {id:'latest',done:true,createdAt:timestamp('2026-10-08'),completedAt:timestamp('2026-10-10')},
+  {id:'legacy',done:true,createdAt:timestamp('2026-10-08')},
+  {id:'open',done:false,createdAt:timestamp('2026-10-10')},
+  {id:'future',done:true,createdAt:timestamp('2026-10-09'),completedAt:timestamp('2026-10-11')}
+ ];
+ const order=data.tasks.map(task=>task.id);
+ const week=statistics(data,7,'2026-10-10');
+ assert.deepEqual(week.completedTasks.map(task=>task.id),['latest','older-created','legacy']);
+ assert.equal(week.tasksDone,week.completedTasks.length);
+ assert.deepEqual(statistics(data,30,'2026-10-10').completedTasks.map(task=>task.id),['latest','older-created','legacy','recent-created']);
+ assert.deepEqual(data.tasks.map(task=>task.id),order);
+});
