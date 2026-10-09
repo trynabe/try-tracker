@@ -1,4 +1,20 @@
-# Verification — 2026-10-05
+# Verification — 2026-10-10
+
+HabitKit-inspired redesign: 25 automated tests passing; production build passing.
+
+- Updated the shared visual system across Today, Habits, Tasks, Focus, Schedule, Notes, Insights, Profile, Settings, Auth, and editor dialogs. Existing account, cloud storage, backup, task, schedule, note, and timer handlers remain connected.
+- Habit cards show 20 Monday-first weeks of actual logs, partial completion, inactive days, current/best streaks, and daily or weekly cadence. Selecting a tile opens that historical date. Card/list switching retains the existing count, reset, edit, and delete controls.
+- Habit colors and optional descriptions persist through edits and backups. Legacy emoji and normalized icon IDs use the same fallback colors.
+- Editor Save/Cancel controls remain visible outside the scrollable form body. A saved activity retained its weekday, 09:00–10:00 time, and chosen green tag. Start/end/day fields were all 50px high at 320px width, including a reduced 500px viewport height.
+- In an isolated localhost demo, verified habit creation, color selection, completion, editing without losing its completed log, historical date selection, card/list switching, and stopwatch start/pause/resume/save. User data on 127.0.0.1 was not used for these mutations.
+- All eight workspace pages rendered without document horizontal overflow at 320px and 1280px. Profile rendered at desktop size; mobile layouts and form widths were inspected at 390px. Checked Thai/English and dark/light themes.
+- Mobile Focus panels stretch across the available width; category delete controls remain at the right. Schedule retains seven short weekday buttons and seven tag colors plus a circular custom-color control.
+- Mobile add buttons now sit beside the page title so they do not cover history tiles or row controls. Verified that the moved habit button opens the complete editor.
+- Browser warning/error logs were empty after the final edit/save check.
+
+Limitations: physical iPhone Safari, live Supabase/Auth, notification permission delivery, and a full Pomodoro/break cycle were not tested in this redesign run. Build retains the existing large JavaScript chunk warning. No push or deployment was performed.
+
+## Previous verification — 2026-10-05
 
 Automated checks: 20 tests passing; production build passing.
 

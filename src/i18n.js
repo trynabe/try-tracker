@@ -1,4 +1,5 @@
 const strings={
+habitHistory:['ประวัติการทำ — เลือกช่องเพื่อดูวันนั้น','History — select a tile to view that day'],habitColor:['สีของนิสัย','Habit color'],cardsView:['แสดงแบบการ์ด','Card view'],listView:['แสดงแบบรายการ','List view'],description:['คำอธิบาย','Description'],optional:['ไม่จำเป็นต้องกรอก','Optional'],times:['ครั้ง','times'],
 tagColor:['สีแท็ก','Tag color'],autoColor:['อัตโนมัติ','Automatic'],customColor:['สีอื่น…','Custom color…'],colorViolet:['สีม่วง','Violet'],colorIndigo:['สีคราม','Indigo'],colorBlue:['สีน้ำเงิน','Blue'],colorGreen:['สีเขียว','Green'],colorOrange:['สีส้ม','Orange'],colorRed:['สีแดง','Red'],colorYellow:['สีเหลือง','Yellow'],colorRainbow:['สีม่วงอมชมพู','Purple pink'],
 editProfilePhoto:['เปลี่ยนรูปโปรไฟล์','Change profile photo'],editCoverPhoto:['เปลี่ยนภาพปก','Change cover photo'],coverPhoto:['ภาพปกโปรไฟล์','Profile cover'],removeCoverPhoto:['ลบภาพปก','Remove cover photo'],imagePreview:['ตัวอย่างรูปภาพ','Image preview'],
 profileAccountDesc:['ข้อมูลส่วนตัวและรายละเอียดบัญชีของคุณ','Your personal information and account details'],
