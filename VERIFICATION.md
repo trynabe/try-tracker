@@ -1,9 +1,10 @@
 # Verification — 2026-10-10
 
-Desktop habit date toolbar: production build passing.
+Habit date toolbar: production build passing.
 
 - Moved Today to the right edge of the Habits date toolbar on desktop. The date input remains 320px wide; both controls are 48px high.
 - Checked alignment at 850px and 1280px, and retained the mobile layout at 390px. No document horizontal overflow occurred; browser warning/error logs were empty. Screenshot: outputs/habit-date-button-aligned.png. Changes remain local.
+- Mobile Today and date controls now both measure 48px high and align on the same row at 320px and 390px. No document horizontal overflow occurred. Screenshot: outputs/habit-date-button-mobile.png.
 
 ## Earlier Today history and desktop layout — 2026-10-10
 

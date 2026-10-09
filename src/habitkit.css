@@ -524,9 +524,9 @@ dialog.modal:not([open]) {display:none}
 .history-tabs button {min-width:70px;min-height:42px}
 .history-caption {font-size:.76rem;line-height:1.7;margin:0 0 16px}
 .history-date-toolbar {gap:10px;flex-wrap:wrap;align-items:center}
+.page-habits>.history-date-toolbar>input[type=date],.page-habits>.history-date-toolbar>.secondary {height:48px;min-height:48px}
 @media (min-width:701px) {
  .page-habits>.history-date-toolbar {max-width:none;grid-template-columns:minmax(0,320px) auto;justify-content:space-between}
- .page-habits>.history-date-toolbar>input[type=date],.page-habits>.history-date-toolbar>.secondary {height:48px;min-height:48px}
 }
 .history-duration {font-size:.8rem;white-space:nowrap;font-variant-numeric:tabular-nums;flex-shrink:0}
 .task-history-list .row-meta {flex-wrap:wrap}
