@@ -1,5 +1,16 @@
 # Verification — 2026-10-10
 
+Five equal mobile navigation buttons with contextual Add: production build passing; 26 automated tests passing.
+
+- Mobile navigation always has five buttons: three ordered shortcuts, a central Add action, and More. All five buttons measure 48 × 48px with a 14px corner radius. The central action sits on the same row without a circular shape, raised position, or halo.
+- The central Add action uses the current page's existing editor: Tasks on Today/Tasks, Habits on Habits, focus categories on Focus, notes on Notes, and activities on Schedule. Schedule carries over the selected weekday. Pages without a create action keep Add disabled; verified this on Insights. Removed the duplicate mobile heading add actions; desktop add actions remain available.
+- Selected shortcut preferences remain in their original order; the first three appear in the bar, filled with default pages if fewer than three are selected. More still opens all pages. Updated the Thai/English navigation settings description.
+- Checked 320px, 390px, and 600px: exactly five equal 48px buttons with a 14px radius, centered Add, and no document horizontal overflow. At 1280px, the mobile bar remained hidden.
+- Opened and canceled the correct editor from all six pages with create actions. Selecting Tuesday on Schedule and then Add activity set the form weekday to Tuesday (2). Browser warning/error logs were empty. No user records were changed for verification.
+- Screenshot: outputs/mobile-nav-contextual.png. Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier mobile navigation with central Add task — 2026-10-10
+
 Mobile navigation with central Add task: production build passing; 26 automated tests passing.
 
 - Replaced the mobile tab bar with a symmetric layout and a raised 56px Add task button at its center. It opens the existing task editor from any page. Today and Tasks use the central action; other pages retain their own entity add action beside the heading.

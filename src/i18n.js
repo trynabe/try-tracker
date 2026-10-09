@@ -23,6 +23,6 @@ Object.assign(ideaThai,{'Learn Something New':'เรียนรู้สิ่
 
 strings.confirm=['ยืนยัน','Confirm'];
 
-Object.assign(strings,{bottomTabs:['เมนูด้านล่างบนมือถือ','Mobile bottom navigation'],bottomTabsDesc:['เลือกได้ 1–5 หน้าและปรับลำดับได้ จอเล็กแสดง 3 หน้าแรก ปุ่ม + ตรงกลางใช้เพิ่มงาน และเพิ่มเติมเปิดทุกหน้า','Choose and order 1–5 pages. Small screens show the first 3. The center + adds a task, and More opens every page.'],bottomTabsMin:['เลือกอย่างน้อย 1 หน้า','Keep at least one page selected.'],workspaceTitle:['Workspace','Workspace'],moveEarlier:['เลื่อนไปก่อนหน้า','Move earlier'],moveLater:['เลื่อนไปถัดไป','Move later']});
+Object.assign(strings,{bottomTabs:['เมนูด้านล่างบนมือถือ','Mobile bottom navigation'],bottomTabsDesc:['เลือกได้ 1–5 หน้าและปรับลำดับได้ แถบมี 5 ปุ่ม แสดงทางลัด 3 หน้าแรก โดยเติมหน้าเริ่มต้นถ้าเลือกไม่ครบ ปุ่ม + เพิ่มรายการตามหน้าปัจจุบัน และเพิ่มเติมเปิดทุกหน้า','Choose and order 1–5 pages. The bar has 5 buttons: your first 3 shortcuts, filled with default pages if needed, a contextual +, and More to open every page.'],bottomTabsMin:['เลือกอย่างน้อย 1 หน้า','Keep at least one page selected.'],workspaceTitle:['Workspace','Workspace'],moveEarlier:['เลื่อนไปก่อนหน้า','Move earlier'],moveLater:['เลื่อนไปถัดไป','Move later']});
 
 strings.more=['เพิ่มเติม','More'];

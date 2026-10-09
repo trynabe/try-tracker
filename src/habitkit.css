@@ -477,18 +477,16 @@ dialog.modal:not([open]) {display:none}
  .form-footer {margin-top:18px;gap:10px}.form-footer button {min-height:49px;font-size:.88rem}
  .mobile-tabbar {
   position:fixed;left:20px;right:20px;bottom:calc(14px + env(safe-area-inset-bottom));
-  display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);align-items:center;
-  min-height:74px;padding:8px;background:color-mix(in srgb,var(--surface) 96%,transparent);
-  border:1px solid var(--border);border-radius:24px;gap:8px;box-shadow:0 5px 24px #0002;
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;
+  min-height:62px;padding:6px;background:color-mix(in srgb,var(--surface) 96%,transparent);
+  border:1px solid var(--border);border-radius:20px;gap:4px;box-shadow:0 5px 24px #0002;
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
  }
- .mobile-nav-side {display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);min-width:0;gap:0}
- .mobile-tabbar button {color:var(--muted);border-radius:14px;min-height:48px;padding:5px 0}
+ .mobile-tabbar button {width:48px;height:48px;min-height:48px;justify-self:center;color:var(--muted);border-radius:14px;padding:0}
  .mobile-tabbar button.active {background:var(--surface-2);color:var(--highlight)}
- .mobile-tabbar button svg {width:22px;height:22px}
- .mobile-tabbar>.mobile-nav-add-task {width:56px;height:56px;min-height:56px;padding:0;border-radius:50%;background:var(--highlight);color:var(--button-ink);position:relative;top:-10px;box-shadow:0 5px 16px color-mix(in srgb,var(--highlight) 25%,transparent),0 0 0 6px var(--surface)}
- .mobile-tabbar>.mobile-nav-add-task:hover {background:color-mix(in srgb,var(--highlight) 85%,var(--text))}
- .mobile-tabbar>.mobile-nav-add-task svg {width:28px;height:28px}
+ .mobile-tabbar button svg {width:23px;height:23px}
+ .mobile-tabbar>.mobile-nav-add {background:var(--highlight);color:var(--button-ink);box-shadow:none}
+ .mobile-tabbar>.mobile-nav-add:hover {background:color-mix(in srgb,var(--highlight) 85%,var(--text))}
  .mobile-add-item {position:static;flex-shrink:0;width:42px;height:42px;margin-top:5px;border-radius:13px;background:var(--highlight);color:var(--button-ink);border:0;box-shadow:none}
  .mobile-add-item svg {width:23px;height:23px}
  .floating-timer {bottom:calc(108px + env(safe-area-inset-bottom));right:20px;max-width:calc(100% - 40px)}
