@@ -74,9 +74,15 @@
 
 .habit-day-picker .weekday-short{display:none}@media(max-width:700px){.habit-day-picker .weekday-full{display:none}.habit-day-picker .weekday-short{display:inline}}
 
-.task-toolbar{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(220px,1fr);gap:16px;align-items:stretch}.task-toolbar .filter-pills{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:100%}.task-toolbar .filter-pills button{min-width:0;min-height:44px;padding:8px 6px;line-height:1.5}.task-toolbar .search-input{min-width:0;max-width:none;width:100%}.task-toolbar .search-input input{height:100%;min-height:44px}.task-toolbar .search-input svg{top:50%;transform:translateY(-50%)}@media(max-width:950px){.task-toolbar{grid-template-columns:minmax(0,1fr);gap:14px}}@media(max-width:700px){.task-toolbar .filter-pills{gap:6px}.task-toolbar .filter-pills button{padding:8px 4px;font-size:.75rem}}
+.task-toolbar{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(220px,1fr);gap:16px;align-items:stretch}.task-toolbar .filter-pills{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:100%}.task-toolbar .filter-pills button{min-width:0;min-height:44px;padding:8px 6px;line-height:1.5;overflow-wrap:anywhere}.task-toolbar .search-input{min-width:0;max-width:none;width:100%}.task-toolbar .search-input input{height:100%;min-height:44px}.task-toolbar .search-input svg{top:50%;transform:translateY(-50%)}@media(max-width:950px){.task-toolbar{grid-template-columns:minmax(0,1fr);gap:14px}}@media(max-width:700px){.task-toolbar .filter-pills{display:flex;flex-wrap:wrap;gap:6px}.task-toolbar .filter-pills button{flex:1 0 auto;max-width:100%;padding:8px 12px;font-size:.75rem}}
 
 .mobile-add-item{display:none}@media(max-width:700px){.desktop-add-item{display:none}.mobile-add-item{display:flex;position:fixed;right:var(--mobile-gutter,18px);bottom:calc(90px + env(safe-area-inset-bottom));z-index:46;align-items:center;justify-content:center;width:52px;height:52px;padding:0;border-radius:50%;background:var(--accent);color:#fff;box-shadow:0 5px 18px color-mix(in srgb,var(--accent) 26%,transparent),0 2px 6px #00000018}.mobile-add-item:hover{background:color-mix(in srgb,var(--accent) 87%,#15152b)}.has-mobile-add-action{padding-bottom:calc(160px + env(safe-area-inset-bottom))}.floating-timer.beside-add-action{right:calc(var(--mobile-gutter,18px) + 64px);bottom:calc(94px + env(safe-area-inset-bottom));max-width:calc(100% - 100px)}.floating-timer.beside-add-action>span{min-width:0}}
+
+.subject-actions{display:flex;align-items:center;gap:3px;margin-left:auto;flex-shrink:0}
+@media(max-width:700px){.subject-row{flex-wrap:nowrap}.subject-row .row-main{min-width:0}.subject-actions{gap:2px}}
+
+.schedule-day-picker .weekday-short{display:none}
+@media(max-width:700px){.schedule-day-picker{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));width:100%;gap:4px}.schedule-day-picker button{min-width:0;min-height:44px;padding:9px 1px;font-size:.75rem;white-space:nowrap}.schedule-day-picker .weekday-full{display:none}.schedule-day-picker .weekday-short{display:inline}}
 
 .sidebar .brand,.auth-story .brand{min-height:37px}
 .sidebar .brand{justify-content:center;width:100%;text-align:center}
