@@ -1,5 +1,14 @@
 # Verification — 2026-10-10
 
+Habit history returned to Habits: production build passing; 26 automated tests passing.
+
+- Moved the history cards, streak chips, date strip, date picker, and historical recording controls back to Habits. Removed the View history in Insights shortcut. All habits remain available for editing, including habits not scheduled for the selected date; recording controls respect the habit schedule and creation date in both card and list views.
+- Insights retains completed-task and focus-session history with two tabs. Habit history cards no longer appear there.
+- Verified tile selection for October 6, return to Today, card/list switching, edit/delete controls, and both remaining Insights history tabs. Checked Habits and Insights at 320px and Habits at 1280px without document horizontal overflow. Fresh browser warning/error logs were empty. No user records were changed for verification.
+- Screenshot: outputs/habits-history-restored.png. Changes remain local; no push or deployment.
+
+## Earlier Focus category fix and consolidated history — 2026-10-10
+
 Focus category layout fix and consolidated usage history: 26 automated tests passing; production build passing.
 
 - Focus category rows reserve space for the name. In narrow category panels, Start/Edit/Delete move to a second row aligned to the right; wider panels retain one row. The layout responds to the panel width, including narrow desktop columns. Mobile buttons remain 44 × 44px.
