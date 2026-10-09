@@ -17,7 +17,7 @@ export default function HabitCard({habit,today,date=today,t,language='th',page,b
   {showHistory&&<HabitHistoryGrid {...{habit,today,date,t,language,busy,onSelectDate}}/>}
   <footer className="habit-card-footer"><div className="habit-chips">{showHistory&&<><span title={t('streak')}><Flame size={13}/>{record.current} {t('streak')}</span><span title={t('bestStreak')}><Trophy size={13}/>{t('bestStreak')}: {record.best}</span></>}<span><Target size={13}/>{habit.days?.length?habit.days.length+' / '+t('weekly'):t('daily')}</span></div><div className="habit-card-tools">
    {habit.target>1&&<button className="icon-btn" aria-label={t('undo')+': '+habit.name} title={t('undo')} disabled={busy||unavailable||value===0} onClick={()=>changeHabit(habit,date,0)}><RotateCcw size={16}/></button>}
-   {page==='habits'&&<><button className="icon-btn" aria-label={t('edit')+': '+habit.name} title={t('edit')} disabled={busy} onClick={()=>openEditor('habits',habit)}><Pencil size={16}/></button><button className="icon-btn" aria-label={t('delete')+': '+habit.name} title={t('delete')} disabled={busy} onClick={()=>remove('habits',habit)}><Trash2 size={16}/></button></>}
+   {(page==='habits'||page==='today')&&<><button className="icon-btn" aria-label={t('edit')+': '+habit.name} title={t('edit')} disabled={busy} onClick={()=>openEditor('habits',habit)}><Pencil size={16}/></button><button className="icon-btn" aria-label={t('delete')+': '+habit.name} title={t('delete')} disabled={busy} onClick={()=>remove('habits',habit)}><Trash2 size={16}/></button></>}
   </div></footer>
  </article>;
 }

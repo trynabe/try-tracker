@@ -82,13 +82,27 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .progress-track {height:5px;background:var(--surface-2);border-radius:5px}
 .progress-track i {background:var(--highlight);border-radius:5px}
 .progress-caption {font-size:.72rem;margin-bottom:8px;color:var(--muted)}
-.today-grid {display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:auto;gap:24px;align-items:start}
-.today-grid>.stack,.today-grid>.stack:last-child {display:flex;flex-direction:column;gap:24px}
-.today-grid>.stack>section {height:auto;grid-row:auto;grid-column:auto}
-.today-grid>.stack:first-child>section:first-child {background:transparent;border:0;padding:0}
-.today-grid>.stack:first-child>section:first-child>.section-head {margin-bottom:14px}
+.today-grid {display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:24px;align-items:stretch;container-type:inline-size}
+.today-grid>.dashboard-habits-panel {background:transparent;border:0;padding:0;min-width:0}
+.dashboard-habits-panel>.section-head {margin-bottom:14px}
 .today-grid .progress-track {margin-bottom:16px}
-.dashboard-habits {display:flex;flex-direction:column;gap:14px}
+.dashboard-habits {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+.dashboard-habits>.habit-card {display:flex;flex-direction:column;min-width:0}
+.dashboard-habits .habit-card-footer {margin-top:auto}
+.dashboard-habits>.empty {grid-column:1/-1}
+.dashboard-secondary {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch;min-width:0}
+.dashboard-secondary>section {display:flex;flex-direction:column;min-width:0;min-height:280px;margin:0}
+.dashboard-secondary .section-head {align-items:center;flex-wrap:wrap}
+.dashboard-secondary .empty {flex:1;min-height:140px}
+@container (max-width:880px) {
+ .dashboard-secondary {grid-template-columns:repeat(2,minmax(0,1fr))}
+ .dashboard-secondary>.dashboard-schedule {grid-column:1/-1;min-height:220px}
+}
+@container (max-width:580px) {
+ .dashboard-habits,.dashboard-secondary {grid-template-columns:minmax(0,1fr)}
+ .dashboard-secondary>section {min-height:0}
+ .dashboard-secondary>.dashboard-schedule {grid-column:auto;min-height:0}
+}
 .habit-collection {margin-top:24px}
 .habit-collection-items.cards {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .habit-card {
@@ -344,15 +358,15 @@ dialog.modal:not([open]) {display:none}
 }
 @media (max-width:1100px) {
  .main-content {padding:30px 26px 45px}.topbar {padding-inline:26px}
- .today-grid,.focus-layout {grid-template-columns:1fr}
- .today-grid>.stack:last-child {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
- .dashboard-habits {display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .focus-layout {grid-template-columns:1fr}
  .habit-collection-items.cards {grid-template-columns:1fr}
  .notes-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
  .schedule-day-picker .weekday-full {display:none}.schedule-day-picker .weekday-short {display:inline}
 }
 @media (max-width:850px) {
- .dashboard-habits,.today-grid>.stack:last-child,.focus-layout>.stack {display:flex;flex-direction:column;align-items:stretch}
+ .focus-layout>.stack {display:flex;flex-direction:column;align-items:stretch}
+ .dashboard-habits,.dashboard-secondary {grid-template-columns:minmax(0,1fr)}
+ .dashboard-secondary>section,.dashboard-secondary>.dashboard-schedule {min-height:0;grid-column:auto}
  .stats-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
  .page-heading h1 {font-size:1.65rem}.page-heading>.primary {font-size:.75rem;padding-inline:12px}
  .notes-grid {grid-template-columns:1fr}
@@ -378,9 +392,10 @@ dialog.modal:not([open]) {display:none}
  .stat-card {padding:16px;border-radius:17px;gap:5px}
  .stat-icon {width:30px;height:30px;border-radius:9px}.stat-icon svg {width:17px;height:17px}
  .stat-label {font-size:.66rem}.stat-card>strong {font-size:1.55rem}.stat-card>small {font-size:.59rem}
- .today-grid,.today-grid>.stack,.today-grid>.stack:last-child,.focus-layout {gap:22px;display:flex;flex-direction:column;align-items:stretch}
+ .today-grid,.dashboard-secondary {gap:22px}
+ .focus-layout {gap:22px;display:flex;flex-direction:column;align-items:stretch}
  .focus-panel {align-self:stretch}
- .today-grid>.stack,.focus-layout>.stack {width:100%}
+ .focus-layout>.stack {width:100%}
  .dashboard-habits {gap:12px;width:100%}
  .habit-collection {margin-top:22px}
  .habit-collection-items.cards {grid-template-columns:1fr;gap:14px}

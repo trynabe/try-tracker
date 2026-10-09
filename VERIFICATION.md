@@ -1,5 +1,15 @@
 # Verification — 2026-10-10
 
+Today history and desktop layout: production build passing.
+
+- Restored habit heatmaps, current/best streaks, and edit/delete controls on Today. Selecting a history tile opens that date on Habits.
+- Desktop Today places habit cards side by side in a full-width section, followed by equal-width Tasks, Notes, and Schedule panels. Cards stretch to the same height within each row; secondary panels use content-sized rows rather than inheriting the old equal-row layout. Narrow layouts use two columns or a single column according to available space.
+- Checked Today at 1000px, 1280px, and 1600px, plus 320px and 390px. No document horizontal overflow occurred. On desktop, secondary panels aligned with equal widths and heights; mobile habit cards used the full section width. Also checked the user's two-card layout at 1440px with empty Tasks and Schedule panels: all three secondary panels measured 352 × 280px.
+- Verified opening/canceling a habit editor, opening/canceling a note editor, and selecting the October 6 book history tile from Today. Historical selection opened Habits at October 6. Fresh warning/error logs were empty. No user records were changed for verification.
+- Screenshot: outputs/today-desktop-aligned.png. Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier Habits history restoration — 2026-10-10
+
 Habit history returned to Habits: production build passing; 26 automated tests passing.
 
 - Moved the history cards, streak chips, date strip, date picker, and historical recording controls back to Habits. Removed the View history in Insights shortcut. All habits remain available for editing, including habits not scheduled for the selected date; recording controls respect the habit schedule and creation date in both card and list views.
