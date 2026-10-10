@@ -1,5 +1,15 @@
 # Verification — 2026-10-10
 
+Settings birth date and shared native date fields: production build passing.
+
+- Extracted the padded wrapper into DateInput and applied it to the birth date, task due date, and habit history date. All inputs remain native type=date controls; labels, values, handlers, autocomplete, names, and date constraints are retained. Padding and the border belong to the wrapper, while the native input has zero padding and stays within the available width and height.
+- Chromium checks at 320px, 390px (iPhone 13 dimensions), 430px, and 1280px confirmed equal birth-date and gender widths, matching top edges, and matching heights (50px mobile / 48px desktop). Checked blank and populated birth dates, valid keyboard input, the minimum/maximum validity constraints, and Cancel restoring the empty draft. No account details or passwords were saved.
+- English settings at 320px exposed a pre-existing overflow in the bottom-tab selection grid. Those options now use one column below 361px. The final English layout has no document overflow at 320px or 390px.
+- Task due-date fields stayed inside their wrappers at 320px, 390px, and 1280px. Habit history date and Today remained 48px tall on the same row without overlap at those sizes. Browser warning/error logs were empty. QA language was restored; habit/task records were untouched.
+- Screenshot: outputs/iphone-settings-date-fixed.png. Physical iPhone Safari remains untested. The build retains the existing large JavaScript chunk warning.
+
+## Earlier habit history date sizing — 2026-10-10
+
 iOS habit date field sizing: production build passing.
 
 - Moved the historical date field's border and padding to a fixed 48px wrapper. The native date input retains its type, maximum date, label, and change handler, with zero padding/border and a constrained 46px inner height. Added WebKit value sizing and moved the focus outline to the wrapper. Today remains 48px high and preserves the right-edge desktop position.

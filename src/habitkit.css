@@ -294,6 +294,7 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .bottom-tabs-settings label {background:var(--surface-2);border:1px solid transparent;border-radius:12px;font-size:.8rem}
 .bottom-tabs-settings label.chosen {border-color:color-mix(in srgb,var(--highlight) 35%,transparent);background:color-mix(in srgb,var(--highlight) 7%,var(--surface-2))}
 .bottom-tabs-settings input {accent-color:var(--highlight)}
+@media (max-width:360px) {.bottom-tabs-settings {grid-template-columns:minmax(0,1fr)}}
 .tab-order>div {padding:8px 0;font-size:.78rem}
 .color-picker {gap:14px;padding:5px}
 .color-picker button {width:30px;height:30px}
@@ -554,13 +555,16 @@ dialog.modal:not([open]) {display:none}
 .history-tabs button {min-width:70px;min-height:42px}
 .history-caption {font-size:.76rem;line-height:1.7;margin:0 0 16px}
 .history-date-toolbar {gap:10px;flex-wrap:wrap;align-items:center}
-.habit-date-field {display:flex;align-items:center;min-width:0;width:100%;height:48px;padding:0 12px;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-sizing:border-box}
+.native-date-field {display:flex;align-items:center;min-width:0;width:100%;max-width:100%;height:48px;padding:0 14px;overflow:hidden;background:var(--surface-2);border:1px solid transparent;border-radius:12px;box-sizing:border-box}
+.habit-date-field {padding-inline:12px;background:var(--surface);border-color:var(--border)}
 /* Keep padding on the wrapper: iOS date inputs can miscalculate padded dimensions. */
-.habit-date-field>input[type=date] {appearance:none;-webkit-appearance:none;display:flex;align-items:center;flex:1;min-width:0;width:100%;max-width:100%;height:46px;min-height:0;max-height:46px;padding:0;border:0;border-radius:0;background:transparent;box-sizing:border-box;font-size:16px;line-height:1.5}
-.habit-date-field>input[type=date]::-webkit-date-and-time-value {min-width:0;max-width:100%;height:1.5em;white-space:nowrap;text-align:left}
-.habit-date-field>input[type=date]::-webkit-datetime-edit {min-width:0;padding:0}
-.habit-date-field:focus-within {border-color:var(--highlight);outline:2px solid var(--highlight);outline-offset:3px}
-.habit-date-field>input[type=date]:focus-visible {outline:none}
+.native-date-field>input[type=date] {appearance:none;-webkit-appearance:none;display:flex;align-items:center;flex:1;min-width:0;width:100%;max-width:100%;height:100%;min-height:0;max-height:100%;padding:0;border:0;border-radius:0;background:transparent;box-sizing:border-box;font-size:16px;line-height:1.5}
+.native-date-field>input[type=date]::-webkit-date-and-time-value {min-width:0;max-width:100%;height:1.5em;white-space:nowrap;text-align:left}
+.native-date-field>input[type=date]::-webkit-datetime-edit {min-width:0;padding:0}
+.native-date-field:hover {border-color:var(--border)}
+.native-date-field:focus-within {border-color:var(--highlight);outline:2px solid var(--highlight);outline-offset:3px}
+.native-date-field>input[type=date]:focus-visible {outline:none}
+@media (max-width:700px) {.field>.native-date-field {height:50px;padding-inline:12px}}
 .page-habits>.history-date-toolbar>.secondary {height:48px;min-height:48px;max-height:48px}
 @media (min-width:701px) {
  .page-habits>.history-date-toolbar {max-width:none;grid-template-columns:minmax(0,320px) auto;justify-content:space-between}
