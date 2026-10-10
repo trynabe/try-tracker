@@ -1,5 +1,15 @@
 # Verification — 2026-10-10
 
+Mobile scroll endpoint: production build passing.
+
+- Mobile content clearance now uses the same 62px navigation height and 14px + safe-area bottom offset as the fixed nav, plus the shared 12px row spacing. Removed the former unconditional 156px bottom padding. Extra clearance is retained only while the floating focus timer is present. Set mobile root overscroll-behavior-y to none; physical Safari bounce behavior remains untested (reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overscroll-behavior).
+- Replaced the backup file input's visually-hidden class with the hidden attribute. Its generic 48px input minimum height previously contributed scroll overflow even though the control was clipped. The input now has display:none and zero height; its ref, accepted formats, import button click handler, and import change handler remain unchanged.
+- Chromium at 390x844: measured the Today page after scrolling to the actual bottom. The gap from the final card to the nav reduced from 128.3px to 12.3px. Width checks at 320px, 390px, and 430px stayed within 1px of the 12px target (layout rounding), with no horizontal overflow.
+- Inspected the bottom layout of Habits, Tasks, Focus, Schedule, Insights, and Settings at 390px: approximately 12px clearance and zero file-input height. The short Notes page has no scrollable overflow. Desktop at 1280px retained 50px content padding, hidden mobile nav, and auto root overscroll behavior. Browser warning/error logs were empty; no records or preferences were edited.
+- Screenshot: outputs/mobile-scroll-end-fixed.png. Physical iPhone Safari and safe-area geometry remain untested. The build retains the existing large JavaScript chunk warning.
+
+## Earlier settings and shared native date fields — 2026-10-10
+
 Settings birth date and shared native date fields: production build passing.
 
 - Extracted the padded wrapper into DateInput and applied it to the birth date, task due date, and habit history date. All inputs remain native type=date controls; labels, values, handlers, autocomplete, names, and date constraints are retained. Padding and the border belong to the wrapper, while the native input has zero padding and stays within the available width and height.
