@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+Mobile task filter spacing: production build passing.
+
+- Unified the four vertical gaps from the summary card through search, status filters, quick filters, and the task list using one 12px spacing variable. The gap between the two quick filters follows the same value. Increased the space between status labels and counts to 6px and adjusted their inner padding.
+- Quick filter buttons now match the 48px search field height. Checked 320px, 390px, and 600px: all four vertical gaps measured 12px, both quick filters measured 48px high, and neither button text nor the document overflowed horizontally.
+- Verified the selected High priority filter and captured outputs/task-filters-spacing.png. Browser warning/error logs were empty. No task records were changed. Changes remain local; no push or deployment. Build retains the existing large JavaScript chunk warning.
+
+## Earlier mobile task filter redesign — 2026-10-10
+
 Mobile task filter redesign: production build passing.
 
 - Replaced the five wrapping task pills on mobile with a search field above three equal status segments and two equal quick filters. Status buttons are 56px high; quick filters are 44px high; the search field is 48px high. Counts reflect the current search while preserving the existing exclusive filter behavior.
