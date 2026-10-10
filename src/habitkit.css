@@ -174,11 +174,12 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .task-toolbar .task-search svg {position:static;transform:none;flex-shrink:0}
 .task-toolbar .task-search input {flex:1;width:100%;min-width:0;padding:11px 0;outline:none}
 .task-search input::-webkit-search-cancel-button {appearance:none;-webkit-appearance:none}
-.task-search:focus-within {border-color:var(--highlight);box-shadow:0 0 0 3px color-mix(in srgb,var(--highlight) 15%,transparent)}
 .task-search-clear {display:flex;align-items:center;justify-content:center;flex-shrink:0;min-width:44px;min-height:44px;border-radius:9px;color:var(--muted);margin-right:-10px}
 .task-search-clear:hover {background:var(--surface-2);color:var(--text)}
-.search-input {border:1px solid var(--border);background:var(--surface);border-radius:12px;min-height:44px}
-.search-input input {border:0;background:transparent;font-size:.8rem;min-height:42px!important;padding:9px 12px}
+.search-input {display:flex;align-items:center;gap:10px;padding:0 14px;min-width:0;border:1px solid var(--border);background:var(--surface);border-radius:12px;min-height:44px}
+.search-input svg {position:static;transform:none;flex-shrink:0}
+.search-input input {flex:1;width:100%;min-width:0;border:0;background:transparent;font-size:.8rem;min-height:42px!important;padding:11px 0;outline:none}
+.search-input:focus-within {border-color:var(--highlight);box-shadow:0 0 0 3px color-mix(in srgb,var(--highlight) 15%,transparent)}
 .task-progress {background:linear-gradient(120deg,color-mix(in srgb,var(--highlight) 8%,var(--surface)),var(--surface));margin-bottom:20px}
 .task-progress h2 {font-size:2rem;line-height:1.4;letter-spacing:-.05em}
 .task-progress p {font-size:.75rem}
@@ -387,6 +388,8 @@ dialog.modal:not([open]) {display:none}
  .sidebar {padding:28px 20px}.main-shell {width:100%;margin-left:0}
  .topbar {height:62px;padding:0 20px;background:var(--bg);border-bottom:0}
  .topbar-actions {gap:12px}.language-btn {min-height:36px}
+ .search-input {min-height:48px;border-radius:14px}
+ .search-input input {min-height:46px!important;font-size:16px;padding:10px 0}
  .mobile-brand-mark {width:27px;height:27px;background:var(--surface-2);border-radius:9px;color:var(--highlight)}
  .mobile-brand-mark svg {width:18px;height:18px}
  .breadcrumb {gap:9px}.breadcrumb strong {font-size:.78rem;color:var(--muted)}

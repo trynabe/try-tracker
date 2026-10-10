@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+Notes search icon spacing: production build passing.
+
+- Replaced absolute icon positioning in the shared search field with a flex layout. The icon and input now have a 10px gap, with zero inner input side padding so existing theme styles cannot place text under the icon. Added a shared focus outline. Mobile fields are 48px high with 16px text.
+- Checked Notes at 320px, 390px, and 1280px: measured a 10px icon/input gap, vertically centered icon, and no horizontal document overflow. Verified a matching title query, an unmatched query with the empty state, and clearing the query to restore notes. Checked Tasks at 320px with a query and its Clear action: the icon gap remained 10px, the 44px Clear target remained visible, and all rows returned when cleared.
+- Browser warning/error logs were empty. Screenshot: outputs/notes-search-spacing.png. No records were changed. Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier rightmost Settings button — 2026-10-10
+
 Rightmost header Settings button: production build passing.
 
 - Removed the Settings / mobile bottom menu shortcut from the More sheet. Added a labeled gear button after Profile as the rightmost header action, with the same size and rounded shape as Profile. The gear highlights the active Settings page and exposes `aria-current="page"`.
