@@ -56,6 +56,8 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .breadcrumb {font-size:.8rem;color:var(--muted)}
 .breadcrumb strong {font-weight:500;color:var(--text)}
 .topbar-actions {gap:18px}
+.topbar-settings {color:var(--muted)}
+.topbar-settings:hover,.topbar-settings.active {color:var(--highlight);background:color-mix(in srgb,var(--highlight) 12%,var(--surface-2))}
 .save-status {font-size:.7rem;color:var(--muted)}
 .language-btn {background:transparent;border:0;color:var(--muted);font-size:.75rem;min-height:36px}
 .main-content {width:100%;max-width:1320px;padding:36px 38px 50px}

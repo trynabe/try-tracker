@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+Rightmost header Settings button: production build passing.
+
+- Removed the Settings / mobile bottom menu shortcut from the More sheet. Added a labeled gear button after Profile as the rightmost header action, with the same size and rounded shape as Profile. The gear highlights the active Settings page and exposes `aria-current="page"`.
+- Checked 320px, 390px, and 1280px: the gear is the last header action, positioned after Profile with the same dimensions and vertical center; no document horizontal overflow occurred. Verified that the gear opens Settings and Profile still opens Profile. The More sheet retains all seven page shortcuts and no longer shows its Settings footer button.
+- Browser warning/error logs were empty. Screenshot: outputs/settings-gear-right.png. No records or preferences were changed. Changes remain local; no push or deployment. Build retains the existing large JavaScript chunk warning.
+
+## Earlier single-row focus categories — 2026-10-10
+
 Single-row focus categories: production build passing.
 
 - Focus category rows now always use three columns for the icon, name/time, and action group. Removed the narrow-container rule that moved actions below the name. Long titles truncate with an ellipsis and retain the full name in their title and edit form. Active rows retain the same horizontal padding as inactive rows, preventing the controls from squeezing the timer text.
