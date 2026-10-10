@@ -210,20 +210,16 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .timer-circle>span:last-child {font-size:.76rem}
 .timer-controls {margin-top:18px;gap:9px}
 .focus-categories {min-width:0;container-type:inline-size}
-.subject-row {--item-ink:color-mix(in srgb,var(--item-color) 60%,#18181d);display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:8px 12px;padding:15px 0;min-width:0}
+.subject-row {--item-ink:color-mix(in srgb,var(--item-color) 60%,#18181d);display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px 12px;padding:15px 0;min-width:0}
 :root[data-theme=dark] .subject-row {--item-ink:var(--item-color)}
 .subject-row .emoji-tile {background:color-mix(in srgb,var(--item-color) 12%,transparent);color:var(--item-ink);border-radius:12px;width:42px;height:42px;flex-shrink:0}
 .subject-row .row-main {min-width:0;flex:1}
-.subject-row .row-main>strong {overflow-wrap:break-word;word-break:normal;line-height:1.6}
+.subject-row .row-main>strong {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.6}
 .subject-row .row-meta {color:var(--muted);font-variant-numeric:tabular-nums}
-.subject-row.active {background:color-mix(in srgb,var(--item-color) 8%,transparent);padding:13px 8px;border-radius:12px}
-.subject-actions {grid-column:1/-1;justify-self:end;gap:4px;display:flex;align-items:center;flex-shrink:0;margin-left:0}
+.subject-row.active {background:color-mix(in srgb,var(--item-color) 8%,transparent);padding:13px 0;border-radius:12px}
+.subject-actions {justify-self:end;gap:4px;display:flex;align-items:center;flex-shrink:0;margin-left:0}
 .subject-actions .icon-btn {width:40px;min-width:40px;height:44px;min-height:44px}
 .subject-actions .icon-btn:first-child {color:var(--item-ink)}
-@container (min-width:340px) {
- .subject-row {grid-template-columns:auto minmax(0,1fr) auto}
- .subject-actions {grid-column:auto}
-}
 .history-list>div:not(.empty) {gap:12px;padding:14px 0}
 .history-list .emoji-tile {width:36px;height:36px;border-radius:11px;background:var(--surface-2);color:var(--highlight)}
 .history-list .row-main>strong {font-size:.78rem}
@@ -531,6 +527,7 @@ dialog.modal:not([open]) {display:none}
  .history-weekdays {width:15px}.history-months {margin-left:21px}
  .habit-chips>span {padding:2px 5px;font-size:.55rem}.habit-card-tools .icon-btn {width:31px;min-width:31px}
  .subject-row {gap:8px}
+ .subject-actions {gap:0}
  .subject-row .emoji-tile {width:33px;height:36px}.subject-row .row-main>strong {font-size:.75rem}
  .modal-body {padding:17px}.modal>header {padding-inline:17px}
  .schedule-color-panel {padding:7px 5px}.schedule-color-picker {gap:3px}

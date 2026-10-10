@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+Single-row focus categories: production build passing.
+
+- Focus category rows now always use three columns for the icon, name/time, and action group. Removed the narrow-container rule that moved actions below the name. Long titles truncate with an ellipsis and retain the full name in their title and edit form. Active rows retain the same horizontal padding as inactive rows, preventing the controls from squeezing the timer text.
+- Checked 320px, 390px, 600px, 850px, and 1280px: icons, name/time blocks, and action groups shared the same vertical center; all actions remained inside each row; elapsed time and the document did not overflow horizontally. Mobile action buttons remain 44px square; the narrowest layout removes only the space between their touch targets.
+- Opened and canceled a category edit form without changing records. Browser warning/error logs were empty. Screenshot: outputs/focus-categories-single-row.png. Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier shared row spacing — 2026-10-10
+
 Shared desktop/mobile row spacing: production build passing.
 
 - Added a shared `--row-space: 12px` stylesheet loaded after the existing responsive styles. Page sections, stacked panels, card-grid rows, repeated list rows, filters, form rows, and sidebar navigation now share this vertical spacing. Removed conflicting margins where they would double the gap. Existing horizontal column spacing, heatmap cell spacing, and control sizes are preserved.
