@@ -184,13 +184,15 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .task-progress h2 {font-size:2rem;line-height:1.4;letter-spacing:-.05em}
 .task-progress p {font-size:.75rem}
 .progress-number {font-size:2rem;color:var(--highlight);font-weight:600;letter-spacing:-.05em}
-.task-row {align-items:flex-start;flex-wrap:nowrap;padding:18px 0;gap:12px}
-.task-row .row-main {min-width:0}
+.task-row {display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;padding:18px 0;gap:12px}
+.task-row .row-main {grid-column:2;grid-row:1;min-width:0}
+.task-row>.subtask-list {grid-column:2/-1;margin-block:0}
+.task-row .row-tools {grid-column:3;grid-row:1;margin:0}
 .row-main>strong {font-size:.875rem;font-weight:600;line-height:1.65;color:var(--text);overflow-wrap:anywhere}
 .row-meta {font-size:.65rem;gap:7px;margin-top:5px;color:var(--muted);line-height:1.7}
 .check-btn {width:34px;height:34px;flex-shrink:0;min-width:34px;min-height:34px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2)}
 .check-btn.checked {background:var(--highlight);border-color:var(--highlight);color:var(--button-ink)}
-.task-row>.check-btn {margin-top:2px;border-color:color-mix(in srgb,var(--item-color) 35%,var(--border))}
+.task-row>.check-btn {grid-column:1;grid-row:1;margin-top:0;border-color:color-mix(in srgb,var(--item-color) 35%,var(--border))}
 .row-tools {margin-left:auto;gap:1px;flex-shrink:0}
 .task-row .row-tools .icon-btn {width:32px;height:34px;min-width:32px;min-height:34px}
 .task-row.is-done .row-main>strong {color:var(--muted)}
@@ -446,10 +448,10 @@ dialog.modal:not([open]) {display:none}
  .task-toolbar .task-search input {min-height:46px!important;font-size:16px;padding:10px 0}
  .task-progress {padding:19px;margin-bottom:var(--task-control-gap)}.task-progress h2 {font-size:1.85rem}.task-progress p {font-size:.7rem}
  .progress-number {font-size:1.85rem}.task-progress .eyebrow {font-size:.6rem}
- .task-row {gap:10px;padding:17px 0;position:relative;flex-wrap:wrap}
+ .task-row {grid-template-columns:36px minmax(0,1fr);gap:12px 10px;padding:17px 0}
  .task-row>.check-btn {width:36px;height:36px;min-width:36px;min-height:36px;margin-top:0;border-radius:10px}
  .task-row .row-main {flex:1;min-width:0}.row-main>strong {font-size:.82rem}
- .task-row .row-tools {margin-left:46px;width:calc(100% - 46px);justify-content:flex-end;margin-top:-3px}
+ .task-row .row-tools {grid-column:2;grid-row:auto;justify-self:end;justify-content:flex-end;width:auto;margin:0}
  .task-row .row-tools .icon-btn {width:40px;min-width:40px;height:40px;min-height:40px}
  .row-meta {font-size:.62rem;gap:6px}.tag,.pill {font-size:.58rem}
  .habit-list-view .habit-row {gap:10px}.habit-list-view .row-main {min-width:0;flex:1}

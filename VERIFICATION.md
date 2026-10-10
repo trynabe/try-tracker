@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+Aligned task rows on Today and Tasks: production build and 26 automated tests passing.
+
+- Both pages now use the same grid alignment: completion controls center on the title/metadata block, and edit/delete actions align to the right edge. Moved task subtasks into their own grid row so their height cannot shift the completion control. Mobile actions retain their lower row with a 12px row gap; desktop actions remain beside the title.
+- Checked Today and Tasks at 320px, 390px, and 1280px. Completion controls and title/metadata centers differed by less than 0.01px; horizontal gaps matched between pages (10px mobile, 12px desktop), and actions aligned to their row's right edge. No document horizontal overflow occurred. The two existing subtasks retained their completion states and appeared below the task header; opened and canceled an edit form without changing records.
+- Browser warning/error logs were empty. Screenshots: outputs/today-tasks-aligned.png and outputs/task-list-aligned.png. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier Notes search spacing — 2026-10-10
+
 Notes search icon spacing: production build passing.
 
 - Replaced absolute icon positioning in the shared search field with a flex layout. The icon and input now have a 10px gap, with zero inner input side padding so existing theme styles cannot place text under the icon. Added a shared focus outline. Mobile fields are 48px high with 16px text.
