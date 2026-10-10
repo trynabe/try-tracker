@@ -200,7 +200,15 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .priority-low {color:var(--priority-blue);background:color-mix(in srgb,#67a7ed 12%,transparent)}
 .subtask-list {gap:8px;margin-top:13px;padding-top:12px;border-top:1px solid var(--border)}
 .subtask-list label {font-size:.78rem;align-items:center}
-.subtask-list input {margin:0;accent-color:var(--highlight);width:15px;height:15px;flex-shrink:0}
+.subtask-list input[type=checkbox] {appearance:none;-webkit-appearance:none;display:grid;place-content:center;width:18px;height:18px;min-width:18px;min-height:18px;margin:0;padding:0;flex-shrink:0;box-sizing:border-box;border:1.5px solid var(--muted);border-radius:4px;background:var(--surface-2);color:var(--accent-contrast,#fff);cursor:pointer}
+.subtask-list input[type=checkbox]::after {content:'';width:5px;height:9px;box-sizing:border-box;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg);visibility:hidden}
+.subtask-list input[type=checkbox]:checked {background:var(--accent);border-color:var(--accent)}
+.subtask-list input[type=checkbox]:checked::after {visibility:visible}
+.subtask-list input[type=checkbox]:disabled {opacity:.5;cursor:default}
+@media (forced-colors:active) {
+ .subtask-list input[type=checkbox] {forced-color-adjust:none;background:Canvas;border-color:CanvasText;color:HighlightText}
+ .subtask-list input[type=checkbox]:checked {background:Highlight;border-color:Highlight}
+}
 .focus-layout {grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
 .focus-panel {padding:26px;min-width:0;width:100%}
 .focus-panel .segmented {margin-bottom:16px}

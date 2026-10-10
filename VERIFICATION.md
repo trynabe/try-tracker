@@ -1,5 +1,11 @@
 # Verification — 2026-10-10
 
+## Subtask checkbox appearance — 2026-10-11
+
+- The reported iPhone screenshot shows native dark checkbox rendering. Subtask inputs previously retained native appearance while inheriting generic input decoration. Scoped these checkboxes to an explicit 18 × 18px box with zero padding, a 4px radius, theme background and a visible border. Checked state uses the accent color and contrasting CSS tick. The real checkbox remains keyboard accessible, with focus, disabled and forced-colors styling.
+- Local demo: verified clicking to check, Space to uncheck and the label's completed styling; restored all four original unchecked states. At 320px, 390px, 430px and 1280px, checkbox dimensions stay consistent, labels remain vertically centered and there is no horizontal document overflow. Physical iPhone Safari remains untested.
+- Production build passed with the existing large chunk warning. Screenshot: outputs/subtask-checkbox-fixed.png.
+
 ## Profile and cover image adjustment — 2026-10-11
 
 - Added 1–4× zoom, pointer dragging, arrow-key positioning, reset and save/cancel previews to both image editors. Existing images can be reopened and adjusted. The original resized image is retained with independent normalized crop metadata, so editing again does not repeatedly crop the source. Legacy pictures retain centered cover framing.
