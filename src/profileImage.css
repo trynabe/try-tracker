@@ -1,0 +1,15 @@
+.profile-image-frame {display:block;position:relative;width:100%;height:100%;overflow:hidden;min-width:0;flex-shrink:0}
+button.avatar {padding:0}
+.profile-image-frame>img {position:absolute;display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;user-select:none;pointer-events:none}
+.profile-image-preview.image-cropper {padding:0;margin-bottom:16px;box-sizing:border-box;touch-action:none;user-select:none;cursor:grab}
+.profile-image-preview.avatar-crop-preview {width:min(240px,100%);height:auto;aspect-ratio:1;border-radius:22px}
+.profile-image-preview.cover-crop-preview {width:100%;height:auto;border-radius:12px}
+.profile-image-preview.image-cropper.dragging {cursor:grabbing}
+.image-cropper:focus-visible {outline:2px solid var(--highlight);outline-offset:3px}
+.image-zoom-control {margin-bottom:20px;min-width:0}
+.image-zoom-heading {display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.875rem}
+.image-zoom-heading label {white-space:nowrap}
+.image-zoom-heading output {color:var(--muted);font-variant-numeric:tabular-nums;margin-left:5px}
+.image-zoom-heading .image-crop-reset {display:inline-flex;align-items:center;gap:6px;padding:8px 0;font-size:.75rem}
+.image-zoom-control input[type=range] {width:100%;min-width:0;min-height:32px;height:32px;padding:0;border:0;background:transparent;accent-color:var(--highlight);cursor:pointer}
+.image-zoom-control .small-text {font-size:.75rem;line-height:1.6;margin-top:5px}

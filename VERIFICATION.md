@@ -1,5 +1,30 @@
 # Verification — 2026-10-10
 
+## Profile and cover image adjustment — 2026-10-11
+
+- Added 1–4× zoom, pointer dragging, arrow-key positioning, reset and save/cancel previews to both image editors. Existing images can be reopened and adjusted. The original resized image is retained with independent normalized crop metadata, so editing again does not repeatedly crop the source. Legacy pictures retain centered cover framing.
+- Avatar previews and all three avatar placements share the crop renderer. Removed native padding from the header avatar button so its image remains square. Cover previews follow the current cover aspect ratio, including when the viewport changes while editing. Dragging clamps at the image edges; it never exposes space outside the image.
+- Local demo browser: uploaded a synthetic test picture, zoomed, dragged, used keyboard positioning, saved both images, reopened them and reloaded the app. Zoom and placement were retained exactly. Reset followed by Cancel left the saved crop unchanged. Exported JSON contained both images and their independent crop values. Removed only the test pictures afterward, restoring the original empty demo images; existing records and preferences were retained.
+- Chromium at 320 × 568, 390 × 844, 430 × 800 and 1280 × 800: previews fill their frames, cover aspect updates and no horizontal document overflow. Physical iPhone Safari and live cloud synchronization remain untested. Screenshots: outputs/profile-photo-zoom.png and outputs/profile-cover-zoom.png.
+- Automated suite: 47 tests passing, including portrait/landscape crops, extreme panning, malformed values, backup import and legacy framing. Production build passed with the existing large chunk warning. Changes remain local; no commit, push or deployment.
+
+## Subtask text alignment — 2026-10-11
+
+- Centered subtask labels vertically and removed the checkbox's native margins and previous 4px top offset. Both Thai and English text now share the checkbox's vertical center (measured difference below 0.001px).
+- Verified all four existing subtask rows in the mobile browser. Completion states were unchanged. Production build passed with the existing large chunk warning. Screenshot: outputs/subtask-text-centered.png. Changes remain local.
+
+## Gender text alignment — 2026-10-11
+
+- Gender uses a native select over a flex-centered visible value and decorative chevrons. This makes the text position independent of the iOS select renderer while retaining native selection, autocomplete, keyboard access and the translated accessible label. The visible value uses the same 16px/24px text metrics as the adjacent native date input.
+- Chromium at 320px, 390px and 430px: birth-date and gender controls both measure 50px high, top edges match and the visible gender text is centered with a 0px offset. Desktop at 1280px retains equal 48px controls. No horizontal document overflow.
+- Verified Male selection, the longer Prefer not to say option, keyboard ArrowUp and restoration of the original blank form value. No account changes were saved. Production build passed with the existing large chunk warning. Physical iPhone Safari remains untested. Screenshot: outputs/gender-text-aligned.png. Changes remain local.
+
+## Settings color sizing and account position — 2026-10-11
+
+- All ten accent circles are 32 × 32px. The selected border is drawn inside the circle, so the custom color and selected presets keep the same visible size. Button padding is removed and hover backgrounds are limited to devices that support hovering.
+- Moved the Account/sign-out panel after all preferences, including notifications. Its DOM order now matches its position at the bottom of Settings.
+- Chromium checks at 320px, 390px, 430px and 900px: equal circle dimensions, account below notifications and no horizontal document overflow. Existing custom color and workspace data were retained. Production build passed with the existing large chunk warning. Physical iPhone Safari remains untested. Screenshot: outputs/settings-colors-account-bottom.png. These follow-up changes remain local.
+
 ## Mobile date strip — 2026-10-11
 
 - Mobile uses native horizontal scrolling with snapping, touch panning and optional mouse dragging. Seven dates remain visible. Browsing leaves the selected date unchanged until a date is tapped, and dragging suppresses accidental selection. Arrows browse a week; Today recenters the selected day even when Today was already selected. Future dates remain disabled.
