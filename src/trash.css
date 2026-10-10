@@ -1,0 +1,11 @@
+.trash-panel .section-head h2{display:flex;align-items:center;gap:8px}
+.trash-search{margin:16px 0;width:100%}
+.trash-list{max-height:480px;overflow:auto}
+.trash-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.trash-row:last-child{border-bottom:0}
+.trash-item-main{min-width:0;flex:1}
+.trash-item-main>strong{display:block;overflow-wrap:anywhere}
+.trash-item-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;color:var(--muted);font-size:.75rem}
+.trash-actions{display:flex;flex-wrap:wrap;gap:8px;flex-shrink:0}
+.trash-actions button{min-height:44px}
+@media(max-width:1000px){.trash-row{align-items:flex-start;flex-direction:column}.trash-actions{width:100%}.trash-actions button{flex:1}}

@@ -1,0 +1,6 @@
+@media(max-width:700px){
+ .date-strip .date-days.mobile-date-days {display:flex;flex:1;min-width:0;gap:2px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y pinch-zoom;-webkit-overflow-scrolling:touch;user-select:none;cursor:grab}
+ .date-strip .date-days.mobile-date-days::-webkit-scrollbar {display:none}
+ .date-strip .date-days.mobile-date-days>button {flex:0 0 calc((100% - 12px)/7);min-width:0;scroll-snap-align:center;cursor:inherit}
+ .date-strip .date-days.mobile-date-days.dragging {scroll-snap-type:none;cursor:grabbing}
+}

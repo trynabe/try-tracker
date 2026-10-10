@@ -1,5 +1,41 @@
 # Verification — 2026-10-10
 
+## Mobile date strip — 2026-10-11
+
+- Mobile uses native horizontal scrolling with snapping, touch panning and optional mouse dragging. Seven dates remain visible. Browsing leaves the selected date unchanged until a date is tapped, and dragging suppresses accidental selection. Arrows browse a week; Today recenters the selected day even when Today was already selected. Future dates remain disabled.
+- Loads another 28 dates when browsing near either edge, compensating for prepended width so visible dates stay in place. Verified a prepend from September to August and an append from September to October, along with date selection, keyboard navigation, the date input reflecting selection and Today returning to the current date. No habit progress or preferences were edited.
+- Responsive Chromium checks at 320px, 390px and 430px: seven visible dates, selected day retained and no document overflow. At 900px, desktop retains the seven-day picker. Mouse dragging and horizontal wheel input were verified; physical phone gestures remain untested. Screenshot: outputs/mobile-date-scroll.png.
+- Automated suite: 42 tests passing, including future limits, leap days and year boundaries. Production build passed with the existing large chunk warning. Changes remain local; no commit, push or deployment.
+
+## Floating More menu
+
+- 2026-10-11: removed visible labels from the overflow buttons, retaining translated accessible names and hover titles. Buttons and icons match the nav at 48 × 48px and 23 × 23px. The menu is anchored to the More button, and all overflow buttons share its horizontal center, including while scaling during animations. At 320px, 390px, 430px and 700px, the measured center difference was 0px with no horizontal overflow. The gap above the nav remains 12px; short landscape screens scroll the menu. Navigation to Notes and the reverse closing animation still work. Screenshot: outputs/mobile-more-aligned.png. Local build passed; no push or deployment.
+- Closing now reverses the bounce and stagger order: buttons remain mounted while shrinking back down, then disappear after the last animation completes. Closing buttons are inert and hidden from assistive technology; the backdrop fades away. A cleanup timeout handles interrupted animations, and rapid reopening cancels pending dismissal. Reduced motion and desktop changes close immediately. Browser verification covered the closing animation, final removal, reverse delays and reopening during dismissal. Animation preview: outputs/mobile-more-reverse.gif.
+- More now opens a right-aligned column above the mobile navigation. It contains only pages absent from the three displayed shortcuts, including default filler shortcuts. The closest button appears first, followed by a staggered upward bounce. Reduced motion disables animations.
+- Navigation closes the menu; tapping More again, tapping outside and Escape also dismiss it. Arrow keys move focus, Escape restores focus to More, and changing to the desktop breakpoint closes the menu. No stored user data or navigation preferences were changed during verification.
+- Browser checks at 320 × 568 and 390 × 844: all four overflow pages fit above the bar without horizontal overflow. At 700 × 320, the menu scrolls within the available height. At 900 × 700, the mobile nav and popup are hidden. Verified navigation to Notes, repeated toggling, outside dismissal and keyboard navigation. Screenshot: outputs/mobile-more-bounce.png.
+- Automated suite: 40 tests passing, including reordered shortcuts and default fillers. Production build passed with the existing large chunk warning. All changes remain local; no commit, push or deployment.
+
+## Mobile navigation settings overflow
+
+- Reproduced intrinsic grid sizing pushing the right-hand labels beyond the grid's right edge. Constrained both columns with minmax(0,1fr), allowed label text to shrink, and kept icons and ordinal badges fixed.
+- Mobile rows use compact gaps and padding. Screens up to 360px use one column; wider mobile screens retain two columns. At 320px, 390px and 430px, all labels fit inside the grid and document width has no horizontal overflow. Menu names displayed on one line at 390px after the final spacing adjustment. Screenshot: outputs/mobile-menu-overflow-fixed.png.
+- Local UI layout changes only; no push or deployment.
+
+## Accent palette — 9 presets and custom color
+
+- 37 automated tests pass, including all nine presets, custom color backup round-trip, invalid values, legacy rainbow migration and readable text contrast.
+- Local demo browser: verified 10 choices in two rows, invalid HEX disables Save, custom #14b8a6 saves and survives reload, and the picker retains that value. Canceled a subsequent draft and restored the original Blue preset after testing. Browser warning/error logs were empty. Screenshot: outputs/accent-nine-custom.png.
+- Production build passes with the existing chunk-size warning. Live Supabase writes and physical mobile color pickers remain untested. No commit, push or deployment was performed.
+
+## Trash in Settings — local changes only
+
+- Automated suite: 33 tests passing. Production build passing, with the existing large JavaScript chunk warning.
+- Regression coverage: habit history/IDs/revisions survive trash and restore; backup round-trip retains deleted records; legacy backups remain active; deleted records leave analytics; permanent deletion only accepts trashed records; overnight schedule conflicts and duplicate active category names block restoration.
+- Local demo browser: moved the existing note to trash, verified it disappeared from Notes, inspected Settings → Trash and its deletion date, opened and canceled permanent-deletion confirmation, restored the note, and verified its original text and date after reload. The note was restored at the end of testing; no existing records were permanently deleted.
+- Inspected desktop layout and mobile viewport 390 × 844 (375 CSS px content width after scrollbar). Search and restore worked on mobile; document scroll width equaled client width. Browser warning/error logs were empty. Screenshots: outputs/trash-settings.png and outputs/trash-settings-mobile.png.
+- Live Supabase writes, cross-device revision conflicts and physical iPhone Safari were not tested. The existing database schema is unchanged. No commit, push or deployment was performed.
+
 Mobile scroll endpoint: production build passing.
 
 - Mobile content clearance now uses the same 62px navigation height and 14px + safe-area bottom offset as the fixed nav, plus the shared 12px row spacing. Removed the former unconditional 156px bottom padding. Extra clearance is retained only while the floating focus timer is present. Set mobile root overscroll-behavior-y to none; physical Safari bounce behavior remains untested (reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overscroll-behavior).

@@ -143,8 +143,6 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .habit-chips>span {display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:7px;background:color-mix(in srgb,var(--habit-color) 10%,transparent);color:var(--habit-ink);font-size:.64rem;line-height:1.7}
 .habit-card-tools {display:flex;flex-shrink:0;gap:1px;margin-right:-5px}
 .habit-card-tools .icon-btn {width:32px;height:34px;min-width:32px;min-height:34px;font-size:.75rem}
-.habit-view-toggle {padding:3px!important}
-.habit-view-toggle button {min-width:36px!important;min-height:32px!important;padding:6px 9px!important}
 .habit-stats-grid {gap:12px;margin-top:20px}
 .habit-stats-grid .small-panel {padding:14px 18px;border-radius:16px}
 .habit-stats-grid .small-panel>strong {font-size:.8rem}

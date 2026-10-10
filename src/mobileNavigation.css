@@ -1,0 +1,32 @@
+.mobile-more-menu,.mobile-more-backdrop {display:none}
+@media(max-width:700px){
+ .mobile-more-backdrop {display:block;position:fixed;inset:0;z-index:44;width:100%;height:100%;padding:0;border:0;border-radius:0;background:#0003;cursor:default}
+ .mobile-more-backdrop:hover,.mobile-more-backdrop:active:not(:disabled) {background:#0003;transform:none}
+ .mobile-more-anchor {position:relative;display:flex;align-items:center;justify-content:center;justify-self:center;width:48px;height:48px}
+ .mobile-more-menu {display:flex;position:absolute;z-index:46;left:50%;margin-left:-30px;bottom:calc(100% + 19px);flex-direction:column;align-items:center;gap:10px;width:60px;max-height:calc(100dvh - var(--mobile-nav-height,62px) - var(--mobile-nav-offset,14px) - 100px);overflow-y:auto;padding:6px;scrollbar-width:none}
+ .mobile-more-menu::-webkit-scrollbar {display:none}
+ .mobile-more-anchor .mobile-more-menu>button {display:flex;align-items:center;justify-content:center;flex:0 0 48px;width:48px;height:48px;min-width:48px;min-height:48px;padding:0;border:1px solid var(--border);border-radius:14px;background:var(--surface-2);color:var(--muted);box-shadow:0 4px 16px #0002;transform-origin:center bottom;animation:mobile-more-bounce .48s both;animation-delay:var(--menu-delay,0ms)}
+ .mobile-more-menu>button>svg {width:23px;height:23px}
+ .mobile-more-anchor .mobile-more-menu>button.active {border-color:var(--highlight);color:var(--highlight);background:color-mix(in srgb,var(--highlight) 12%,var(--surface))}
+ .mobile-more-anchor .mobile-more-menu>button:hover {background:var(--surface-2)}
+ .mobile-more-anchor .mobile-more-menu>button:focus-visible {outline:2px solid var(--highlight);outline-offset:2px}
+ .mobile-more-menu.closing {pointer-events:none}
+ .mobile-more-anchor .mobile-more-menu.closing>button {animation:mobile-more-return .48s both;animation-delay:var(--menu-close-delay,0ms)}
+ .mobile-more-backdrop.closing {animation:mobile-more-dim-out .615s ease-out both;pointer-events:none}
+ .mobile-more-anchor>.mobile-more-open svg {animation:mobile-more-icon .25s ease-out}
+}
+@keyframes mobile-more-bounce {
+ 0% {opacity:0;transform:translateY(30px) scale(.72);animation-timing-function:ease-out}
+ 60% {opacity:1;transform:translateY(-7px) scale(1.04);animation-timing-function:ease-in-out}
+ 82% {transform:translateY(3px) scale(.98);animation-timing-function:ease-out}
+ 100% {opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes mobile-more-icon {from {transform:rotate(-90deg) scale(.7)}to {transform:rotate(0) scale(1)}}
+@keyframes mobile-more-return {
+ 0% {opacity:1;transform:translateY(0) scale(1);animation-timing-function:ease-in}
+ 18% {opacity:1;transform:translateY(3px) scale(.98);animation-timing-function:ease-in-out}
+ 40% {opacity:1;transform:translateY(-7px) scale(1.04);animation-timing-function:ease-in}
+ 100% {opacity:0;transform:translateY(30px) scale(.72)}
+}
+@keyframes mobile-more-dim-out {from {opacity:1}to {opacity:0}}
+@media(prefers-reduced-motion:reduce){.mobile-more-anchor .mobile-more-menu>button,.mobile-more-anchor .mobile-more-menu.closing>button,.mobile-more-backdrop.closing,.mobile-more-anchor>.mobile-more-open svg {animation:none}}

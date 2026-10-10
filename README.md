@@ -38,14 +38,15 @@ In the original app, export your JSON backup. In Try-Tracker, open Settings → 
 ## Product scope
 
 - Today dashboard with habits, tasks, focus and schedule.
-- Habits: all 60 original suggestions in 6 categories, custom icons/name, historical progress, daily count targets, units, repeat weekdays, edit/delete, current and best streaks.
+- Habits: all 60 original suggestions in 6 categories, custom icons/name, historical progress with a swipeable mobile date strip, daily count targets, units, repeat weekdays, edit/delete, current and best streaks.
 - Tasks: priority, tags, completion/reopen, filters, sorting, progress, edit/delete, deadlines, subtasks and search.
 - Focus: five starting categories, custom categories, category totals, start/stop, editing, session history, durable wall-clock timing, pause/resume, Pomodoro/break mode and midnight splitting.
 - Schedule: daily/weekly 24-hour grid, colored categories, selected day budget, current-time indicator, edit/delete, overnight visualization, overlap prevention and click-to-focus.
 - Notes: create/edit/delete, search, date, expand/collapse and clipboard copy.
 - Insights: 7/30-day periods, discipline score, habit rate, completed tasks, best weekday, completion chart, actual versus planned time, grouped session history.
 - Profile: profile-photo and cover-image upload, account details, joined date, quick statistics and score levels. Account editing and password changes are available in Settings.
-- Settings: Thai/English, light/dark/system, eight accent colors, JSON backup/import and browser notifications.
+- Settings: Thai/English, light/dark/system, nine accent colors plus a custom color picker with HEX input, JSON backup/import and browser notifications. Custom accents persist per account and in backups; the former rainbow option retains its original color as a custom accent when imported.
+- Settings → Trash: deleted habits, tasks, notes, schedule activities and focus categories retain their original data until restored or permanently deleted. Search by name/type, see deletion dates and confirm permanent deletion. There is no automatic expiry. Trash is included in JSON backups and uses existing per-account cloud records without a database migration. Restoring overlapping activities or duplicate category names is blocked until the active item is adjusted. Saved focus sessions remain intact when a category is deleted.
 - Supabase Auth: account creation, email/password login, session persistence, sign-out and email-verified password recovery.
 
 Original reference: https://github.com/trynabe/trynabe.github.io (reviewed commit 61ac2ee). This is a rebuild preserving the product features rather than embedding the original single HTML file.
@@ -65,4 +66,4 @@ This project uses Vite. Build command: npm run build. Output directory: dist. Se
 For an iPhone, open the deployed HTTPS URL in Safari. The current loopback preview URL works on this computer only. User data entered in demo mode is local to each browser; use Supabase to share data between your phone and computer.
 
 ### Mobile navigation
-On phones, pin 1–5 of the seven workspace pages in Settings → Mobile bottom navigation. Reorder them with the previous/next buttons. The fixed More button opens every workspace page plus settings. Preferences are stored per account and included in backups. Desktop keeps its sidebar.
+On phones, choose and order 1–5 of the seven workspace pages in Settings → Mobile bottom navigation. The bar displays the first three shortcuts, filling any gaps with default pages, plus a contextual Add button and More. More opens a column of icon buttons centered above its trigger for pages absent from those three shortcuts. Buttons bounce into view in sequence and shrink back down in reverse order when closed; reduced motion skips both animations. Selecting a page, tapping More again or tapping outside closes the menu. Escape also closes it, and arrow keys move between menu items. Reopening during the closing animation cancels dismissal. Preferences are stored per account and included in backups. Desktop keeps its sidebar.

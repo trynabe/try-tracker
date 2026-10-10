@@ -95,4 +95,27 @@
 .sidebar .brand,.auth-story .brand{min-height:37px}
 .sidebar .brand{justify-content:center;width:100%;text-align:center}
 
+.backup-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.backup-actions .secondary{width:100%;min-width:0;min-height:44px;gap:6px;padding-inline:10px}
+.backup-actions .secondary svg{flex-shrink:0}
+.backup-actions .secondary span{min-width:0;overflow-wrap:anywhere}
+@media(max-width:700px){.backup-actions .secondary{font-size:.875rem;padding-inline:8px}}
+
+.accent-picker{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-width:280px}
+.accent-picker button{display:flex;align-items:center;justify-content:center;width:100%;min-width:0;height:44px;border-radius:10px}
+.accent-dot{display:flex;align-items:center;justify-content:center;width:31px;height:31px;flex-shrink:0;border-radius:50%}
+.accent-dot.selected{outline:2px solid var(--text);outline-offset:3px}
+.accent-picker button:hover{background:var(--surface-2)}
+.custom-accent-fields{display:grid;grid-template-columns:80px minmax(0,1fr);gap:16px;align-items:start}
+.custom-accent-input{height:48px;padding:4px;cursor:pointer}
+.custom-accent-preview{display:flex;align-items:center;justify-content:center;padding:18px;border-radius:12px;font-weight:600}
+.primary,.check-btn.checked,.date-days button.selected,.filter-pills .selected,.mobile-add-item,.floating-timer,.brand-mark,.profile-avatar-edit{color:var(--accent-contrast,#fff)}
+
+.bottom-tabs-settings{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0;width:100%}
+.bottom-tabs-settings label{min-width:0}
+.bottom-tabs-settings label>span{flex:1;min-width:0;overflow-wrap:anywhere;line-height:1.35}
+.bottom-tabs-settings label>svg,.bottom-tabs-settings label>small{flex-shrink:0}
+@media(max-width:700px){.bottom-tabs-settings label{padding:10px 8px;gap:4px;font-size:.75rem}.bottom-tabs-settings label>svg,.bottom-tabs-settings input{width:14px;height:14px}.bottom-tabs-settings label>small{font-size:.6875rem;padding-inline:4px}}
+@media(max-width:360px){.bottom-tabs-settings{grid-template-columns:minmax(0,1fr)}}
+
 @media(min-width:701px){.main-content.account-content{max-width:none}.account-content>.profile-page,.account-content>.settings-layout.settings-only{width:100%;max-width:none;min-width:0}}
