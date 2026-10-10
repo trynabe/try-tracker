@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+Task actions on the same row: production build passing.
+
+- Mobile Tasks and Today now retain three columns for completion, title/metadata, and edit/delete actions. Removed the mobile action placement below the title so all three groups share the same vertical center. Subtasks remain in a separate lower row; desktop placement is unchanged.
+- Checked both pages at 320px, 390px, and 1280px. Every action group occupies grid row 1, vertical centers differ by less than 0.01px, and neither titles nor documents overflow horizontally. The title area does not overlap actions, actions remain inside each row, and subtasks remain below the header. Mobile action buttons retain their 40px dimensions.
+- Browser warning/error logs were empty. Screenshot: outputs/task-actions-same-row.png. No records were changed. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier task header alignment — 2026-10-10
+
 Aligned task rows on Today and Tasks: production build and 26 automated tests passing.
 
 - Both pages now use the same grid alignment: completion controls center on the title/metadata block, and edit/delete actions align to the right edge. Moved task subtasks into their own grid row so their height cannot shift the completion control. Mobile actions retain their lower row with a 12px row gap; desktop actions remain beside the title.
