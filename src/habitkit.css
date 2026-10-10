@@ -544,9 +544,7 @@ dialog.modal:not([open]) {display:none}
 @media (prefers-reduced-motion:reduce) {button {transition:none}button:active:not(:disabled){transform:none}}
 
 /* Keep the historical date and Today shortcut in one row on narrow screens. */
-.page-habits>.toolbar {display:grid;grid-template-columns:minmax(0,1fr) auto;justify-content:start;max-width:420px}
-.page-habits>.toolbar>input[type=date] {width:100%;max-width:none;min-height:44px}
-.page-habits>.toolbar>.secondary {min-height:44px}
+.page-habits>.history-date-toolbar {display:grid;grid-template-columns:minmax(0,1fr) auto;justify-content:start;max-width:420px}
 .page-habits>.page-heading .eyebrow,.page-tasks>.page-heading .eyebrow,.page-focus>.page-heading .eyebrow,.page-schedule>.page-heading .eyebrow,.page-notes>.page-heading .eyebrow,.page-insights>.page-heading .eyebrow,.page-settings>.page-heading .eyebrow,.page-profile>.page-heading .eyebrow {display:none}
 
 .usage-history {margin:26px 0;min-width:0}
@@ -556,7 +554,14 @@ dialog.modal:not([open]) {display:none}
 .history-tabs button {min-width:70px;min-height:42px}
 .history-caption {font-size:.76rem;line-height:1.7;margin:0 0 16px}
 .history-date-toolbar {gap:10px;flex-wrap:wrap;align-items:center}
-.page-habits>.history-date-toolbar>input[type=date],.page-habits>.history-date-toolbar>.secondary {height:48px;min-height:48px}
+.habit-date-field {display:flex;align-items:center;min-width:0;width:100%;height:48px;padding:0 12px;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-sizing:border-box}
+/* Keep padding on the wrapper: iOS date inputs can miscalculate padded dimensions. */
+.habit-date-field>input[type=date] {appearance:none;-webkit-appearance:none;display:flex;align-items:center;flex:1;min-width:0;width:100%;max-width:100%;height:46px;min-height:0;max-height:46px;padding:0;border:0;border-radius:0;background:transparent;box-sizing:border-box;font-size:16px;line-height:1.5}
+.habit-date-field>input[type=date]::-webkit-date-and-time-value {min-width:0;max-width:100%;height:1.5em;white-space:nowrap;text-align:left}
+.habit-date-field>input[type=date]::-webkit-datetime-edit {min-width:0;padding:0}
+.habit-date-field:focus-within {border-color:var(--highlight);outline:2px solid var(--highlight);outline-offset:3px}
+.habit-date-field>input[type=date]:focus-visible {outline:none}
+.page-habits>.history-date-toolbar>.secondary {height:48px;min-height:48px;max-height:48px}
 @media (min-width:701px) {
  .page-habits>.history-date-toolbar {max-width:none;grid-template-columns:minmax(0,320px) auto;justify-content:space-between}
 }

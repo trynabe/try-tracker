@@ -1,5 +1,14 @@
 # Verification — 2026-10-10
 
+iOS habit date field sizing: production build passing.
+
+- Moved the historical date field's border and padding to a fixed 48px wrapper. The native date input retains its type, maximum date, label, and change handler, with zero padding/border and a constrained 46px inner height. Added WebKit value sizing and moved the focus outline to the wrapper. Today remains 48px high and preserves the right-edge desktop position.
+- This targets the padded native-control sizing issue described in WebKit report https://bugs.webkit.org/show_bug.cgi?id=301648; the screenshot is consistent with it, but the exact Safari version and cause on the user's phone were not confirmed.
+- Chromium responsive checks at 320px, 390px (844px height), 430px, and 1280px measured both outer controls at 48px with matching top edges. Mobile controls maintained a 10px gap; the inner native input stayed inside its wrapper with zero padding and 16px text. Checked English at 320px and 390px with the same results; no horizontal document overflow occurred.
+- Verified changing the native date with keyboard input, the selected strip/heading updating to the previous day, and Today restoring the current date. Future dates remain disabled. Browser warning/error logs were empty. Screenshot: outputs/iphone-habit-date-fixed.png. QA language was restored and no habit/task records were changed. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier task actions on the same row — 2026-10-10
+
 Task actions on the same row: production build passing.
 
 - Mobile Tasks and Today now retain three columns for completion, title/metadata, and edit/delete actions. Removed the mobile action placement below the title so all three groups share the same vertical center. Subtasks remain in a separate lower row; desktop placement is unchanged.
