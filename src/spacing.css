@@ -1,0 +1,65 @@
+/* One vertical rhythm for page sections, list rows, and forms at every width. */
+:root {--row-space:12px}
+.page-tasks {--task-control-gap:var(--row-space)}
+
+.main-content {display:flex;flex-direction:column;row-gap:var(--row-space)}
+.main-content > :not([hidden]) {margin-block:0}
+
+.stats-grid,.today-grid,.dashboard-habits,.dashboard-secondary,
+.habit-collection-items.cards,.habit-stats-grid,.focus-layout,.focus-layout>.stack,
+.notes-grid,.two-columns,.profile-page,.profile-overview-stats,.account-detail-grid,
+.settings-layout.settings-only,.settings-layout.settings-only>.stack,.stack,
+.task-toolbar,.task-filter-groups,.toolbar,.bottom-tabs-settings,.workspace-grid,
+.field-grid,.ideas-grid,.entity-icon-picker,.color-picker,.profile-membership,
+.button-row,.timer-controls,.subject-row,.profile-action-menu {
+ row-gap:var(--row-space);
+}
+
+.main-content .section-head,.usage-history-heading,.history-caption,
+.dashboard-notes-intro,.profile-edit-panel>h2,.password-help,
+.note-icon,.note-card h2 {margin-bottom:var(--row-space)}
+.dashboard-notes-intro {margin-top:0}
+.dashboard-habits-panel {display:flex;flex-direction:column;row-gap:var(--row-space)}
+.main-content .dashboard-habits-panel>* {margin-block:0}
+.dashboard-note-list {display:flex;flex-direction:column;row-gap:var(--row-space)}
+
+.task-row+.task-row,.habit-row+.habit-row,.subject-row+.subject-row,
+.agenda-row+.agenda-row,.history-list>div+div {margin-top:var(--row-space)}
+.subtask-list {row-gap:var(--row-space);margin-top:var(--row-space)}
+.allocation-row {row-gap:var(--row-space);margin-bottom:var(--row-space)}
+.allocation-row:last-child {margin-bottom:0}
+.tab-order {display:grid;row-gap:var(--row-space);margin-top:var(--row-space)}
+.profile-membership,.profile-overview-stats,.button-row,.small-text,
+.settings-layout .panel>.secondary,.bottom-tabs-settings,.budget-legend,
+.profile-account-caption {margin-top:var(--row-space)}
+.setting-label {margin-block:var(--row-space)}
+
+.main-content .focus-panel>* {margin-block:0}
+.main-content .focus-panel>*+* {margin-top:var(--row-space)}
+.focus-panel .timer-orbit {margin-inline:auto}
+
+.field {row-gap:var(--row-space);margin-bottom:var(--row-space)}
+.field-grid {margin-bottom:var(--row-space)}
+.field-grid>.field {margin-bottom:0}
+.form-fields {display:grid;grid-template-columns:minmax(0,1fr);row-gap:var(--row-space)}
+.form-fields>* {margin-block:0}
+.profile-edit-panel form>fieldset {display:grid;grid-template-columns:minmax(0,1fr);row-gap:var(--row-space)}
+.profile-edit-panel form>fieldset>* {margin-block:0}
+.icon-picker-field>legend,.schedule-color-field legend {margin-bottom:var(--row-space)}
+.habit-ideas {padding-top:var(--row-space)}
+.habit-ideas>summary {margin-top:0}
+.habit-ideas[open]>summary {margin-bottom:var(--row-space)}
+.form-footer {margin-top:var(--row-space);padding-top:0;row-gap:var(--row-space)}
+
+.sidebar .brand {margin-bottom:var(--row-space)}
+.sidebar .nav-label {margin-top:0;margin-bottom:var(--row-space)}
+.sidebar nav {row-gap:var(--row-space);flex-shrink:0}
+.sidebar {overflow-y:auto}
+.sidebar-bottom {padding-top:var(--row-space)}
+.sidebar-focus {margin-bottom:var(--row-space)}
+.sidebar-profile {padding-top:var(--row-space)}
+
+.auth-form-card {display:flex;flex-direction:column;row-gap:var(--row-space)}
+.auth-form-card>:not([hidden]) {margin-block:0}
+.auth-form-card form {display:grid;row-gap:var(--row-space)}
+.auth-form-card form>* {margin-block:0}

@@ -1,5 +1,14 @@
 # Verification — 2026-10-10
 
+Shared desktop/mobile row spacing: production build passing.
+
+- Added a shared `--row-space: 12px` stylesheet loaded after the existing responsive styles. Page sections, stacked panels, card-grid rows, repeated list rows, filters, form rows, and sidebar navigation now share this vertical spacing. Removed conflicting margins where they would double the gap. Existing horizontal column spacing, heatmap cell spacing, and control sizes are preserved.
+- Checked Today, Habits, Tasks, Focus, Schedule, Notes, Insights, and Settings at 320px, 390px, and 1280px. Direct page-section gaps measured 12px and applicable grids computed a 12px row gap; no document horizontal overflow occurred. Also checked Profile at 390px and 1280px and visually checked the desktop focus timer and category layout.
+- Opened and canceled all five distinct add editors (habit, task, focus category, activity, and note) at 320px and 1280px. Form-section gaps measured 12px, no modal body overflow occurred, and Cancel/Save remained equal-width and 48px high. Profile settings fieldset gaps measured 12px at 390px. Login card rows measured 12px at 320px and 1280px without horizontal overflow; no credentials were entered or submitted.
+- Browser warning/error logs were empty. Screenshots: outputs/spacing-12px-desktop.png and outputs/spacing-12px-mobile.png. QA used the separate localhost demo origin and preserved records; the user preview remains on 127.0.0.1. Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier mobile task filter spacing — 2026-10-10
+
 Mobile task filter spacing: production build passing.
 
 - Unified the four vertical gaps from the summary card through search, status filters, quick filters, and the task list using one 12px spacing variable. The gap between the two quick filters follows the same value. Increased the space between status labels and counts to 6px and adjusted their inner padding.
