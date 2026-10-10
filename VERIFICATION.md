@@ -1,5 +1,15 @@
 # Verification — 2026-10-10
 
+Mobile task filter redesign: production build passing.
+
+- Replaced the five wrapping task pills on mobile with a search field above three equal status segments and two equal quick filters. Status buttons are 56px high; quick filters are 44px high; the search field is 48px high. Counts reflect the current search while preserving the existing exclusive filter behavior.
+- Search uses a flex layout to prevent the icon overlapping the text, a 16px mobile font, and a labeled Clear search action. Filter buttons expose their pressed state. Thai and English labels are supported.
+- Checked Thai at 320px and 390px and English at 320px: equal button widths within each row, no button text overflow, and no document horizontal overflow. Also checked the desktop layout near 700px and at 1280px; desktop filters remain compact and the search icon is vertically centered.
+- Verified all five filters, searching by tag, combining search with Completed, clearing the search, and an unmatched query with zero counts and an empty list. Browser warning/error logs were empty. Screenshot: outputs/task-filters-mobile-redesign.png. No task records were changed; the QA language preference was restored.
+- Changes remain local; no push or deployment. Physical iPhone Safari remains untested; build retains the existing large JavaScript chunk warning.
+
+## Earlier equal editor buttons — 2026-10-10
+
 Equal Cancel/Save buttons: production build passing.
 
 - Shared modal footers and inline form footers now use two equal-width columns. This applies to all entity add/edit editors and profile forms.

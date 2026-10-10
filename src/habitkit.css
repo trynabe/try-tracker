@@ -163,6 +163,18 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .filter-pills {gap:6px}
 .filter-pills button {background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:.76rem;padding:8px 14px;color:var(--muted)}
 .filter-pills button.selected {background:var(--highlight);border-color:var(--highlight);color:var(--button-ink)}
+.task-filter-groups {display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.task-toolbar .filter-pills {display:flex;flex-wrap:nowrap;width:auto}
+.task-toolbar .filter-pills button {padding:8px 12px;white-space:nowrap}
+.task-quick-filter {display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.task-filter-count {display:none}
+.task-toolbar .task-search {display:flex;align-items:center;gap:10px;padding:0 14px;min-width:0}
+.task-toolbar .task-search svg {position:static;transform:none;flex-shrink:0}
+.task-toolbar .task-search input {flex:1;width:100%;min-width:0;padding:11px 0;outline:none}
+.task-search input::-webkit-search-cancel-button {appearance:none;-webkit-appearance:none}
+.task-search:focus-within {border-color:var(--highlight);box-shadow:0 0 0 3px color-mix(in srgb,var(--highlight) 15%,transparent)}
+.task-search-clear {display:flex;align-items:center;justify-content:center;flex-shrink:0;min-width:44px;min-height:44px;border-radius:9px;color:var(--muted);margin-right:-10px}
+.task-search-clear:hover {background:var(--surface-2);color:var(--text)}
 .search-input {border:1px solid var(--border);background:var(--surface);border-radius:12px;min-height:44px}
 .search-input input {border:0;background:transparent;font-size:.8rem;min-height:42px!important;padding:9px 12px}
 .task-progress {background:linear-gradient(120deg,color-mix(in srgb,var(--highlight) 8%,var(--surface)),var(--surface));margin-bottom:20px}
@@ -415,9 +427,21 @@ dialog.modal:not([open]) {display:none}
  .date-days small {font-size:.59rem}.date-days strong {font-size:1rem}
  .toolbar {gap:10px;flex-wrap:wrap}.toolbar>input[type=date] {font-size:.8rem;min-width:0;max-width:100%}
  .toolbar>.secondary {min-height:42px;font-size:.8rem;padding:8px 14px}
- .task-toolbar>.filter-pills {display:flex;flex-wrap:wrap;width:100%;gap:6px}
- .task-toolbar .filter-pills button {flex:0 1 auto;width:auto;min-width:0;padding:9px 12px;min-height:42px;font-size:.72rem;white-space:normal;overflow-wrap:anywhere}
- .task-toolbar .search-input {width:100%;max-width:none}
+ .task-toolbar {display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:18px}
+ .task-filter-groups {display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+ .task-toolbar .task-status-filters {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:4px;padding:4px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+ .task-toolbar .task-status-filters button {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;width:100%;min-height:56px;padding:6px 3px;border:0;border-radius:12px;background:transparent;color:var(--muted);font-size:.76rem;line-height:1.5;white-space:nowrap}
+ .task-toolbar .task-status-filters button.selected {background:color-mix(in srgb,var(--highlight) 15%,var(--surface));color:var(--highlight)}
+ .task-status-filters .task-filter-label {font-weight:600}
+ .task-toolbar .task-filter-count {display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;font-variant-numeric:tabular-nums;line-height:1.4;opacity:.8}
+ .task-toolbar .task-quick-filters {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
+ .task-toolbar .task-quick-filters button {justify-content:flex-start;gap:6px;min-width:0;width:100%;min-height:44px;padding:9px 10px;border-radius:12px;font-size:.74rem;white-space:nowrap;background:var(--surface)}
+ .task-quick-filter svg {flex-shrink:0;color:var(--muted)}
+ .task-quick-filters .task-filter-count {margin-left:auto;min-width:14px}
+ .task-toolbar .task-quick-filters button.selected {border-color:color-mix(in srgb,var(--highlight) 60%,var(--border));background:color-mix(in srgb,var(--highlight) 10%,var(--surface));color:var(--highlight)}
+ .task-quick-filter.selected svg {color:inherit}
+ .task-toolbar .task-search {grid-row:1;width:100%;max-width:none;min-height:48px;border-radius:14px}
+ .task-toolbar .task-search input {min-height:46px!important;font-size:16px;padding:10px 0}
  .task-progress {padding:19px}.task-progress h2 {font-size:1.85rem}.task-progress p {font-size:.7rem}
  .progress-number {font-size:1.85rem}.task-progress .eyebrow {font-size:.6rem}
  .task-row {gap:10px;padding:17px 0;position:relative;flex-wrap:wrap}
