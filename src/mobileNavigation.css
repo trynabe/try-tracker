@@ -14,6 +14,7 @@
  .mobile-more-anchor .mobile-more-menu.closing>button {animation:mobile-more-return .48s both;animation-delay:var(--menu-close-delay,0ms)}
  .mobile-more-backdrop.closing {animation:mobile-more-dim-out .615s ease-out both;pointer-events:none}
  .mobile-more-anchor>.mobile-more-open svg {animation:mobile-more-icon .25s ease-out}
+ .mobile-more-anchor>.mobile-more-closing svg {animation:mobile-more-icon-close .25s ease-out}
 }
 @keyframes mobile-more-bounce {
  0% {opacity:0;transform:translateY(30px) scale(.72);animation-timing-function:ease-out}
@@ -22,6 +23,7 @@
  100% {opacity:1;transform:translateY(0) scale(1)}
 }
 @keyframes mobile-more-icon {from {transform:rotate(-90deg) scale(.7)}to {transform:rotate(0) scale(1)}}
+@keyframes mobile-more-icon-close {from {transform:rotate(90deg) scale(.7)}to {transform:rotate(0) scale(1)}}
 @keyframes mobile-more-return {
  0% {opacity:1;transform:translateY(0) scale(1);animation-timing-function:ease-in}
  18% {opacity:1;transform:translateY(3px) scale(.98);animation-timing-function:ease-in-out}
@@ -29,4 +31,4 @@
  100% {opacity:0;transform:translateY(30px) scale(.72)}
 }
 @keyframes mobile-more-dim-out {from {opacity:1}to {opacity:0}}
-@media(prefers-reduced-motion:reduce){.mobile-more-anchor .mobile-more-menu>button,.mobile-more-anchor .mobile-more-menu.closing>button,.mobile-more-backdrop.closing,.mobile-more-anchor>.mobile-more-open svg {animation:none}}
+@media(prefers-reduced-motion:reduce){.mobile-more-anchor .mobile-more-menu>button,.mobile-more-anchor .mobile-more-menu.closing>button,.mobile-more-backdrop.closing,.mobile-more-anchor>.mobile-more-open svg,.mobile-more-anchor>.mobile-more-closing svg {animation:none}}
