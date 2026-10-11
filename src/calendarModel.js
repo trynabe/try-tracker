@@ -1,5 +1,5 @@
 import {importedEventsForDate} from './calendarImport.js';
-import {calendarEventTitle} from './courseCatalog.js';
+import {calendarEventTitle,coursesForImports,courseForSchedule} from './courseCatalog.js';
 import {dateKey,shiftDate,weekday,minutes} from './domain.js';
 
 export const monthStart=key=>key.slice(0,7)+'-01';
@@ -28,8 +28,12 @@ export function eventsForDate(data,key,catalog){
   id:'task-'+item.id,kind:'tasks',title:item.text,done:!!item.done,item,
  }));
  const schedule=[];
+ const importedItems=data.profile?.[0]?.calendarEvents||[];
+ const importedCodes=new Set(coursesForImports(importedItems,catalog).map(course=>course.code));
  for(const item of data.timeblocks||[]){
   if(item.deletedAt)continue;
+  const course=courseForSchedule(item,catalog);
+  if(course&&!importedCodes.has(course.code))continue;
   const created=Number.isFinite(item.createdAt)?dateKey(item.createdAt):'0000-01-01';
   const start=Number(item.start.slice(0,2))*60+Number(item.start.slice(3));
   const end=start+minutes(item.start,item.end);
@@ -42,6 +46,6 @@ export function eventsForDate(data,key,catalog){
  }
  tasks.sort((a,b)=>Number(a.done)-Number(b.done)||a.title.localeCompare(b.title));
  schedule.sort((a,b)=>a.start.localeCompare(b.start)||a.title.localeCompare(b.title));
- const imported=importedEventsForDate(data.profile?.[0]?.calendarEvents||[],key).map(event=>({...event,title:calendarEventTitle(event.item,catalog)}));
+ const imported=importedEventsForDate(importedItems,key).map(event=>({...event,title:calendarEventTitle(event.item,catalog)}));
  return [...tasks,...[...schedule,...imported].sort((a,b)=>Number(!!b.allDay)-Number(!!a.allDay)||a.start.localeCompare(b.start)||a.title.localeCompare(b.title))];
 }
