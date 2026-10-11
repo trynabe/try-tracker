@@ -32,58 +32,58 @@ test('month navigation clamps late dates without skipping February and crosses y
  assert.equal(shiftMonth('2024-03-31',-1),'2024-02-29');
  assert.equal(shiftMonth('2026-12-15',1),'2027-01-15');
 });
-test('calendar combines due tasks and recurring blocks, excludes trash and undated tasks',()=>{
- const data={tasks:[{id:'a',text:'Due task',dueDate:'2026-10-11'},{id:'b',text:'Undated'},{id:'c',text:'Deleted',dueDate:'2026-10-11',deletedAt:1}],timeblocks:[{id:'s',title:'Study',day:0,start:'09:00',end:'10:00'},{id:'d',title:'Deleted',day:0,start:'11:00',end:'12:00',deletedAt:1}]};
- assert.deepEqual(eventsForDate(data,'2026-10-11').map(event=>event.title),['Due task','Study']);
- assert.deepEqual(eventsForDate(data,'2026-10-12'),[]);
- assert.equal(eventsForDate(data,'2026-10-18')[0].title,'Study');
+const calendar=(...events)=>['BEGIN:VCALENDAR','VERSION:2.0',...events,'END:VCALENDAR'].join('\r\n');
+const event=(uid,...fields)=>['BEGIN:VEVENT','UID:'+uid,...fields,'END:VEVENT'].join('\r\n');
+const parse=text=>parseCalendarFile(text,'course.ics',{from:'2026-10-01',to:'2026-11-30'}).events;
+
+test('calendar is empty without ICS and never reads tasks or weekly Schedule records',()=>{
+ const data={profile:[{calendarEvents:[]}],get tasks(){throw Error('Tasks must stay separate');},get timeblocks(){throw Error('Schedule must stay separate');}};
+ assert.deepEqual(eventsForDate(data,'2026-10-16'),[]);
+ data.profile[0].calendarEvents=parse(calendar(event('course','SUMMARY:691_ITDS294','DTSTART;VALUE=DATE:20261016')));
+ assert.equal(eventsForDate(data,'2026-10-16')[0].kind,'imported');
+ assert.deepEqual(eventsForDate(data,'2026-10-23'),[]);
 });
-test('overnight blocks carry across Sunday and month boundaries without phantom history',()=>{
- const data={timeblocks:[{id:'night',title:'Night',day:6,start:'23:00',end:'01:00',createdAt:new Date('2026-10-31T12:00:00').getTime()}]};
- const first=eventsForDate(data,'2026-10-31')[0],next=eventsForDate(data,'2026-11-01')[0];
- assert.deepEqual([first.start,first.end],['23:00','24:00']);
- assert.deepEqual([next.start,next.end,next.continuation],['00:00','01:00',true]);
- assert.deepEqual(eventsForDate(data,'2026-10-25'),[]);
+
+test('even matching imported courses never create weekly lectures, labs or task entries',()=>{
+ const data={tasks:[{id:'task',text:'Course deadline',dueDate:'2026-10-16'}],timeblocks:['Electric Commerce Lectures','Electric Commerce Lab','ITDS294','Deep work','Any other class'].map((title,index)=>({id:String(index),title,day:5,start:'09:00',end:'10:00'})),profile:[{calendarEvents:parse(calendar(event('course','SUMMARY:691_ITDS294','DTSTART;VALUE=DATE:20261016')))}]};
+ const before=JSON.stringify(data);
+ const displayed=eventsForDate(data,'2026-10-16');
+ assert.equal(displayed.length,1);assert.equal(displayed[0].kind,'imported');
+ assert.equal(displayed[0].item.title,'691_ITDS294');
+ for(const day of ['2026-10-09','2026-10-23','2026-10-30'])assert.deepEqual(eventsForDate(data,day),[]);
+ assert.equal(JSON.stringify(data),before);
+ data.profile[0].calendarEvents=[];
+ assert.deepEqual(eventsForDate(data,'2026-10-16'),[]);
+ assert.equal(data.timeblocks.length,5);assert.equal(data.tasks.length,1);
 });
-test('completed tasks remain visible and midnight endings do not create next-day events',()=>{
- const data={tasks:[{id:'t',text:'Done',done:true,dueDate:'2026-10-31'}],timeblocks:[{id:'night',title:'Night',day:6,start:'23:00',end:'00:00'}]};
- assert.equal(eventsForDate(data,'2026-10-31')[0].done,true);
- assert.deepEqual(eventsForDate(data,'2026-11-01'),[]);
+
+test('calendar respects ICS all-day exclusive ends, overnight spans and midnight endings',()=>{
+ const data={profile:[{calendarEvents:parse(calendar(event('trip','SUMMARY:Trip','DTSTART;VALUE=DATE:20261030','DTEND;VALUE=DATE:20261101'),event('night','SUMMARY:Night','DTSTART:20261031T230000','DTEND:20261101T010000'),event('midnight','SUMMARY:Ends at midnight','DTSTART:20261031T220000','DTEND:20261101T000000')))}]};
+ assert.deepEqual(eventsForDate(data,'2026-10-30').map(e=>e.item.uid),['trip']);
+ const first=eventsForDate(data,'2026-10-31');
+ assert.deepEqual(first.map(e=>e.item.uid),['trip','midnight','night']);
+ assert.deepEqual([first[2].start,first[2].end],['23:00','24:00']);
+ const next=eventsForDate(data,'2026-11-01');
+ assert.equal(next.length,1);
+ assert.deepEqual([next[0].item.uid,next[0].start,next[0].end,next[0].continuation],['night','00:00','01:00',true]);
+ assert.deepEqual(eventsForDate(data,'2026-11-02'),[]);
 });
+
+test('recurrence occurs only on ICS dates, respecting count, exclusions, moved events and cancellation',()=>{
+ const master=event('weekly','SUMMARY:691_ITDS241','DTSTART:20261005T090000','DTEND:20261005T100000','RRULE:FREQ=WEEKLY;COUNT=4','EXDATE:20261012T090000');
+ const moved=event('weekly','SUMMARY:Make-up ITDS241','RECURRENCE-ID:20261019T090000','DTSTART:20261020T110000','DTEND:20261020T120000');
+ const cancelled=event('cancelled','SUMMARY:Cancelled ITDS294','STATUS:CANCELLED','DTSTART;VALUE=DATE:20261016');
+ const data={profile:[{calendarEvents:parse(calendar(master,moved,cancelled))}],timeblocks:[{id:'weekly',title:'Website Technology Lectures',day:1,start:'09:00',end:'10:00'}]};
+ assert.equal(eventsForDate(data,'2026-10-05').length,1);
+ for(const day of ['2026-10-12','2026-10-19','2026-11-02'])assert.deepEqual(eventsForDate(data,day),[]);
+ const makeUp=eventsForDate(data,'2026-10-20');
+ assert.equal(makeUp.length,1);assert.equal(makeUp[0].start,'11:00');
+ assert.equal(eventsForDate(data,'2026-10-26').length,1);
+ assert.equal(eventsForDate(data,'2026-10-16')[0].item.status,'CANCELLED');
+ assert.deepEqual(eventsForDate(data,'2026-10-23'),[]);
+});
+
 test('calendar shortcut survives backup import in its selected position',()=>{
  const data=normalizeBackup({profile:[{id:'profile',name:'Test',bottomTabs:['calendar','tasks','schedule']}]});
  assert.deepEqual(data.profile[0].bottomTabs,['calendar','tasks','schedule']);
-});
-
-test('weekly course schedules require a matching saved ICS import, while personal tasks and activities remain visible',()=>{
- const titles=['Website Technology Lectures','Website Technology Lab','Software Engineering Lectures','Software Engineering Lab','Computer Architecture Lectures','Computer Systems Lab','Computer Network Lectures','Computer Network Lab','ITLG201','Fundamentals of Electronic Commerce Systems','Electric Commerce Lectures','Electric Commerce Lab'];
- const data={tasks:[{id:'task',text:'Prepare for ITDS211',dueDate:'2026-10-12'}],timeblocks:titles.map((title,index)=>({id:'class-'+index,title,day:1,start:'09:00',end:'10:00'})).concat([{id:'work',title:'Deep work',day:1,start:'10:00',end:'11:00'},{id:'reading',title:'Read a book about software engineering',day:1,start:'11:00',end:'12:00'}]),profile:[{calendarEvents:[]}]};
- const before=JSON.stringify(data.timeblocks);
- assert.deepEqual(eventsForDate(data,'2026-10-12').map(event=>event.title),['Prepare for ITDS211','Deep work','Read a book about software engineering']);
- const file=['BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT','UID:course@school','SUMMARY:691_ITDS241','DTSTART;VALUE=DATE:20261013','END:VEVENT','END:VCALENDAR'].join('\r\n');
- data.profile[0].calendarEvents=parseCalendarFile(file,'course.ics',{from:'2026-10-01',to:'2026-10-31'}).events;
- assert.deepEqual(eventsForDate(data,'2026-10-12').map(event=>event.title),['Prepare for ITDS211','Website Technology Lectures','Deep work','Read a book about software engineering']);
- assert.equal(JSON.stringify(data.timeblocks),before);
- data.profile[0].calendarEvents=[];
- assert.ok(!eventsForDate(data,'2026-10-12').some(event=>titles.includes(event.title)));
-});
-test('unimported course blocks do not leak overnight continuation into the next day',()=>{
- const data={timeblocks:[{id:'class',title:'ITDS211',day:1,start:'23:00',end:'01:00'}]};
- assert.deepEqual(eventsForDate(data,'2026-10-12'),[]);
- assert.deepEqual(eventsForDate(data,'2026-10-13'),[]);
-});
-
-test('Electric Commerce lecture and lab stay hidden until ITDS294 is imported, including later weeks',()=>{
- const data={timeblocks:[{id:'lecture',title:'Electric Commerce Lectures',day:5,start:'09:00',end:'10:00'},{id:'lab',title:'Electric Commerce Lab',day:5,start:'10:00',end:'11:00'}],profile:[{calendarEvents:[]}]};
- const before=JSON.stringify(data.timeblocks);
- for(const day of ['2026-10-16','2026-10-23','2026-10-30'])assert.deepEqual(eventsForDate(data,day),[]);
- const file=code=>['BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT','UID:commerce@school','SUMMARY:691_'+code,'DTSTART;VALUE=DATE:20261017','END:VEVENT','END:VCALENDAR'].join('\r\n');
- const parse=code=>parseCalendarFile(file(code),'course.ics',{from:'2026-10-01',to:'2026-10-31'}).events;
- data.profile[0].calendarEvents=parse('ITDS241');
- assert.deepEqual(eventsForDate(data,'2026-10-16'),[]);
- data.profile[0].calendarEvents=parse('ITDS294');
- assert.deepEqual(eventsForDate(data,'2026-10-16').map(event=>event.title),['Electric Commerce Lectures','Electric Commerce Lab']);
- assert.equal(JSON.stringify(data.timeblocks),before);
- data.profile[0].calendarEvents=[];
- assert.deepEqual(eventsForDate(data,'2026-10-16'),[]);
 });

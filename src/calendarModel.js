@@ -1,6 +1,6 @@
 import {importedEventsForDate} from './calendarImport.js';
-import {calendarEventTitle,coursesForImports,courseForSchedule} from './courseCatalog.js';
-import {dateKey,shiftDate,weekday,minutes} from './domain.js';
+import {calendarEventTitle} from './courseCatalog.js';
+import {dateKey,shiftDate,weekday} from './domain.js';
 
 export const monthStart=key=>key.slice(0,7)+'-01';
 
@@ -24,28 +24,6 @@ export function monthCells(key){
 }
 
 export function eventsForDate(data,key,catalog){
- const tasks=(data.tasks||[]).filter(task=>!task.deletedAt&&task.dueDate===key).map(item=>({
-  id:'task-'+item.id,kind:'tasks',title:item.text,done:!!item.done,item,
- }));
- const schedule=[];
- const importedItems=data.profile?.[0]?.calendarEvents||[];
- const importedCodes=new Set(coursesForImports(importedItems,catalog).map(course=>course.code));
- for(const item of data.timeblocks||[]){
-  if(item.deletedAt)continue;
-  const course=courseForSchedule(item,catalog);
-  if(course&&!importedCodes.has(course.code))continue;
-  const created=Number.isFinite(item.createdAt)?dateKey(item.createdAt):'0000-01-01';
-  const start=Number(item.start.slice(0,2))*60+Number(item.start.slice(3));
-  const end=start+minutes(item.start,item.end);
-  if(item.day===weekday(key)&&key>=created){
-   schedule.push({id:'block-'+item.id,kind:'timeblocks',title:item.title,start:item.start,end:end>1440?'24:00':item.end,continues:end>1440,item});
-  }
-  if(end>1440&&(item.day+1)%7===weekday(key)&&shiftDate(key,-1)>=created){
-   schedule.push({id:'block-'+item.id+'-carry',kind:'timeblocks',title:item.title,start:'00:00',end:item.end,continuation:true,item});
-  }
- }
- tasks.sort((a,b)=>Number(a.done)-Number(b.done)||a.title.localeCompare(b.title));
- schedule.sort((a,b)=>a.start.localeCompare(b.start)||a.title.localeCompare(b.title));
- const imported=importedEventsForDate(importedItems,key).map(event=>({...event,title:calendarEventTitle(event.item,catalog)}));
- return [...tasks,...[...schedule,...imported].sort((a,b)=>Number(!!b.allDay)-Number(!!a.allDay)||a.start.localeCompare(b.start)||a.title.localeCompare(b.title))];
+ const imported=importedEventsForDate(data.profile?.[0]?.calendarEvents||[],key).map(event=>({...event,title:calendarEventTitle(event.item,catalog)}));
+ return imported.sort((a,b)=>Number(!!b.allDay)-Number(!!a.allDay)||a.start.localeCompare(b.start)||a.title.localeCompare(b.title));
 }

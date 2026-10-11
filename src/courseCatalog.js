@@ -55,22 +55,3 @@ export function coursesForImports(events=[],catalog=defaultCourseCatalog){
  }
  return [...courses.values()].sort((a,b)=>a.code.localeCompare(b.code));
 }
-
-// Recognize the older weekly class titles as well as official catalog names.
-const weeklyCourseAliases={
- ITDS211:['Computer Architecture','Computer Architecture Lectures'],
- ITDS212:['Computer Systems Lab'],
- ITDS231:['Computer Network','Computer Network Lectures','Computer Networks Lectures'],
- ITDS241:['Website Technology','Website Technology Lectures','Web Technologies and Applications Lectures'],
- ITDS242:['Website Technology Lab'],
- ITDS261:['Software Engineering','Software Engineering Lectures'],
- ITDS294:['Electric Commerce Lectures','Electric Commerce Lab','Electronic Commerce Lectures','Electronic Commerce Lab'],
-};
-const courseTitleKey=value=>String(value||'').trim().toLowerCase().replace(/[ _-]+/g,' ');
-export function courseForSchedule(item,catalog=defaultCourseCatalog){
- const coded=courseForEvent(item,catalog);
- if(coded)return coded;
- const title=courseTitleKey(item.title);
- const matches=catalog.filter(course=>[course.name,...(weeklyCourseAliases[course.code]||[])].some(name=>courseTitleKey(name)===title));
- return matches.length===1?matches[0]:null;
-}
