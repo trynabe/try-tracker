@@ -289,7 +289,7 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .profile-overview-stats>div {border-radius:14px;background:var(--surface-2);border:0;box-shadow:none}
 .profile-stat-symbol {color:var(--highlight);background:color-mix(in srgb,var(--highlight) 10%,transparent);border-radius:11px}
 .level-badge {background:color-mix(in srgb,var(--highlight) 10%,transparent);color:var(--highlight);border-radius:8px;font-size:.7rem}
-.account-detail {background:var(--surface-2);border:0;border-radius:12px;padding:14px 16px}
+.account-detail,.account-detail:last-child {background:var(--surface-2);border:0;border-radius:12px;padding:14px 16px}
 .account-detail dt {font-size:.68rem}
 .account-detail dd {font-size:.8rem}
 .settings-layout.settings-only>.stack {gap:20px}
