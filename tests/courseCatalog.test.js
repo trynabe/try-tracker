@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {defaultCourseCatalog,normalizeCourseCatalog,courseForEvent,calendarEventTitle} from '../src/courseCatalog.js';
+import {defaultCourseCatalog,normalizeCourseCatalog,courseForEvent,calendarEventTitle,coursesForImports} from '../src/courseCatalog.js';
 import {eventsForDate} from '../src/calendarModel.js';
 import {parseCalendarFile,mergeCalendarEvents} from '../src/calendarImport.js';
 
@@ -51,4 +51,16 @@ test('existing imports acquire names at display time without changing their sour
  assert.equal(eventsForDate(data,'2026-10-11',custom)[0].title,'ITDS211 · Changed in database');
  assert.equal(JSON.stringify(data),before);
  assert.equal(mergeCalendarEvents(parsed.events,parsed).unchanged,1);
+});
+
+test('course list stays empty without imports and contains only distinct courses in saved events',()=>{
+ assert.deepEqual(coursesForImports([]),[]);
+ const events=[{title:'691_ITDS231'},{title:'[Cancel]-691_ITDS211'},{title:'Quiz',category:'691_ITDS211'},{title:'University holiday'},{title:'ITDS211 and ITDS212'}];
+ const before=JSON.stringify(events);
+ assert.deepEqual(coursesForImports(events).map(course=>course.code),['ITDS211','ITDS231']);
+ assert.equal(JSON.stringify(events),before);
+ assert.deepEqual(coursesForImports(events.filter(event=>event.title==='University holiday')),[]);
+ assert.deepEqual(coursesForImports([{title:'ITDS999'}]),[{code:'ITDS999',name:''}]);
+ const catalog=normalizeCourseCatalog([{code:'ITDS211',name:'Updated name'}]);
+ assert.equal(coursesForImports(events,catalog)[0].name,'Updated name');
 });

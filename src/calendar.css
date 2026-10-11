@@ -1,5 +1,5 @@
 .calendar-layout {display:grid;grid-template-columns:minmax(0,1fr);gap:var(--row-space,12px);align-items:start}
-.calendar-month,.calendar-agenda {min-width:0;padding:24px}
+.calendar-month,.calendar-agenda,.calendar-courses {min-width:0;padding:24px}
 .calendar-toolbar {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
 .calendar-toolbar h2 {font-size:1.2rem;letter-spacing:-.025em}
 .calendar-month-controls {display:flex;align-items:center;gap:6px;flex-shrink:0}
@@ -40,6 +40,11 @@
 .calendar-event-body small {font-size:.65rem;color:var(--muted);overflow-wrap:anywhere}
 .calendar-event.done strong {text-decoration:line-through;color:var(--muted)}
 .calendar-empty {padding:30px 10px}
+.calendar-courses h2 {font-size:1.05rem;margin-bottom:16px}
+.calendar-course-list {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;list-style:none;margin:0;padding:0}
+.calendar-course-list li {display:flex;flex-direction:column;gap:6px;min-width:0;padding:14px 16px;background:var(--surface-2);border-radius:12px;overflow-wrap:anywhere;line-height:1.6}
+.calendar-course-list strong {font-size:.8rem;color:var(--highlight)}
+.calendar-course-list span {font-size:.8rem}
 .calendar-import-toolbar {grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:24px}
 .calendar-import-toolbar small {font-size:.7rem}
 .calendar-import-button {min-height:44px;gap:8px;font-size:.8rem}
@@ -64,7 +69,7 @@
 .calendar-import-detail dd {margin:0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7}
 @media(min-width:701px){.main-content.page-calendar {max-width:none}}
 @media(max-width:700px){
- .calendar-month,.calendar-agenda,.calendar-import-toolbar {padding:18px}
+ .calendar-month,.calendar-agenda,.calendar-courses,.calendar-import-toolbar {padding:18px}
  .calendar-toolbar {display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:16px}
  .calendar-toolbar h2 {font-size:1.05rem;text-align:center}
  .calendar-month-controls {display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;width:100%}

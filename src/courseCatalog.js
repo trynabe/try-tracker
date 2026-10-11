@@ -46,3 +46,12 @@ export function calendarEventTitle(event,catalog=defaultCourseCatalog){
  const simple=original.match(new RegExp('^(\\[[^\\]]+\\]\\s*[-–:]?\\s*)?(?:\\d{2,4}[ _-])?'+course.code+'$','i'));
  return simple?(simple[1]?simple[1].replace(/[\s\-–:]+$/,'')+' · ':'')+course.code+' · '+course.name:original+' · '+course.name;
 }
+
+export function coursesForImports(events=[],catalog=defaultCourseCatalog){
+ const courses=new Map();
+ for(const event of events){
+  const course=courseForEvent(event,catalog);
+  if(course)courses.set(course.code,course);
+ }
+ return [...courses.values()].sort((a,b)=>a.code.localeCompare(b.code));
+}

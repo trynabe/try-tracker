@@ -1,7 +1,7 @@
 import React,{useEffect,useMemo,useRef,useState} from 'react';
 import {CalendarDays,ChevronLeft,ChevronRight,ListTodo,Clock,Plus,Check,Download,Trash2} from 'lucide-react';
 import CalendarImport from './CalendarImport.jsx';
-import {defaultCourseCatalog,courseForEvent,calendarEventTitle} from './courseCatalog.js';
+import {defaultCourseCatalog,courseForEvent,calendarEventTitle,coursesForImports} from './courseCatalog.js';
 import {shiftDate,weekday} from './domain';
 import {monthStart,shiftMonth,monthCells,eventsForDate} from './calendarModel.js';
 import {shortDayNames} from './i18n';
@@ -11,6 +11,7 @@ import './calendar.css';
 export default function Calendar({data,date,onDateChange,today,language,t,busy,onEdit,onAddTask,onAddBlock,Modal,onImport,onRemoveImport,courseCatalog=defaultCourseCatalog}){
  const [filter,setFilter]=useState('all'),[detail,setDetail]=useState(null);
  const imported=data.profile?.[0]?.calendarEvents||[];
+ const courses=coursesForImports(imported,courseCatalog);
  const eventColor=event=>event.kind==='tasks'?'var(--highlight)':event.kind==='imported'?'#0891b2':scheduleColor(event.item);
  const cellRefs=useRef(new Map()),focusDate=useRef(false);
  const locale=language==='th'?'th-TH':'en-US';
@@ -61,6 +62,7 @@ export default function Calendar({data,date,onDateChange,today,language,t,busy,o
     return <button type="button" disabled={busy} key={event.id} className={'calendar-event '+(event.done?'done':'')} onClick={()=>event.kind==='imported'?setDetail(event.item):onEdit(event.kind,event.item)} style={{'--event-color':eventColor(event)}}><span className="calendar-event-icon"><Icon size={19}/></span><span className="calendar-event-body"><strong>{event.title}</strong><span>{event.kind==='tasks'?t(event.done?'completed':'dueDate'):event.allDay?t('calendarAllDay'):event.start+'–'+event.end}{event.continuation?' · '+t('calendarContinuation'):''}{event.item.status==='CANCELLED'?' · '+t('calendarCancelled'):''}</span><small>{event.kind==='tasks'?(event.item.tag||t('tasks')):event.kind==='imported'?(event.item.category||event.item.source):t('calendarWeekly')+(event.item.category?' · '+event.item.category:'')}</small></span></button>;
    })}</div>:<div className="empty calendar-empty"><CalendarDays size={28}/><p>{t('calendarEmpty')}</p></div>}
   </section>
+  {!!courses.length&&<section className="panel calendar-courses" aria-labelledby="calendar-courses-title"><h2 id="calendar-courses-title">{t('calendarImportedCourses')}</h2><ul className="calendar-course-list">{courses.map(course=><li key={course.code}><strong>{course.code}</strong>{course.name&&<span>{course.name}</span>}</li>)}</ul></section>}
   <div className="panel calendar-import-toolbar"><CalendarImport {...{Modal,t,language,today,busy,courseCatalog}} events={imported} onSave={onImport}/>{!!imported.length&&<small className="muted">{imported.length} {t('calendarImportedItems')}</small>}</div>
   {detail&&<Modal title={calendarEventTitle(detail,courseCatalog)} onClose={()=>setDetail(null)} footer={<><button type="button" className="secondary danger" disabled={busy} onClick={()=>{onRemoveImport(detail);setDetail(null);}}><Trash2 size={16}/>{t('delete')}</button><button type="button" className="secondary" onClick={()=>setDetail(null)}>{t('close')}</button></>}><dl className="calendar-import-detail">{detailCourse&&<><dt>{t('calendarCourseCode')}</dt><dd>{detailCourse.code}</dd>{detailCourse.name&&<><dt>{t('calendarCourseName')}</dt><dd>{detailCourse.name}</dd></>}</>}<dt>{t('calendarOriginalTitle')}</dt><dd>{detail.title}</dd><dt>{t('calendarEventTime')}</dt><dd>{detail.allDay?format(detail.startDate,{day:'numeric',month:'long',year:'numeric'})+(detail.endDate>shiftDate(detail.startDate,1)?' – '+format(shiftDate(detail.endDate,-1),{day:'numeric',month:'long',year:'numeric'}):'')+' · '+t('calendarAllDay'):new Date(detail.start).toLocaleString(locale,{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'})+' – '+new Date(detail.end).toLocaleString(locale,{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'})}</dd>{detail.location&&<><dt>{t('calendarLocation')}</dt><dd>{detail.location}</dd></>}{detail.description&&<><dt>{t('description')}</dt><dd>{detail.description}</dd></>}{detail.category&&<><dt>{t('category')}</dt><dd>{detail.category}</dd></>}<dt>{t('calendarSource')}</dt><dd>{detail.source}</dd>{detail.status==='CANCELLED'&&<dd className="danger">{t('calendarCancelled')}</dd>}</dl></Modal>}
  </div>;

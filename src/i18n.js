@@ -1,4 +1,5 @@
 const strings={
+calendarImportedCourses:['รายวิชาจากไฟล์ .ics','Courses from imported .ics files'],
 calendarCourseCode:['รหัสวิชา','Course code'],calendarCourseName:['ชื่อวิชา','Course name'],calendarOriginalTitle:['ชื่อรายการในไฟล์','Original event title'],
 close:['ปิด','Close'],
 calendarImport:["นำเข้า .ics", "Import .ics"],
