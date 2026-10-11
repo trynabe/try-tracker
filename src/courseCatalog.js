@@ -64,6 +64,7 @@ const weeklyCourseAliases={
  ITDS241:['Website Technology','Website Technology Lectures','Web Technologies and Applications Lectures'],
  ITDS242:['Website Technology Lab'],
  ITDS261:['Software Engineering','Software Engineering Lectures'],
+ ITDS294:['Electric Commerce Lectures','Electric Commerce Lab','Electronic Commerce Lectures','Electronic Commerce Lab'],
 };
 const courseTitleKey=value=>String(value||'').trim().toLowerCase().replace(/[ _-]+/g,' ');
 export function courseForSchedule(item,catalog=defaultCourseCatalog){

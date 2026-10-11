@@ -56,7 +56,7 @@ test('calendar shortcut survives backup import in its selected position',()=>{
 });
 
 test('weekly course schedules require a matching saved ICS import, while personal tasks and activities remain visible',()=>{
- const titles=['Website Technology Lectures','Website Technology Lab','Software Engineering Lectures','Software Engineering Lab','Computer Architecture Lectures','Computer Systems Lab','Computer Network Lectures','Computer Network Lab','ITLG201','Fundamentals of Electronic Commerce Systems'];
+ const titles=['Website Technology Lectures','Website Technology Lab','Software Engineering Lectures','Software Engineering Lab','Computer Architecture Lectures','Computer Systems Lab','Computer Network Lectures','Computer Network Lab','ITLG201','Fundamentals of Electronic Commerce Systems','Electric Commerce Lectures','Electric Commerce Lab'];
  const data={tasks:[{id:'task',text:'Prepare for ITDS211',dueDate:'2026-10-12'}],timeblocks:titles.map((title,index)=>({id:'class-'+index,title,day:1,start:'09:00',end:'10:00'})).concat([{id:'work',title:'Deep work',day:1,start:'10:00',end:'11:00'},{id:'reading',title:'Read a book about software engineering',day:1,start:'11:00',end:'12:00'}]),profile:[{calendarEvents:[]}]};
  const before=JSON.stringify(data.timeblocks);
  assert.deepEqual(eventsForDate(data,'2026-10-12').map(event=>event.title),['Prepare for ITDS211','Deep work','Read a book about software engineering']);
@@ -71,4 +71,19 @@ test('unimported course blocks do not leak overnight continuation into the next 
  const data={timeblocks:[{id:'class',title:'ITDS211',day:1,start:'23:00',end:'01:00'}]};
  assert.deepEqual(eventsForDate(data,'2026-10-12'),[]);
  assert.deepEqual(eventsForDate(data,'2026-10-13'),[]);
+});
+
+test('Electric Commerce lecture and lab stay hidden until ITDS294 is imported, including later weeks',()=>{
+ const data={timeblocks:[{id:'lecture',title:'Electric Commerce Lectures',day:5,start:'09:00',end:'10:00'},{id:'lab',title:'Electric Commerce Lab',day:5,start:'10:00',end:'11:00'}],profile:[{calendarEvents:[]}]};
+ const before=JSON.stringify(data.timeblocks);
+ for(const day of ['2026-10-16','2026-10-23','2026-10-30'])assert.deepEqual(eventsForDate(data,day),[]);
+ const file=code=>['BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT','UID:commerce@school','SUMMARY:691_'+code,'DTSTART;VALUE=DATE:20261017','END:VEVENT','END:VCALENDAR'].join('\r\n');
+ const parse=code=>parseCalendarFile(file(code),'course.ics',{from:'2026-10-01',to:'2026-10-31'}).events;
+ data.profile[0].calendarEvents=parse('ITDS241');
+ assert.deepEqual(eventsForDate(data,'2026-10-16'),[]);
+ data.profile[0].calendarEvents=parse('ITDS294');
+ assert.deepEqual(eventsForDate(data,'2026-10-16').map(event=>event.title),['Electric Commerce Lectures','Electric Commerce Lab']);
+ assert.equal(JSON.stringify(data.timeblocks),before);
+ data.profile[0].calendarEvents=[];
+ assert.deepEqual(eventsForDate(data,'2026-10-16'),[]);
 });
