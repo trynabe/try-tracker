@@ -63,3 +63,14 @@
 .auth-form-card>:not([hidden]) {margin-block:0}
 .auth-form-card form {display:grid;row-gap:var(--row-space)}
 .auth-form-card form>* {margin-block:0}
+
+.settings-session-actions {display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.settings-session-actions.has-demo-reset {grid-template-columns:repeat(2,minmax(0,1fr))}
+.settings-session-actions>button {width:100%;min-width:0;padding-inline:8px;white-space:normal}
+.settings-session-actions>button>svg {flex-shrink:0}
+
+/* Keep the right column from setting the gap above the account card. */
+@media(min-width:851px){
+ .settings-layout.settings-only>.settings-preferences {grid-column:2;grid-row:1 / span 2}
+ .settings-layout.settings-only>.settings-session {grid-column:1;grid-row:2}
+}
