@@ -77,3 +77,23 @@
  .calendar-day-dots small {font-size:.55rem;line-height:1;color:var(--muted)}
  .calendar-agenda-heading h2 {font-size:1rem}
 }
+
+.calendar-event-form fieldset {display:flex;flex-direction:column;gap:16px}
+.calendar-event-form .field {margin:0;min-width:0}
+.calendar-event-fields {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.calendar-event-fields input {width:100%;min-width:0;font-size:16px}
+.calendar-all-day {display:flex;align-items:center;gap:10px;font-size:.85rem;cursor:pointer}
+.calendar-all-day input {width:18px;height:18px;accent-color:var(--accent)}
+.calendar-event-actions {display:flex;justify-content:flex-end;gap:12px}
+@media(min-width:1100px){
+ .calendar-layout {grid-template-columns:minmax(0,1fr) minmax(300px,360px)}
+ .calendar-month {grid-column:1;grid-row:1}
+ .calendar-agenda {grid-column:2;grid-row:1}
+ .calendar-courses {grid-column:1/-1}
+}
+@media(max-width:700px){.calendar-event-actions>button {flex:1}.calendar-event-form input,.calendar-event-form textarea {font-size:16px}}
+
+.calendar-day-count {font-size:.8rem;margin-bottom:16px}
+.calendar-day-dialog .calendar-agenda-list {max-height:50dvh;overflow-y:auto}
+
+.modal>footer>.calendar-day-add {grid-column:2}

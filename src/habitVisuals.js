@@ -2,7 +2,7 @@ import {dateKey,shiftDate,weekday,dueHabit,habitValue,habitDone} from './domain.
 import {normalizeScheduleColor} from './scheduleColors.js';
 import {resolveIcon} from './iconCatalog.js';
 
-export const habitPalette=['#43d6ab','#f27d98','#36c9cc','#67a7ed','#aa8bf5','#f4bb62','#e98bd4'];
+export const habitPalette=['#8b5cf6','#3b82f6','#06b6d4','#10b981','#f59e0b','#ef4444','#ec4899'];
 const iconColors={book:0,water:2,exercise:1,walking:1,code:3,study:4,meditate:4,food:0,sleep:3,money:5,art:6};
 export function habitColor(habit){
  return normalizeScheduleColor(habit.color)||habitPalette[iconColors[resolveIcon(habit.emoji)]??Math.abs([...String(habit.id||habit.name||'')].reduce((hash,char)=>hash+char.charCodeAt(0),0))%habitPalette.length];
