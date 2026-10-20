@@ -1,5 +1,6 @@
 import React,{useRef,useState} from 'react';
 import {Plus,Check} from 'lucide-react';
+import DateInput from './DateInput.jsx';
 import {createCalendarEvent,updateCalendarEvent,calendarEventDraft} from './calendarEvent.js';
 
 export default function CalendarEventForm({date,event:original,t,busy,onSave,onCancel}){
@@ -20,8 +21,8 @@ export default function CalendarEventForm({date,event:original,t,busy,onSave,onC
    <label className="field"><span>{t('calendarEventTitle')}</span><input required maxLength={original?10000:200} value={draft.title} onChange={e=>change('title',e.target.value)} placeholder={t('calendarEventTitlePlaceholder')}/></label>
    <label className="calendar-all-day"><input type="checkbox" checked={draft.allDay} onChange={e=>change('allDay',e.target.checked)}/><span>{t('calendarAllDay')}</span></label>
    <div className="calendar-event-fields">
-    <label className="field"><span>{t('calendarStartDate')}</span><input type="date" required min="1900-01-01" max="2200-12-31" value={draft.date} onChange={e=>change('date',e.target.value)}/></label>
-    <label className="field"><span>{t('calendarEndDate')}</span><input type="date" required min={draft.date||'1900-01-01'} max="2200-12-31" value={draft.endDate} onChange={e=>change('endDate',e.target.value)}/></label>
+    <label className="field"><span>{t('calendarStartDate')}</span><DateInput required min="1900-01-01" max="2200-12-31" value={draft.date} onChange={e=>change('date',e.target.value)}/></label>
+    <label className="field"><span>{t('calendarEndDate')}</span><DateInput required min={draft.date||'1900-01-01'} max="2200-12-31" value={draft.endDate} onChange={e=>change('endDate',e.target.value)}/></label>
     {!draft.allDay&&<><label className="field"><span>{t('startTime')}</span><input type="time" required value={draft.startTime} onChange={e=>change('startTime',e.target.value)}/></label><label className="field"><span>{t('endTime')}</span><input type="time" required value={draft.endTime} onChange={e=>change('endTime',e.target.value)}/></label></>}
    </div>
    <label className="field"><span>{t('calendarLocation')}</span><input maxLength={original?10000:500} value={draft.location} onChange={e=>change('location',e.target.value)}/></label>

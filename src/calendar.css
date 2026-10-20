@@ -78,10 +78,14 @@
  .calendar-agenda-heading h2 {font-size:1rem}
 }
 
-.calendar-event-form fieldset {display:flex;flex-direction:column;gap:16px}
+.calendar-event-form fieldset {display:flex;flex-direction:column;gap:16px;min-width:0}
 .calendar-event-form .field {margin:0;min-width:0}
 .calendar-event-fields {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .calendar-event-fields input {width:100%;min-width:0;font-size:16px}
+/* Bound Safari's native time control to its grid column, including its value. */
+.calendar-event-fields input[type=time] {appearance:none;-webkit-appearance:none;display:block;max-width:100%;height:50px;min-height:50px;padding-inline:8px;overflow:hidden}
+.calendar-event-fields input[type=time]::-webkit-date-and-time-value {min-width:0;max-width:100%;text-align:left}
+.calendar-event-fields input[type=time]::-webkit-datetime-edit {min-width:0;padding:0}
 .calendar-all-day {display:flex;align-items:center;gap:10px;font-size:.85rem;cursor:pointer}
 .calendar-all-day input {width:18px;height:18px;accent-color:var(--accent)}
 .calendar-event-actions {display:flex;justify-content:flex-end;gap:12px}
