@@ -142,24 +142,6 @@
 .notes-folder-row.has-color .notes-folder-chip>svg {color:var(--folder-color)}
 .notes-folder-colors {border:0;padding:0;margin-top:20px;min-width:0}
 .notes-folder-colors legend {font-size:.75rem;color:var(--muted);margin-bottom:10px}
-.notes-folder-palette {display:flex;align-items:center;flex-wrap:wrap;gap:10px}
-.notes-folder-swatch {display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:var(--swatch-color);color:white;border:2px solid transparent}
-.notes-folder-swatch[aria-pressed=true] {outline:2px solid var(--swatch-color);outline-offset:3px}
-.notes-folder-color-default {padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:.75rem;color:var(--muted)}
-.notes-folder-color-default[aria-pressed=true] {color:var(--accent);border-color:var(--accent)}
-.notes-folder-custom-color {display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--muted)}
-.notes-folder-custom-color input[type=color] {width:34px;height:34px;min-height:34px;padding:3px;cursor:pointer}
-
-/* Compact palette with a selection ring and custom-color plus. */
-.notes-folder-palette {flex-wrap:nowrap;justify-content:space-between;gap:clamp(5px,1.8vw,14px);padding:16px;background:var(--surface-2);border-radius:14px}
-.notes-folder-palette .notes-folder-swatch {width:32px;height:32px;min-width:0;flex:0 1 32px;aspect-ratio:1;border:0;color:#101114}
-.notes-folder-swatch[aria-pressed=true] {outline:2px solid var(--swatch-color);outline-offset:4px}
-.notes-folder-palette .notes-folder-custom-color {position:relative;display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;width:32px;height:32px;border:1px solid var(--muted);border-radius:50%;color:var(--muted);cursor:pointer}
-.notes-folder-custom-color.selected {border-color:var(--swatch-color);color:var(--swatch-color);outline:2px solid var(--swatch-color);outline-offset:3px}
-.notes-folder-custom-color input[type=color] {position:absolute;inset:0;width:100%;height:100%;min-height:0;opacity:0;padding:0;border:0;cursor:pointer}
-.notes-folder-custom-color:focus-within {outline:2px solid var(--accent);outline-offset:4px}
-@media(max-width:380px){.notes-folder-palette {padding:14px 10px;gap:7px}.notes-folder-palette .notes-folder-swatch {height:auto}.notes-folder-palette .notes-folder-custom-color {flex-basis:28px;width:28px;height:28px}}
-
 /* Match the notes page corners to the reference search field. */
 .page-notes {--notes-radius:14px}
 .page-notes .notes-search,
@@ -172,5 +154,5 @@
 .page-notes .notes-workspace .icon-btn {border-radius:var(--notes-radius)}
 .modal:has(.notes-editor),.modal:has(.notes-reader),.modal:has(#notes-folder-form),
 .modal .notes-editor input:not([type=checkbox]),.modal .notes-editor select,.modal .notes-editor textarea,.modal .notes-editor-pin,
-.modal #notes-folder-form input:not([type=color]),.modal .notes-folder-palette,
+.modal #notes-folder-form input:not([type=color]),
 .modal:has(.notes-editor)>footer>button,.modal:has(#notes-folder-form)>footer>button {border-radius:14px}
