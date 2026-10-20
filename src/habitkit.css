@@ -600,3 +600,6 @@ dialog.modal:not([open]) {display:none}
  .history-tabs {width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
  .history-tabs button {min-width:0}
 }
+
+/* Follow the visible mobile viewport instead of the browser chrome height. */
+@media(max-width:700px){.app-shell {min-height:100dvh}}
