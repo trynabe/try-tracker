@@ -38,7 +38,7 @@ input:focus,select:focus,textarea:focus {border-color:var(--highlight);box-shado
 .icon-btn:has(.lucide-trash-2):hover {color:var(--danger);background:color-mix(in srgb,var(--danger) 12%,transparent)}
 .sidebar {background:var(--bg);border-right:1px solid var(--border);padding:32px 20px 20px}
 .brand {gap:14px;font-size:1.08rem;letter-spacing:-.04em;font-weight:700;margin-bottom:38px}
-.brand::before {content:'';width:24px;height:24px;flex-shrink:0;border-radius:7px;background:repeating-linear-gradient(90deg,transparent 0 6px,var(--bg) 6px 8px),repeating-linear-gradient(0deg,var(--highlight) 0 6px,var(--bg) 6px 8px)}
+.brand::before {content:'';width:24px;height:24px;flex-shrink:0;background:var(--highlight);-webkit-mask:url('/favicon.svg') center/contain no-repeat;mask:url('/favicon.svg') center/contain no-repeat}
 .version {font-size:.55rem;background:var(--surface-2);color:var(--muted);border:0;border-radius:5px;padding:2px 4px;vertical-align:middle}
 .nav-label {color:var(--muted);letter-spacing:.09em;font-size:.62rem;padding-left:14px;margin-bottom:12px}
 .sidebar nav {gap:5px}

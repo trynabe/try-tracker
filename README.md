@@ -1,4 +1,4 @@
-# Try-Tracker 2.0
+# Try-Tracker 2.5
 
 A bilingual personal discipline workspace built with React + Vite and Supabase. Designed for desktop and iPhone 13 (390 × 844 CSS pixels).
 
