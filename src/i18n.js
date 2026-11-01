@@ -1,5 +1,5 @@
 const strings={
-mobileDockLabel:['เมนูนำทาง','Navigation menu'],mobileDockOpen:['เปิดเมนู · ปัดจากขอบซ้าย','Open menu · swipe from the left edge'],
+mobileDockLabel:['เมนูนำทาง','Navigation menu'],mobileDockOpen:['เปิดเมนู · ปัดหน้าจอไปทางซ้าย','Open menu · swipe left on the page'],
 insightsViewAll:['ดูสถิติทั้งหมด','View all statistics'],
 insightsPerformance:['ภาพรวมความก้าวหน้า','Performance overview'],insightsShowMetric:['เลือกกราฟ','View chart'],insightsPeriodSnapshot:['ช่วงที่เลือก','This period'],
 insightsCurrentPeriod:['ช่วงนี้','Current period'],insightsPreviousPeriod:['ช่วงก่อนหน้า','Previous period'],insightsVersusPrevious:['เทียบกับช่วงก่อนหน้า','Compared with previous period'],insightsPercentagePoints:['จุด','pp'],insightsNoPreviousData:['ยังไม่มีข้อมูลช่วงก่อนหน้า','No data in the previous period'],

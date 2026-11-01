@@ -11,7 +11,7 @@ Release prepared on 1 November 2026.
 ## UI changes
 
 - Desktop floating icon Dock and compact top bar, with profile/settings in the header, consistent spacing, matte surfaces, light/dark/system themes and the existing accent preference.
-- Mobile menu opens by swiping right from the left screen edge. It closes by swiping left, choosing a page, tapping the backdrop or pressing Escape. Transform-based transitions support reduced motion. Dock buttons and the mobile add button share 40 × 40px square proportions and matching corner radii.
+- Mobile menu opens by swiping left on the page, including from its center, or swiping right from the left screen edge. It closes by swiping left, choosing a page, tapping the backdrop or pressing Escape. Form controls, dialogs and horizontal scroll areas keep their own interactions. Transform-based transitions support reduced motion. Dock buttons and the mobile add button share 40 × 40px square proportions and matching corner radii.
 - Responsive habit date selection and heatmap sizing, compact Focus timer with an in-place category picker and session history, and consistent creation buttons/dialogs.
 - The Today page shows a seven-day line/area progress overview. Statistics compares habits, completed tasks and focus time with the preceding period, using the existing records. Empty habit schedules appear as gaps rather than zero completion.
 - Note editor fields, folder dropdown and task priority controls use consistent sizing and typography. Creation dialogs retain their close button and Escape behavior after removal of the requested Cancel buttons.

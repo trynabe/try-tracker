@@ -1,5 +1,13 @@
 # Verification — 2026-10-10
 
+## Mobile menu page swipe — 2026-11-01
+
+- Added leftward opening from the page, including its center, while retaining rightward opening from the left edge and leftward closing. Both directions share the existing animation and reduced-motion styling. Form controls, modal dialogs and native horizontal scroll containers are excluded from page gestures.
+- Native touch handling claims only deliberate horizontal gestures with a non-passive touch-move listener; vertical movement, multi-touch/pinch and nested horizontal scrolling are left to the browser. Mouse/pen drag handling remains available.
+- All **100 tests passed**, including three added gesture cases covering leftward direction, drag/flick thresholds, reversal and closing after center-page opening. Production build and `git diff --check` passed; the existing large-chunk warning remains.
+- Browser at 390 × 844: a center-page left drag opened the eight-button menu; another left drag closed it; a vertical drag did not open it; the original rightward edge drag still opened it. Dragging the habit date strip changed its scroll position from 1074.4px to 1098.4px without opening the menu. Dragging within the Add Habit dialog left the menu closed, and closing the unsaved dialog restored body scrolling. No console errors/warnings were recorded. No records were saved or timers changed.
+- These browser checks used pointer drags in the mobile viewport. Physical-device touch handling and Safari remain unverified. Screenshot: local task artifact `try-tracker-2.8/swipe-anywhere/open-from-middle.png`.
+
 ## Try-Tracker 2.8 release — 2026-11-01
 
 - Promoted the redesigned desktop/mobile interface to `/`, retained `/preview/2.6` as an alias and added `/classic` for the original presentation. Package and lockfile versions are 2.8.0, and the app badge reads 2.8.

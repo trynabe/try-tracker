@@ -28,38 +28,70 @@ export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabe
  const toggle=()=>settle(!current.current.open);
 
  useEffect(()=>{
-  const down=event=>{
-   ignoredClick.current=null;
-   if(!event.isPrimary||event.button!==0||gesture.current)return;
-   const target=event.target;
-   if(!(target instanceof Element)||target.closest('input,textarea,select,[contenteditable=true]'))return;
+  const hasHorizontalScroll=target=>{
+   for(let node=target;node&&node!==document.body;node=node.parentElement){
+    if(node.scrollWidth>node.clientWidth+1&&/auto|scroll/.test(getComputedStyle(node).overflowX))return true;
+   }
+   return false;
+  };
+  const begin=(id,x,y,target,source)=>{
+   if(gesture.current||!(target instanceof Element))return;
+   if(target.closest('input,textarea,select,[contenteditable]:not([contenteditable=false]),[role=slider],[data-dock-gesture=ignore]'))return;
    if(document.querySelector('[role=dialog][aria-modal=true]:not(.mobile-edge-navigation)'))return;
    const startedOpen=current.current.open;
-   if(startedOpen?!root.current?.contains(target):event.clientX>EDGE_DOCK_WIDTH)return;
-   gesture.current={pointerId:event.pointerId,x:event.clientX,y:event.clientY,at:performance.now(),startedOpen,target,locked:false};
+   if(startedOpen?!root.current?.contains(target):hasHorizontalScroll(target))return;
+   // Anywhere on the page: swipe left. The original rightward edge gesture still works.
+   const openingDirection=x<=EDGE_DOCK_WIDTH?1:-1;
+   gesture.current={id,source,x,y,at:performance.now(),startedOpen,openingDirection,target,locked:false};
   };
-  const move=event=>{
-   const drag=gesture.current;if(!drag||event.pointerId!==drag.pointerId)return;
-   const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
+  const down=event=>{
+   ignoredClick.current=null;
+   if(event.pointerType==='touch'||!event.isPrimary||event.button!==0)return;
+   begin(event.pointerId,event.clientX,event.clientY,event.target,'pointer');
+  };
+  const update=(x,y,event)=>{
+   const drag=gesture.current;if(!drag)return;
+   const dx=x-drag.x,dy=y-drag.y;
    if(!drag.locked){
-    const intent=edgeGestureIntent(dx,dy,drag.startedOpen);
+    const intent=edgeGestureIntent(dx,dy,drag.startedOpen,drag.openingDirection);
     if(intent==='scroll'||intent==='cancel'){gesture.current=null;return;}
     if(intent!=='drag')return;
     drag.locked=true;setDragging(true);root.current?.setAttribute('data-dragging','true');
-    try{drag.target.setPointerCapture(event.pointerId);}catch{}
+    if(drag.source==='pointer')try{drag.target.setPointerCapture(drag.id);}catch{}
    }
    if(event.cancelable)event.preventDefault();
-   paint(edgeGestureProgress(dx,drag.startedOpen));
+   paint(edgeGestureProgress(dx,drag.startedOpen,drag.openingDirection));
   };
-  const finish=event=>{
-   const drag=gesture.current;if(!drag||event.pointerId!==drag.pointerId)return;
+  const complete=(x,cancelled)=>{
+   const drag=gesture.current;if(!drag)return;
    if(!drag.locked){gesture.current=null;return;}
-   if(event.type==='pointerup')ignoredClick.current={until:performance.now()+500};
-   const next=event.type==='pointercancel'?drag.startedOpen:settleEdgeGesture(event.clientX-drag.x,performance.now()-drag.at,drag.startedOpen);
-   try{if(drag.target.hasPointerCapture(event.pointerId))drag.target.releasePointerCapture(event.pointerId);}catch{}
+   if(!cancelled)ignoredClick.current={until:performance.now()+500};
+   const next=cancelled?drag.startedOpen:settleEdgeGesture(x-drag.x,performance.now()-drag.at,drag.startedOpen,drag.openingDirection);
+   if(drag.source==='pointer')try{if(drag.target.hasPointerCapture(drag.id))drag.target.releasePointerCapture(drag.id);}catch{}
    settle(next);
   };
+  const move=event=>{if(gesture.current?.source==='pointer'&&event.pointerId===gesture.current.id)update(event.clientX,event.clientY,event);};
+  const finish=event=>{if(gesture.current?.source==='pointer'&&event.pointerId===gesture.current.id)complete(event.clientX,event.type==='pointercancel');};
   const cancel=()=>{if(gesture.current?.locked)settle(gesture.current.startedOpen);else gesture.current=null;};
+  // Touch move must be non-passive so a deliberate horizontal swipe can claim the
+  // gesture without disabling native vertical scrolling, pinch zoom or date-strip scrolling.
+  const touchStart=event=>{
+   ignoredClick.current=null;
+   if(event.touches.length!==1){cancel();return;}
+   const touch=event.changedTouches[0];
+   begin(touch.identifier,touch.clientX,touch.clientY,event.target,'touch');
+  };
+  const touchMove=event=>{
+   if(gesture.current?.source!=='touch')return;
+   if(event.touches.length!==1){cancel();return;}
+   const touch=[...event.touches].find(touch=>touch.identifier===gesture.current.id);
+   if(touch)update(touch.clientX,touch.clientY,event);
+  };
+  const touchEnd=event=>{
+   if(gesture.current?.source!=='touch')return;
+   const touch=[...event.changedTouches].find(touch=>touch.identifier===gesture.current.id);
+   if(touch)complete(touch.clientX,event.type==='touchcancel');
+  };
   const suppressClick=event=>{
    const ignored=ignoredClick.current;
    if(ignored&&event.detail!==0&&performance.now()<ignored.until){event.preventDefault();event.stopImmediatePropagation();ignoredClick.current=null;}
@@ -68,9 +100,13 @@ export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabe
   document.addEventListener('pointermove',move,{passive:false});
   document.addEventListener('pointerup',finish);
   document.addEventListener('pointercancel',finish);
+  document.addEventListener('touchstart',touchStart,{passive:true});
+  document.addEventListener('touchmove',touchMove,{passive:false});
+  document.addEventListener('touchend',touchEnd);
+  document.addEventListener('touchcancel',touchEnd);
   document.addEventListener('click',suppressClick,true);
   window.addEventListener('blur',cancel);
-  return()=>{document.removeEventListener('pointerdown',down);document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',finish);document.removeEventListener('pointercancel',finish);document.removeEventListener('click',suppressClick,true);window.removeEventListener('blur',cancel);if(frame.current)cancelAnimationFrame(frame.current);};
+  return()=>{document.removeEventListener('pointerdown',down);document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',finish);document.removeEventListener('pointercancel',finish);document.removeEventListener('touchstart',touchStart);document.removeEventListener('touchmove',touchMove);document.removeEventListener('touchend',touchEnd);document.removeEventListener('touchcancel',touchEnd);document.removeEventListener('click',suppressClick,true);window.removeEventListener('blur',cancel);if(frame.current)cancelAnimationFrame(frame.current);};
  },[]);
 
  useEffect(()=>{close();},[page]);
