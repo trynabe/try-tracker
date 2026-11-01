@@ -4,6 +4,7 @@ import DateInput from './DateInput.jsx';
 import {createCalendarEvent,updateCalendarEvent,calendarEventDraft} from './calendarEvent.js';
 
 export default function CalendarEventForm({date,event:original,t,busy,onSave,onCancel}){
+ const premium=document.documentElement.dataset.ui==='v26';
  const initial=()=>calendarEventDraft(original,date);
  const [draft,setDraft]=useState(initial),[error,setError]=useState(''),[saving,setSaving]=useState(false);
  const savingRef=useRef(false);
@@ -28,7 +29,7 @@ export default function CalendarEventForm({date,event:original,t,busy,onSave,onC
    <label className="field"><span>{t('calendarLocation')}</span><input maxLength={original?10000:500} value={draft.location} onChange={e=>change('location',e.target.value)}/></label>
    <label className="field"><span>{t('description')}</span><textarea rows={3} maxLength={original?10000:5000} value={draft.description} onChange={e=>change('description',e.target.value)}/></label>
    {error&&<p className="danger" role="alert">{error}</p>}
-   <div className="calendar-event-actions">{onCancel&&<button type="button" className="secondary" onClick={onCancel}>{t('cancel')}</button>}<button type="submit" className="primary">{original?<Check size={17}/>:<Plus size={17}/>} {busy||saving?t('saving'):t(original?'save':'calendarAddEvent')}</button></div>
+   <div className="calendar-event-actions">{onCancel&&!premium&&<button type="button" className="secondary" onClick={onCancel}>{t('cancel')}</button>}<button type="submit" className="primary">{original?<Check size={17}/>:<Plus size={17}/>} {busy||saving?t('saving'):t(original?'save':'calendarAddEvent')}</button></div>
   </fieldset>
  </form>;
 }

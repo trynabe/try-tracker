@@ -1,8 +1,10 @@
-# Try-Tracker 2.5 — Development guide
+# Try-Tracker 2.8 — Development guide
 
 [กลับไปหน้า README](../README.md)
 
 A bilingual personal discipline workspace built with React + Vite and Supabase. Designed for desktop and iPhone 13 (390 × 844 CSS pixels).
+
+Version 2.8 uses the redesigned interface at `/` on desktop and mobile. `/preview/2.6` remains a compatibility alias; `/classic` selects the original presentation. These paths share the same account, records and synchronization. The internal `v26` presentation identifier is retained to keep the existing styles and components stable. See [release notes](RELEASE_2_8.md) for the UI changes and validation.
 
 ## Run locally
 

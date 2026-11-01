@@ -1,0 +1,132 @@
+/* Shared preview presentation adapted to phone widths. */
+@media(max-width:700px){
+ :root[data-ui=v26] .desktop-habit-dates {
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px 24px;
+  padding:18px 24px;border:1px solid var(--border);border-radius:18px;background:var(--surface);box-shadow:var(--v26-inner);
+ }
+ :root[data-ui=v26] .desktop-date-heading {grid-column:1;grid-row:1;display:flex;align-items:center;gap:12px;min-width:0}
+ :root[data-ui=v26] .desktop-date-icon {display:grid;place-items:center;flex-shrink:0;width:38px;height:38px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2);color:var(--highlight)}
+ :root[data-ui=v26] .desktop-date-heading>div {display:flex;flex-direction:column;gap:4px;min-width:0}
+ :root[data-ui=v26] .desktop-date-heading strong {font-size:.9375rem;line-height:1.4;font-weight:600;letter-spacing:-.025em}
+ :root[data-ui=v26] .desktop-date-heading>div>span {font-size:.6875rem;line-height:1.4;color:var(--muted)}
+ :root[data-ui=v26] .desktop-habit-dates .date-strip {
+  grid-column:1/-1;grid-row:2;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;max-width:560px;min-width:0;justify-self:center;
+  min-height:0;padding:6px;margin:0;border:1px solid var(--border);border-radius:16px;background:color-mix(in srgb,var(--bg) 65%,var(--surface));box-shadow:inset 0 1px 3px #00000008;
+ }
+ :root[data-ui=v26] .desktop-habit-dates .date-strip>.icon-btn {width:30px;min-width:30px;height:36px;min-height:36px;padding:0;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--muted);flex-shrink:0}
+ :root[data-ui=v26] .desktop-habit-dates .date-strip>.icon-btn:hover:not(:disabled) {color:var(--text);background:var(--surface-2);border-color:var(--border)}
+ :root[data-ui=v26] .desktop-habit-dates .date-strip>.icon-btn:disabled {opacity:.3}
+ :root[data-ui=v26] .desktop-habit-dates .date-days {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;max-width:none;min-width:0;width:100%;flex:1}
+ :root[data-ui=v26] .desktop-habit-dates .date-days.scrollable-date-days {display:flex;gap:2px}
+ :root[data-ui=v26] .desktop-habit-dates .date-days.scrollable-date-days>button {width:auto;min-width:48px}
+ :root[data-ui=v26] .desktop-habit-dates .date-days button {position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;height:64px;min-height:64px;min-width:0;padding:4px 0;width:100%;border:0;border-radius:10px;background:transparent;color:var(--text)}
+ :root[data-ui=v26] .desktop-habit-dates .date-days button.selected {background:transparent;color:var(--text);box-shadow:none}
+ :root[data-ui=v26] .desktop-habit-dates .date-days small {font-size:.6875rem;font-weight:500;line-height:1.3;color:var(--muted)}
+ :root[data-ui=v26] .desktop-habit-dates .date-days .selected small {color:var(--text);font-weight:600;opacity:1}
+ :root[data-ui=v26] .desktop-habit-dates .date-days strong {display:grid;place-items:center;flex-shrink:0;width:38px;max-width:100%;height:36px;border:1px solid transparent;border-radius:10px;font-size:1.125rem;line-height:1;font-weight:600;font-variant-numeric:tabular-nums;transition:background-color .15s,border-color .15s}
+ :root[data-ui=v26] .desktop-habit-dates .date-days button:hover:not(:disabled):not(.selected) strong {background:var(--surface-2);border-color:var(--border)}
+ :root[data-ui=v26] .desktop-habit-dates .date-days .selected strong {width:40px;border-radius:11px;background:var(--accent);border-color:color-mix(in srgb,var(--accent) 80%,var(--text));box-shadow:inset 0 1px 0 #ffffff35,inset 0 -2px 0 #00000014,0 3px 8px color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent-contrast,#fff);font-weight:650}
+ :root[data-ui=v26] .desktop-habit-dates .date-days button>i {position:absolute;bottom:2px;left:calc(50% - 1.5px);width:3px;height:3px;margin:0;border-radius:50%;background:transparent}
+ :root[data-ui=v26] .desktop-habit-dates .date-days button:disabled {opacity:.4}
+ :root[data-ui=v26] .desktop-habit-dates .date-days .today-dot {background:var(--highlight)}
+ :root[data-ui=v26] .desktop-habit-dates .history-date-toolbar {grid-column:2;grid-row:1;display:flex;flex-wrap:nowrap;align-items:center;gap:8px;margin:0;min-width:0}
+ :root[data-ui=v26] .desktop-habit-dates .native-date-field.habit-date-field {width:148px;height:38px;min-height:38px;padding-inline:10px;border-color:var(--border);border-radius:10px;background:var(--surface-2);font-size:.75rem}
+ :root[data-ui=v26] .desktop-habit-dates .history-date-toolbar>.secondary {height:38px;min-height:38px;padding:7px 12px;border-radius:10px;white-space:nowrap;font-size:.75rem;font-weight:500}
+ :root[data-ui=v26] .focus-panel {display:flex;flex-direction:column;gap:20px;padding:24px;min-width:0}
+ :root[data-ui=v26] .focus-panel>*,:root[data-ui=v26] .focus-panel>*+* {margin-block:0}
+ :root[data-ui=v26] .focus-panel>.section-head {gap:12px;align-items:center}
+ :root[data-ui=v26] .focus-panel>.section-head>.accent-text {padding:5px 9px;border-radius:8px;background:var(--surface-2);font-size:.8125rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+ :root[data-ui=v26] .focus-workspace {display:flex;justify-content:center;min-width:0}
+ :root[data-ui=v26] .focus-timer-pane {display:flex;flex-direction:column;gap:20px;min-width:0;width:100%;max-width:640px}
+ :root[data-ui=v26] .focus-timer-pane>* {margin-block:0}
+ :root[data-ui=v26] .focus-category-trigger {display:flex;align-items:center;gap:12px;min-height:58px;width:100%;max-width:320px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--text);text-align:left}
+ :root[data-ui=v26] .focus-category-trigger:hover:not(:disabled) {border-color:color-mix(in srgb,var(--highlight) 50%,var(--border));background:color-mix(in srgb,var(--accent) 5%,var(--surface-2))}
+ :root[data-ui=v26] .focus-trigger-icon {display:grid;place-items:center;flex-shrink:0;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--highlight)}
+ :root[data-ui=v26] .focus-category-trigger>span:nth-child(2) {display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+ :root[data-ui=v26] .focus-category-trigger small {font-size:.6875rem;color:var(--muted)}
+ :root[data-ui=v26] .focus-category-trigger strong {font-size:.875rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ :root[data-ui=v26] .focus-category-trigger>svg {flex-shrink:0;color:var(--muted)}
+ :root[data-ui=v26] .focus-picker-list {display:flex;flex-direction:column;gap:8px;max-height:min(460px,55dvh);overflow-y:auto;overscroll-behavior:contain;padding:4px}
+ :root[data-ui=v26] .focus-picker-row {display:flex;align-items:center;gap:4px;min-width:0;border:1px solid var(--border);border-radius:12px;background:var(--surface-2)}
+ :root[data-ui=v26] .focus-picker-row.is-selected {border-color:color-mix(in srgb,var(--highlight) 50%,var(--border));background:color-mix(in srgb,var(--accent) 6%,var(--surface-2))}
+ :root[data-ui=v26] .focus-picker-option {display:flex;align-items:center;gap:12px;flex:1;min-width:0;min-height:72px;padding:12px;border-radius:11px;text-align:left;color:var(--text)}
+ :root[data-ui=v26] .focus-picker-option:hover:not(:disabled) {background:color-mix(in srgb,var(--accent) 5%,transparent)}
+ :root[data-ui=v26] .focus-picker-icon {display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border-radius:11px;background:color-mix(in srgb,var(--item-color) 12%,var(--surface));color:var(--highlight)}
+ :root[data-ui=v26] .focus-picker-name {display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+ :root[data-ui=v26] .focus-picker-name strong {font-size:.875rem;font-weight:500;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ :root[data-ui=v26] .focus-picker-name small {font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+ :root[data-ui=v26] .focus-picker-option>svg {flex-shrink:0;color:var(--highlight)}
+ :root[data-ui=v26] .focus-picker-tools {display:flex;gap:2px;padding-right:8px;flex-shrink:0}
+ :root[data-ui=v26] .focus-picker-tools .icon-btn {width:36px;min-width:36px;height:40px;min-height:40px}
+ :root[data-ui=v26] .focus-picker-option:focus-visible {outline-offset:-3px}
+ :root[data-ui=v26] .focus-layout>.usage-history {min-width:0}
+ :root[data-ui=v26] .focus-layout>.usage-history>.panel {padding:24px}
+ :root[data-ui=v26] .focus-layout .history-list>.empty {min-height:112px;padding:20px 12px;gap:12px}
+ :root[data-ui=v26] .focus-layout .history-list>.empty p {margin:0;font-size:.8125rem;line-height:1.6}
+ :root[data-ui=v26] .focus-duration-fields {gap:16px}
+ :root[data-ui=v26] .focus-duration-fields>.field {margin:0;gap:8px}
+ :root[data-ui=v26] .focus-categories .subject-row {padding-block:10px}
+ :root[data-ui=v26] .focus-layout .history-list {max-height:224px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+ :root[data-ui=v26] .focus-layout .history-list:focus-visible {outline:2px solid var(--highlight);outline-offset:4px;border-radius:8px}
+ :root[data-ui=v26] .segmented {padding:4px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);gap:4px}
+ :root[data-ui=v26] .segmented button {padding:8px 14px;min-height:36px;font-size:.8125rem;border-radius:9px;color:var(--muted)}
+ :root[data-ui=v26] .segmented button.selected {background:var(--surface);color:var(--text);box-shadow:0 1px 4px #0000000d,var(--v26-inner)}
+ :root[data-ui=v26] .focus-panel .timer-orbit {flex:1;width:100%;max-width:none;min-height:240px;aspect-ratio:auto;margin:0;padding:28px 20px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 5%,transparent),transparent 65%),var(--surface-2);box-shadow:var(--v26-inner);animation:none}
+ :root[data-ui=v26] .focus-panel .timer-orbit.is-active {border-color:color-mix(in srgb,var(--highlight) 45%,var(--border));box-shadow:var(--v26-inner)}
+ :root[data-ui=v26] .focus-panel .timer-circle {width:100%;height:auto;min-width:0;border:0;border-radius:0;background:transparent;gap:18px}
+ :root[data-ui=v26] .focus-panel .timer-circle>strong {font-size:clamp(3rem,4.5vw,4.5rem);line-height:1.15;font-weight:500;letter-spacing:-.045em;font-variant-numeric:tabular-nums;white-space:nowrap}
+ :root[data-ui=v26] .focus-panel .timer-circle .eyebrow {font-size:.75rem;color:var(--muted)}
+ :root[data-ui=v26] .focus-panel .is-active .timer-circle .eyebrow {color:var(--highlight)}
+ :root[data-ui=v26] .focus-panel .timer-circle>span:last-child {max-width:100%;font-size:.875rem;line-height:1.6;overflow-wrap:anywhere}
+ :root[data-ui=v26] .focus-panel .timer-circle>span:last-child>svg {flex-shrink:0}
+ :root[data-ui=v26] .focus-panel .timer-controls {display:flex;gap:12px;margin:0;width:100%}
+ :root[data-ui=v26] .focus-panel .timer-controls>button {flex:1;min-height:44px;justify-content:center}
+
+}
+
+@media(max-width:700px){
+ :root[data-ui=v26] .desktop-habit-dates {padding:14px;gap:12px 8px;border-radius:18px}
+ :root[data-ui=v26] .desktop-date-heading {gap:7px}
+ :root[data-ui=v26] .desktop-date-icon {width:28px;height:30px;border-radius:9px}
+ :root[data-ui=v26] .desktop-date-icon svg {width:16px;height:16px}
+ :root[data-ui=v26] .desktop-date-heading strong {font-size:11px}
+ :root[data-ui=v26] .desktop-date-heading>div>span {font-size:9px}
+ :root[data-ui=v26] .desktop-habit-dates .history-date-toolbar {gap:5px}
+ :root[data-ui=v26] .desktop-habit-dates .native-date-field.habit-date-field {width:105px;height:34px;min-height:34px;padding-inline:7px;font-size:11px}
+ :root[data-ui=v26] .desktop-habit-dates .native-date-field input {font-size:11px}
+ :root[data-ui=v26] .desktop-habit-dates .history-date-toolbar>.secondary {height:34px;min-height:34px;padding:5px 8px;font-size:11px}
+ :root[data-ui=v26] .desktop-habit-dates .date-strip {border-radius:12px;padding:4px;gap:2px}
+ :root[data-ui=v26] .desktop-habit-dates .date-strip>.icon-btn {width:24px;min-width:24px}
+ :root[data-ui=v26] .desktop-habit-dates .date-days.scrollable-date-days>button {flex:0 0 max(40px,calc((100% - 12px)/7));min-width:40px;height:58px;min-height:58px}
+ :root[data-ui=v26] .desktop-habit-dates .date-days strong {width:32px;height:30px;font-size:16px}
+ :root[data-ui=v26] .desktop-habit-dates .date-days .selected strong {width:32px;border-radius:9px}
+ :root[data-ui=v26] .desktop-habit-dates .date-days small {font-size:9px}
+ :root[data-ui=v26] .focus-panel {padding:18px;gap:16px;border-radius:18px}
+ :root[data-ui=v26] .focus-panel>.section-head h2 {font-size:13px}
+ :root[data-ui=v26] .focus-panel>.section-head>.accent-text {font-size:11px}
+ :root[data-ui=v26] .focus-timer-pane {gap:16px}
+ :root[data-ui=v26] .focus-panel .segmented {display:flex;padding:4px;gap:4px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border)}
+ :root[data-ui=v26] .focus-panel .segmented button {flex:1;min-height:36px;font-size:12px;border-radius:8px;padding:6px}
+ :root[data-ui=v26] .focus-panel .segmented button.selected {background:var(--surface);color:var(--text)}
+ :root[data-ui=v26] .focus-panel .timer-orbit {min-height:230px;padding:24px 12px;border-radius:14px}
+ :root[data-ui=v26] .focus-panel .timer-circle {gap:18px}
+ :root[data-ui=v26] .focus-panel .timer-circle>strong {font-size:clamp(36px,10vw,48px)}
+ :root[data-ui=v26] .focus-panel .timer-circle .eyebrow {font-size:11px}
+ :root[data-ui=v26] .focus-category-trigger {max-width:100%;min-height:54px;padding:9px 10px;gap:9px}
+ :root[data-ui=v26] .focus-category-trigger strong {font-size:12px}
+ :root[data-ui=v26] .focus-category-trigger small {font-size:10px}
+ :root[data-ui=v26] .focus-trigger-icon {width:30px;height:30px}
+ :root[data-ui=v26] .focus-layout>.usage-history>.panel {padding:18px;border-radius:18px}
+ :root[data-ui=v26] .focus-layout .history-list .row-main>strong {font-size:12px}
+ :root[data-ui=v26] .focus-layout .history-list .row-meta,:root[data-ui=v26] .focus-layout .history-duration {font-size:11px}
+ :root[data-ui=v26] .focus-picker-option {min-height:64px;padding:10px;gap:9px}
+ :root[data-ui=v26] .focus-picker-name strong {font-size:13px}
+ :root[data-ui=v26] .focus-picker-name small {font-size:11px}
+}
+@media(max-width:360px){
+ :root[data-ui=v26] .desktop-habit-dates {grid-template-columns:minmax(0,1fr)}
+ :root[data-ui=v26] .desktop-date-heading {grid-column:1;grid-row:1}
+ :root[data-ui=v26] .desktop-habit-dates .history-date-toolbar {grid-column:1;grid-row:2}
+ :root[data-ui=v26] .desktop-habit-dates .native-date-field.habit-date-field {flex:1;width:auto}
+ :root[data-ui=v26] .desktop-habit-dates .date-strip {grid-row:3}
+}

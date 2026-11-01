@@ -1,0 +1,109 @@
+/* Creation workspaces, isolated from the classic interface. */
+:root[data-ui=v26] .overlay:has(>.creation-dialog) {padding:24px;background:#090c148f;backdrop-filter:none;-webkit-backdrop-filter:none}
+:root[data-ui=v26] .modal.creation-dialog {
+ width:640px;max-width:100%;max-height:calc(100dvh - 48px);border-radius:22px;
+ border:1px solid var(--border);background:var(--surface);
+ box-shadow:0 24px 80px #00000038,inset 0 1px 0 #ffffff08;
+}
+:root[data-ui=v26] .creation-dialog>header {
+ position:relative;display:flex;align-items:flex-start;gap:16px;padding:24px;
+ background:linear-gradient(115deg,color-mix(in srgb,var(--accent) 5%,var(--surface)),var(--surface));
+}
+:root[data-ui=v26] .creation-heading {display:flex;align-items:center;gap:14px;min-width:0;flex:1}
+:root[data-ui=v26] .creation-heading-icon {
+ display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:14px;
+ color:var(--highlight);background:color-mix(in srgb,var(--accent) 9%,var(--surface));
+ border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));box-shadow:inset 0 1px 0 #ffffff0a;
+}
+:root[data-ui=v26] .creation-dialog .creation-heading h2 {font-size:1.125rem;font-weight:650;line-height:1.45;margin:0}
+:root[data-ui=v26] .creation-heading p {margin:5px 0 0;color:var(--muted);font-size:.75rem;line-height:1.7}
+:root[data-ui=v26] .creation-dialog>header>.icon-btn {flex-shrink:0;width:32px;height:32px;min-width:32px;min-height:32px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--muted)}
+:root[data-ui=v26] .creation-dialog .modal-body {padding:24px;scroll-padding:24px}
+:root[data-ui=v26] .creation-dialog .form-fields {gap:20px}
+:root[data-ui=v26] .creation-dialog-tasks .form-fields {gap:16px}
+:root[data-ui=v26] .creation-dialog .field {gap:9px;margin:0;min-width:0}
+:root[data-ui=v26] .creation-dialog .field-grid {gap:16px;margin:0}
+:root[data-ui=v26] .creation-dialog :is(.field>span,.task-priority-field>legend,.icon-picker-field>legend,.schedule-color-field>legend) {font-size:.75rem;font-weight:550;color:var(--muted)}
+:root[data-ui=v26] .creation-dialog :is(.field>input,.field>textarea,.native-date-field,.native-select-field,.notes-select-trigger) {
+ border:1px solid var(--border);border-radius:12px;background:var(--surface-2);color:var(--text);
+ box-shadow:inset 0 1px 2px #00000004;transition:border-color .15s,box-shadow .15s;
+}
+:root[data-ui=v26] .creation-dialog :is(.field>input,.native-date-field,.native-select-field) {height:48px;min-height:48px;font-size:.875rem}
+:root[data-ui=v26] .creation-dialog .field>input,:root[data-ui=v26] .creation-dialog .field>textarea {padding:12px 14px}
+:root[data-ui=v26] .creation-dialog .field>textarea {font-size:.875rem;line-height:1.8;resize:vertical}
+:root[data-ui=v26] .creation-dialog :is(input,textarea)::placeholder {color:var(--muted);opacity:.65;font-size:inherit}
+:root[data-ui=v26] .creation-dialog :is(.field>input,.field>textarea):focus {outline:none;border-color:var(--highlight);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+:root[data-ui=v26] .creation-dialog :is(.native-date-field,.native-select-field):focus-within {outline:none;border-color:var(--highlight);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+:root[data-ui=v26] .creation-dialog :is(.native-date-field>input,.native-select-field>select) {background:transparent;border:0;box-shadow:none}
+:root[data-ui=v26] .creation-dialog .native-date-field>input {font-size:.875rem}
+:root[data-ui=v26] .creation-dialog>footer,:root[data-ui=v26] .creation-dialog .calendar-event-actions {
+ display:flex;justify-content:flex-end;align-items:center;gap:12px;padding:18px 24px;border-top:1px solid var(--border);
+ background:color-mix(in srgb,var(--surface-2) 35%,var(--surface));border-radius:0;
+}
+:root[data-ui=v26] .creation-dialog :is(footer,.calendar-event-actions)>button {flex:0 1 auto;min-height:46px;min-width:100px;padding:10px 20px;font-size:.8125rem;border-radius:12px}
+:root[data-ui=v26] .creation-dialog :is(footer,.calendar-event-actions)>.primary {min-width:152px;background:var(--accent);color:var(--accent-contrast,#fff);border:1px solid color-mix(in srgb,var(--accent-contrast,#fff) 18%,var(--accent));box-shadow:inset 0 1px 0 #ffffff30,0 4px 10px color-mix(in srgb,var(--accent) 14%,transparent)}
+:root[data-ui=v26] .creation-dialog :is(footer,.calendar-event-actions)>.secondary {background:transparent;border-color:var(--border);color:var(--muted)}
+:root[data-ui=v26] .creation-dialog :is(footer,.calendar-event-actions)>button:disabled {opacity:.45;box-shadow:none}
+:root[data-ui=classic] .creation-save-icon {display:none}
+:root[data-ui=v26] .creation-save-icon {flex-shrink:0}
+:root[data-ui=v26] .task-priority-field {margin:0;padding:0;border:0;min-width:0}
+:root[data-ui=v26] .task-priority-field>legend {margin-bottom:9px;padding:0}
+:root[data-ui=v26] .task-priority-options {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+:root[data-ui=v26] .task-priority-option {position:relative;display:flex;align-items:center;gap:9px;min-width:0;min-height:46px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2);color:var(--muted);font-size:.8125rem;cursor:pointer;transition:background-color .15s,border-color .15s}
+:root[data-ui=v26] .task-priority-option input {position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+:root[data-ui=v26] .task-priority-option i {width:6px;height:6px;flex-shrink:0;border-radius:50%;background:var(--muted)}
+:root[data-ui=v26] .task-priority-option[data-priority=medium] i {background:#dba34f}
+:root[data-ui=v26] .task-priority-option[data-priority=high] i {background:#e47b8e}
+:root[data-ui=v26] .task-priority-option span {min-width:0;overflow-wrap:anywhere}
+:root[data-ui=v26] .task-priority-option>svg {margin-left:auto;color:var(--highlight);flex-shrink:0}
+:root[data-ui=v26] .task-priority-option.selected {background:color-mix(in srgb,var(--accent) 7%,var(--surface));color:var(--text);border-color:color-mix(in srgb,var(--accent) 50%,var(--border))}
+:root[data-ui=v26] .task-priority-option:has(input:focus-visible) {outline:2px solid var(--highlight);outline-offset:3px}
+:root[data-ui=v26] .task-subtasks {padding:12px;background:color-mix(in srgb,var(--surface-2) 45%,var(--surface));border:1px solid var(--border);border-radius:14px;display:grid;gap:10px}
+:root[data-ui=v26] .task-subtasks .field>textarea {height:84px;min-height:84px}
+:root[data-ui=v26] .task-subtasks .field-hint {margin:0;color:var(--muted);font-size:.6875rem;line-height:1.7}
+:root[data-ui=v26] .creation-dialog .editor-entity-preview {flex-direction:row;gap:12px;text-align:left;padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2)}
+:root[data-ui=v26] .creation-dialog .editor-entity-preview>span {width:42px;height:42px;flex-shrink:0;border-radius:12px}
+:root[data-ui=v26] .creation-dialog .editor-entity-preview>span svg {width:23px;height:23px}
+:root[data-ui=v26] .creation-dialog .editor-entity-preview>strong {font-size:.875rem;color:var(--text)}
+:root[data-ui=v26] .creation-dialog .entity-icon-picker {grid-template-columns:repeat(6,minmax(0,1fr))}
+:root[data-ui=v26] .creation-dialog .entity-icon-picker button {min-height:62px;border-radius:12px}
+:root[data-ui=v26] .creation-dialog .habit-day-picker {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+:root[data-ui=v26] .creation-dialog .habit-day-picker button {min-width:0;padding:8px 2px;font-size:.6875rem}
+:root[data-ui=v26] .modal.creation-dialog-notes {width:760px}
+:root[data-ui=v26] .creation-dialog .notes-editor :is(input,textarea,.notes-select-trigger,.notes-editor-pin) {font-size:.77rem}
+:root[data-ui=v26] .creation-dialog .notes-editor-meta .notes-select-trigger {height:44px;min-height:44px}
+:root[data-ui=v26] .creation-dialog .notes-editor fieldset {gap:20px}
+:root[data-ui=v26] .creation-dialog .notes-body-field textarea {min-height:220px}
+:root[data-ui=v26] .creation-dialog-calendar .modal-body {padding-bottom:0}
+:root[data-ui=v26] .creation-dialog .calendar-event-actions {position:sticky;bottom:0;margin:4px -24px 0;z-index:2}
+:root[data-ui=v26] .creation-dialog .calendar-all-day {padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2);font-size:.8125rem}
+:root[data-ui=v26] .creation-dialog .calendar-event-fields {gap:16px}
+:root[data-ui=v26] .creation-dialog-folder #notes-folder-form {display:grid;gap:20px}
+@media(hover:hover) and (pointer:fine){
+ :root[data-ui=v26] .task-priority-option:hover {border-color:color-mix(in srgb,var(--accent) 30%,var(--border))}
+ :root[data-ui=v26] .creation-dialog :is(footer,.calendar-event-actions)>.primary:hover:not(:disabled) {box-shadow:inset 0 1px 0 #ffffff40,0 5px 14px color-mix(in srgb,var(--accent) 22%,transparent)}
+}
+@media(max-width:700px){
+ :root[data-ui=v26] .overlay:has(>.creation-dialog) {padding:12px}
+ :root[data-ui=v26] .modal.creation-dialog {max-height:calc(100dvh - 24px);border-radius:20px}
+ :root[data-ui=v26] .creation-dialog>header {padding:20px;gap:10px}
+ :root[data-ui=v26] .creation-dialog>header>.icon-btn {width:40px;height:40px;min-width:40px;min-height:40px}
+ :root[data-ui=v26] .creation-heading {gap:12px}
+ :root[data-ui=v26] .creation-heading-icon {width:40px;height:40px;flex-basis:40px;border-radius:12px}
+ :root[data-ui=v26] .creation-dialog .creation-heading h2 {font-size:1rem}
+ :root[data-ui=v26] .creation-heading p {font-size:.6875rem}
+ :root[data-ui=v26] .creation-dialog .modal-body {padding:20px}
+ :root[data-ui=v26] .creation-dialog :is(.field>input,.field>textarea,.native-date-field>input,.native-select-value),:root[data-ui=v26] .creation-dialog .notes-editor :is(input,textarea,.notes-select-trigger,.notes-editor-pin) {font-size:16px}
+ :root[data-ui=v26] .creation-dialog .field-grid,:root[data-ui=v26] .creation-dialog .calendar-event-fields {gap:12px}
+ :root[data-ui=v26] .creation-dialog-tasks .field-grid {grid-template-columns:minmax(0,1fr)}
+ :root[data-ui=v26] .task-priority-options {gap:7px}
+ :root[data-ui=v26] .task-priority-option {gap:6px;padding:10px;font-size:.75rem}
+ :root[data-ui=v26] .creation-dialog>footer,:root[data-ui=v26] .creation-dialog .calendar-event-actions {padding:16px 20px;gap:10px}
+ :root[data-ui=v26] .creation-dialog :is(footer,.calendar-event-actions)>button {flex:1;min-width:0;min-height:48px;padding-inline:12px}
+ :root[data-ui=v26] .creation-dialog-calendar .modal-body {padding-bottom:0}
+ :root[data-ui=v26] .creation-dialog .calendar-event-actions {margin-inline:-20px}
+ :root[data-ui=v26] .creation-dialog .entity-icon-picker {grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(prefers-reduced-motion:reduce){
+ :root[data-ui=v26] .creation-dialog * {transition:none}
+}

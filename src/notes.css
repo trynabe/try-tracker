@@ -50,6 +50,14 @@
 .notes-empty>span {display:grid;place-items:center;width:58px;height:58px;color:var(--muted);border:1px solid var(--border);border-radius:16px;background:var(--surface)}.notes-empty h3 {font-size:1.05rem;margin-top:6px}.notes-empty p {font-size:.8rem;color:var(--muted);max-width:340px;line-height:1.8}.notes-empty .primary {margin-top:12px}
 .notes-folder-hint {font-size:.75rem;margin-top:12px}.note-editor-modal {width:760px;max-width:100%}.notes-editor fieldset {display:flex;flex-direction:column;gap:20px}.notes-editor .field {margin:0}.notes-editor-meta {display:flex;align-items:flex-end;gap:16px}.notes-editor-meta>.field {flex:1;min-width:0}.notes-editor-meta select {font-size:.8rem}
 .notes-editor-pin {display:flex;align-items:center;gap:7px;min-height:44px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:.78rem;cursor:pointer;flex-shrink:0}.notes-editor-pin.selected {border-color:color-mix(in srgb,var(--accent) 40%,var(--border));color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface))}.notes-editor-pin input {width:16px;height:16px;accent-color:var(--accent);margin:0}
+.notes-editor-folder {--notes-folder-control-height:44px}
+.notes-editor .notes-editor-meta .notes-editor-folder .notes-select-trigger {max-width:none;height:var(--notes-folder-control-height);min-height:var(--notes-folder-control-height);padding:10px 12px;border-radius:14px;background:var(--surface-2);font-size:.77rem}
+.notes-editor .notes-editor-meta>.field.notes-editor-folder {margin:0}
+.notes-editor-folder .notes-select-menu {left:0;right:auto;display:grid;grid-auto-rows:var(--notes-folder-control-height);gap:4px;width:100%;max-width:100%;max-height:min(240px,30dvh);padding:0;border:0;background:transparent}
+.notes-editor-folder .notes-select-menu>button {height:var(--notes-folder-control-height);min-height:var(--notes-folder-control-height);padding:10px 12px;border:1px solid var(--border);border-radius:14px;font-size:.77rem;line-height:1.5;background:var(--surface)}
+.notes-editor-folder .notes-select-menu>button>span {overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.notes-editor-folder .notes-select-menu>button>svg {flex-shrink:0}
+@media(max-width:700px){.notes-editor .notes-editor-meta .notes-editor-folder .notes-select-trigger,.notes-editor-folder .notes-select-menu>button {font-size:16px}}
 .notes-title-field input {font-size:1.25rem;font-weight:600;padding:14px}.notes-body-field textarea {font-size:.9rem;line-height:1.9;min-height:260px;padding:16px;resize:vertical}.notes-tag-input-row {display:flex;align-items:center;gap:8px}.notes-tag-input-row>input {flex:1}.notes-tag-input-row>.secondary {padding:10px 12px}.notes-editor-tag-list {display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.notes-editor-tag-list button {color:var(--accent)}.notes-tags-hint {font-size:.7rem;margin-top:8px}.notes-editor-count {margin-right:auto;color:var(--muted);font-size:.7rem}
 
 @media(min-width:701px){.main-content.page-notes {max-width:1560px}.page-notes>.page-heading {margin-bottom:26px}}
@@ -101,7 +109,9 @@
 
 /* Keep note form text at one size on desktop and mobile. */
 .notes-editor input,.notes-editor select,.notes-editor textarea,.notes-editor .notes-editor-pin {font-size:.77rem}
+.notes-editor .notes-title-field input::placeholder,.notes-editor .notes-body-field textarea::placeholder {font-size:.77rem;font-weight:400}
 @media(max-width:700px){.notes-editor input,.notes-editor select,.notes-editor textarea,.notes-editor .notes-editor-pin {font-size:16px}}
+@media(max-width:700px){.notes-editor .notes-title-field input::placeholder,.notes-editor .notes-body-field textarea::placeholder {font-size:16px}}
 .notes-editor .notes-title-field input {font-weight:400}
 
 .notes-editor-tag {display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:5px 7px 5px 11px;border:1px solid var(--border);border-radius:8px;background:var(--surface-2);color:var(--text);font-size:.77rem;line-height:1.5}

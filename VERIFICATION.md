@@ -1,5 +1,12 @@
 # Verification — 2026-10-10
 
+## Try-Tracker 2.8 release — 2026-11-01
+
+- Promoted the redesigned desktop/mobile interface to `/`, retained `/preview/2.6` as an alias and added `/classic` for the original presentation. Package and lockfile versions are 2.8.0, and the app badge reads 2.8.
+- All **97 tests passed**; production build and `git diff --check` passed. The existing large JavaScript chunk warning remains.
+- Browser smoke checks confirmed routing, version labels, the eight desktop navigation buttons, 40 × 40px mobile Dock buttons and no horizontal document overflow at 1366 × 768 and 390 × 844. No console warnings/errors were recorded. Workspace records and timers were not modified.
+- See [release notes](docs/RELEASE_2_8.md) for details and [preview development history](docs/DESKTOP_26_PREVIEW.md) for earlier UI verification. The older entries below retain their original dates and validation scope.
+
 ## Subtask checkbox appearance — 2026-10-11
 
 - The reported iPhone screenshot shows native dark checkbox rendering. Subtask inputs previously retained native appearance while inheriting generic input decoration. Scoped these checkboxes to an explicit 18 × 18px box with zero padding, a 4px radius, theme background and a visible border. Checked state uses the accent color and contrasting CSS tick. The real checkbox remains keyboard accessible, with focus, disabled and forced-colors styling.
