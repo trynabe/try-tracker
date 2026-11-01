@@ -16,14 +16,18 @@
   opacity:var(--edge-progress);transition:opacity var(--edge-duration) var(--edge-ease);touch-action:none;cursor:default;
  }
  :root[data-ui=v26] .mobile-edge-scrim:is(:hover,:active) {background:#070a134d;transform:none}
- :root[data-ui=v26] .mobile-edge-position {position:absolute;left:calc(12px + env(safe-area-inset-left));top:calc(12px + env(safe-area-inset-top));bottom:calc(12px + env(safe-area-inset-bottom));width:62px;display:flex;align-items:center;pointer-events:none}
- :root[data-ui=v26] .mobile-edge-dock {
-  --edge-gap:10px;
-  display:flex;flex:0 0 62px;flex-direction:column;align-items:center;gap:var(--edge-gap);width:62px;max-height:100%;padding:10px;
-  border:1px solid var(--border);border-radius:22px;background:var(--surface);box-shadow:0 12px 32px #00000020,inset 0 1px 0 #ffffff06;
-  overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain;touch-action:pan-y;pointer-events:auto;
+ :root[data-ui=v26] .mobile-edge-position {
+  position:absolute;left:calc(var(--mobile-gutter, 20px) + env(safe-area-inset-left));top:calc(12px + env(safe-area-inset-top));bottom:calc(12px + env(safe-area-inset-bottom));width:62px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;pointer-events:none;
   transform:translate3d(calc((var(--edge-progress) - 1) * 112px),0,0);transition:transform var(--edge-duration) var(--edge-ease);
  }
+ :root[data-ui=v26] .mobile-edge-dock {
+  --edge-gap:10px;
+  display:flex;flex:0 1 auto;flex-direction:column;align-items:center;gap:var(--edge-gap);width:62px;min-height:0;max-height:100%;padding:10px;
+  border:1px solid var(--border);border-radius:22px;background:var(--surface);box-shadow:0 12px 32px #00000020,inset 0 1px 0 #ffffff06;
+  overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain;touch-action:pan-y;pointer-events:auto;
+ }
+ :root[data-ui=v26] .mobile-edge-position:has(>.mobile-edge-add)>.mobile-edge-dock {max-height:calc(100% - var(--edge-control) - 12px)}
  :root[data-ui=v26] .mobile-edge-dock::-webkit-scrollbar {display:none}
  :root[data-ui=v26] .mobile-edge-item {position:relative;flex:0 0 auto;width:var(--edge-control);height:var(--edge-control)}
  :root[data-ui=v26] .mobile-edge-button {
@@ -40,16 +44,16 @@
  :root[data-ui=v26] .mobile-edge-count {position:absolute;top:-3px;right:-3px;display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;font-size:9px;font-weight:700;line-height:1;border:2px solid var(--surface);border-radius:7px;background:var(--accent);color:var(--accent-contrast,#fff)}
  :root[data-ui=v26] .mobile-edge-tooltip {position:absolute;left:98px;transform:translateY(-50%);top:50%;width:max-content;max-width:calc(100vw - 140px);padding:7px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text);font-size:.75rem;line-height:1.6;white-space:normal;visibility:hidden;opacity:0;pointer-events:none}
  :root[data-ui=v26] .mobile-edge-position:has(.mobile-edge-button:focus-visible)>.mobile-edge-tooltip {visibility:visible;opacity:1}
- :root[data-ui=v26] .mobile-edge-navigation[data-dragging] :is(.mobile-edge-dock,.mobile-edge-scrim) {transition:none}
+ :root[data-ui=v26] .mobile-edge-navigation[data-dragging] :is(.mobile-edge-position,.mobile-edge-scrim) {transition:none}
  :root[data-ui=v26] .mobile-edge-add {
-  position:absolute;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));display:grid;place-items:center;box-sizing:border-box;aspect-ratio:1;width:var(--edge-control);height:var(--edge-control);min-width:var(--edge-control);min-height:var(--edge-control);max-width:var(--edge-control);max-height:var(--edge-control);padding:0;pointer-events:auto;
+  position:relative;flex:0 0 var(--edge-control);display:grid;place-items:center;box-sizing:border-box;aspect-ratio:1;width:var(--edge-control);height:var(--edge-control);min-width:var(--edge-control);min-height:var(--edge-control);max-width:var(--edge-control);max-height:var(--edge-control);padding:0;pointer-events:auto;
   border:1px solid color-mix(in srgb,var(--accent-contrast,#fff) 22%,var(--accent));border-radius:35%;background:var(--accent);color:var(--accent-contrast,#fff);
   box-shadow:inset 0 1px 0 #ffffff35,0 4px 14px color-mix(in srgb,var(--accent) 20%,transparent);
  }
  :root[data-ui=v26] .mobile-edge-add:disabled {opacity:.4;box-shadow:none}
+ :root[data-ui=v26] .mobile-edge-add:focus-visible {outline:2px solid var(--highlight);outline-offset:3px}
  :root[data-ui=v26] .mobile-edge-add>svg {width:22px;height:22px}
  :root[data-ui=v26] .main-shell:has(.mobile-edge-navigation) .floating-timer {bottom:calc(20px + env(safe-area-inset-bottom))}
- :root[data-ui=v26] .main-shell:has(.mobile-edge-add) .floating-timer {bottom:calc(84px + env(safe-area-inset-bottom))}
  /* Floating controls overlay the page; they must not add an empty scroll tail. */
  :root[data-ui=v26] .main-shell:has(.mobile-edge-navigation) .main-content {padding-bottom:env(safe-area-inset-bottom,0px)}
 }

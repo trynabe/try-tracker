@@ -1,11 +1,11 @@
 import React,{useEffect,useId,useRef,useState} from 'react';
 import {Plus} from 'lucide-react';
-import {EDGE_DOCK_WIDTH,edgeGestureIntent,edgeGestureProgress,settleEdgeGesture} from './edgeDockGesture.js';
+import {edgeGestureIntent,edgeGestureProgress,settleEdgeGesture} from './edgeDockGesture.js';
 import './mobileEdgeDock.css';
 
 export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabel,onNavigate,onAdd}){
  const [open,setOpen]=useState(false),[dragging,setDragging]=useState(false),[focused,setFocused]=useState(null);
- const root=useRef(null),handle=useRef(null),rail=useRef(null),gesture=useRef(null),frame=useRef(0),progress=useRef(0),ignoredClick=useRef(null),previousFocus=useRef(null),navigationRef=useRef(null);
+ const root=useRef(null),handle=useRef(null),rail=useRef(null),stack=useRef(null),gesture=useRef(null),frame=useRef(0),progress=useRef(0),ignoredClick=useRef(null),previousFocus=useRef(null),navigationRef=useRef(null);
  const id=useId(),engaged=open||dragging;
  const current=useRef({open,page,engaged});current.current={open,page,engaged};
  navigationRef.current=onNavigate;
@@ -40,9 +40,8 @@ export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabe
    if(document.querySelector('[role=dialog][aria-modal=true]:not(.mobile-edge-navigation)'))return;
    const startedOpen=current.current.open;
    if(startedOpen?!root.current?.contains(target):hasHorizontalScroll(target))return;
-   // Anywhere on the page: swipe left. The original rightward edge gesture still works.
-   const openingDirection=x<=EDGE_DOCK_WIDTH?1:-1;
-   gesture.current={id,source,x,y,at:performance.now(),startedOpen,openingDirection,target,locked:false};
+   // A rightward swipe opens the dock from anywhere on the page.
+   gesture.current={id,source,x,y,at:performance.now(),startedOpen,target,locked:false};
   };
   const down=event=>{
    ignoredClick.current=null;
@@ -51,22 +50,24 @@ export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabe
   };
   const update=(x,y,event)=>{
    const drag=gesture.current;if(!drag)return;
+   if(drag.ignoredDirection)return;
    const dx=x-drag.x,dy=y-drag.y;
    if(!drag.locked){
-    const intent=edgeGestureIntent(dx,dy,drag.startedOpen,drag.openingDirection);
-    if(intent==='scroll'||intent==='cancel'){gesture.current=null;return;}
+    const intent=edgeGestureIntent(dx,dy,drag.startedOpen);
+    if(intent==='scroll'){gesture.current=null;return;}
+    if(intent==='cancel'){drag.ignoredDirection=true;return;}
     if(intent!=='drag')return;
     drag.locked=true;setDragging(true);root.current?.setAttribute('data-dragging','true');
     if(drag.source==='pointer')try{drag.target.setPointerCapture(drag.id);}catch{}
    }
    if(event.cancelable)event.preventDefault();
-   paint(edgeGestureProgress(dx,drag.startedOpen,drag.openingDirection));
+   paint(edgeGestureProgress(dx,drag.startedOpen));
   };
   const complete=(x,cancelled)=>{
    const drag=gesture.current;if(!drag)return;
-   if(!drag.locked){gesture.current=null;return;}
+   if(!drag.locked){if(drag.ignoredDirection&&!cancelled)ignoredClick.current={until:performance.now()+500};gesture.current=null;return;}
    if(!cancelled)ignoredClick.current={until:performance.now()+500};
-   const next=cancelled?drag.startedOpen:settleEdgeGesture(x-drag.x,performance.now()-drag.at,drag.startedOpen,drag.openingDirection);
+   const next=cancelled?drag.startedOpen:settleEdgeGesture(x-drag.x,performance.now()-drag.at,drag.startedOpen);
    if(drag.source==='pointer')try{if(drag.target.hasPointerCapture(drag.id))drag.target.releasePointerCapture(drag.id);}catch{}
    settle(next);
   };
@@ -130,7 +131,7 @@ export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabe
   });
   const keys=event=>{
    if(event.key==='Escape'){event.preventDefault();event.stopPropagation();close();return;}
-   const items=[...rail.current.querySelectorAll('button')],index=items.indexOf(document.activeElement);
+   const items=[...stack.current.querySelectorAll('button:not(:disabled)')],index=items.indexOf(document.activeElement);
    if(['ArrowDown','ArrowUp','Home','End'].includes(event.key)){
     event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?items.length-1:index<0?(event.key==='ArrowDown'?0:items.length-1):(index+(event.key==='ArrowDown'?1:-1)+items.length)%items.length;items[next]?.focus();
    }
@@ -150,10 +151,11 @@ export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabe
   <button type="button" className="mobile-edge-trigger" ref={handle} aria-label={t(open?'closeMenu':'mobileDockOpen')} aria-expanded={open} aria-controls={id} onClick={toggle}>{t(open?'closeMenu':'mobileDockLabel')}</button>
   <div className="mobile-edge-overlay" aria-hidden={!open} inert={!open?true:undefined}>
    <button type="button" className="mobile-edge-scrim" tabIndex={-1} aria-label={t('closeMenu')} onClick={close}/>
-   <div className="mobile-edge-position"><nav className="mobile-edge-dock" ref={rail} id={id} aria-label={t('workspace')}>
+   <div className="mobile-edge-position" ref={stack}><nav className="mobile-edge-dock" ref={rail} id={id} aria-label={t('workspace')}>
     {nav.map(([key,Icon],index)=><React.Fragment key={key}><div className="mobile-edge-item"><button type="button" className={'mobile-edge-button'+(page===key?' active':'')} aria-label={t(key)+(key==='tasks'&&taskCount?' · '+taskCount:'')} title={t(key)} aria-current={page===key?'page':undefined} onFocus={()=>setFocused(key)} onBlur={()=>setFocused(null)} onClick={()=>navigate(key)}><Icon size={24} strokeWidth={1.7} aria-hidden="true"/>{key==='tasks'&&taskCount>0&&<span className="mobile-edge-count" aria-hidden="true">{taskCount>99?'99+':taskCount}</span>}</button></div>{index===3&&<span className="mobile-edge-divider" aria-hidden="true"/>}</React.Fragment>)}
-   </nav><span className="mobile-edge-tooltip" aria-hidden="true">{focused?t(focused):''}</span></div>
+   </nav>
+   {canAdd&&<button type="button" className="mobile-edge-add" disabled={busy} aria-label={addLabel} title={addLabel} onClick={()=>{close();onAdd();}}><Plus size={22} aria-hidden="true"/></button>}
+   <span className="mobile-edge-tooltip" aria-hidden="true">{focused?t(focused):''}</span></div>
   </div>
-  {!engaged&&canAdd&&<button type="button" className="mobile-edge-add" disabled={busy} aria-label={addLabel} title={addLabel} onClick={onAdd}><Plus size={25} aria-hidden="true"/></button>}
  </div>;
 }

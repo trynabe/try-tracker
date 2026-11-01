@@ -32,27 +32,7 @@ test('a short deliberate flick opens or closes without requiring a half-width dr
  assert.equal(settleEdgeGesture(-5,1,true),true);
 });
 
-test('a leftward page swipe opens while rightward movement and vertical scrolling are ignored',()=>{
- assert.equal(edgeGestureIntent(-30,5,false,-1),'drag');
- assert.equal(edgeGestureIntent(30,5,false,-1),'cancel');
- assert.equal(edgeGestureIntent(-7,35,false,-1),'scroll');
- assert.equal(edgeGestureIntent(-14,14,false,-1),'pending');
-});
-
-test('leftward opening follows the finger and supports short flicks and cancelled partial drags',()=>{
- assert.equal(edgeGestureProgress(-56,false,-1),.5);
- assert.equal(edgeGestureProgress(-500,false,-1),1);
- assert.equal(edgeGestureProgress(50,false,-1),0);
- assert.equal(settleEdgeGesture(-24,50,false,-1),true);
- assert.equal(settleEdgeGesture(-32,500,false,-1),false);
- assert.equal(settleEdgeGesture(-80,500,false,-1),true);
- assert.equal(settleEdgeGesture(-5,1,false,-1),false);
-});
-
-test('leftward closing is unchanged after opening from the middle of the page',()=>{
- assert.equal(edgeGestureIntent(-30,5,true,-1),'drag');
- assert.equal(edgeGestureIntent(30,5,true,-1),'cancel');
- assert.equal(edgeGestureProgress(-56,true,-1),.5);
- assert.equal(settleEdgeGesture(-24,50,true,-1),false);
- assert.equal(settleEdgeGesture(-32,500,true,-1),true);
+test('reversing direction before release returns the dock to its starting state',()=>{
+ assert.equal(settleEdgeGesture(-24,50,false),false);
+ assert.equal(settleEdgeGesture(24,50,true),true);
 });

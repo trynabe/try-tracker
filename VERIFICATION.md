@@ -1,5 +1,21 @@
 # Verification — 2026-10-10
 
+## Rightward mobile menu swipe — 2026-11-02
+
+- Changed the page gesture to open the mobile Dock by swiping right from the middle or left edge. Swiping left closes the open Dock. Vertical scrolling, editable controls, dialogs and horizontally scrollable areas retain their existing handling.
+- A leftward drag over a button while the Dock is closed suppresses the resulting accidental click; the next ordinary click remains functional.
+- Browser checks at 390 × 844: a rightward drag from the center and from the left edge opened the Dock; a leftward drag closed it. A leftward drag over the focus-category button opened neither Dock nor dialog, while a normal click opened the category dialog. Horizontal wheel scrolling in the date strip changed its scroll position without opening the Dock. No console warnings/errors occurred; no records or timer state were changed. These checks used browser pointer input, not a physical phone.
+- All **98 tests passed**; production build and `git diff --check` passed. The existing large-chunk warning remains. Older entries below record earlier directions and measurements at the time of those checks.
+
+## Mobile add button below the Dock — 2026-11-02
+
+- Moved the page-specific Add action into the opened mobile drawer as a separate button below the navigation rail. It sits outside the rail's background, with a 12px gap, and shares the navigation buttons' 40 × 40px dimensions, horizontal alignment and 35% corner radius. The rail and Add button animate together. The previous bottom-right Add placement and its extra floating-timer offset are removed.
+- Arrow keys and Tab navigation include the detached Add button while trapping focus in the opened drawer. Activating Add closes the drawer before opening the existing editor. Pages without an Add action retain only the navigation rail.
+- Browser checks at 320 × 568, 390 × 360, 700 × 480 and 390 × 844 confirmed matching button sizes, the 12px separation, no horizontal overflow and both controls fitting inside the viewport. At 390 × 360, only the navigation rail scrolls; Add stays reachable below it.
+- End focused Add, Tab wrapped to the menu trigger, and Shift+Tab returned to Add. Enter opened Add Task with the drawer closed and the form outside any inert background. Closing without saving restored body scrolling. Statistics showed eight navigation buttons and no Add button. Resizing the open drawer to 1366 × 768 restored the desktop Dock and cleared the mobile body lock/inert state. Console warnings/errors: none. No workspace data or timer state was changed. Physical-device Safari remains untested.
+- All **100 tests passed**, production build and `git diff --check` passed. The existing large-chunk warning remains. Local task artifacts: `try-tracker-2.8/add-below-dock/mobile-390.png` and `layout-checks.json`.
+- Follow-up: aligned the rail's outer left edge with the page content gutter and centered Add under the navigation buttons. At 320 × 568, 390 × 360 and 390 × 844, both alignment differences measure 0px; Add remains 40 × 40px with a 12px gap and fits vertically. The Add Task dialog opened correctly. Production build passed after this CSS-only refinement. Current detail screenshot: `try-tracker-2.8/add-below-dock/aligned-to-page.png`.
+
 ## Mobile menu page swipe — 2026-11-01
 
 - Added leftward opening from the page, including its center, while retaining rightward opening from the left edge and leftward closing. Both directions share the existing animation and reduced-motion styling. Form controls, modal dialogs and native horizontal scroll containers are excluded from page gestures.
