@@ -1,0 +1,89 @@
+/* A quiet glass rail groups status tabs without adding a frame to every tab. */
+:root[data-ui=v26] .toolbar.wrap.task-toolbar {
+ --task-rail-surface:var(--glass-panel,var(--surface));
+ --task-rail-edge:var(--glass-edge,var(--border));
+ --task-selection:var(--glass-selected,color-mix(in srgb,var(--accent) 10%,var(--surface-2)));
+ display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:14px;
+ width:100%;min-width:0;margin:0;padding:0;border:0;background:none;box-shadow:none;
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups {
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;min-width:0;
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-status-filters {
+ display:flex;align-items:center;gap:3px;width:auto;padding:4px;
+ border:1px solid var(--task-rail-edge);border-radius:14px;background:var(--task-rail-surface);
+ box-shadow:inset 0 1px 0 var(--glass-sheen,#ffffff0a);
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .filter-pills>button {
+ display:flex;flex-direction:row;align-items:center;justify-content:center;gap:7px;
+ width:auto;min-width:0;height:34px;min-height:34px;padding:6px 12px;
+ border:1px solid transparent;border-radius:10px;background:transparent;box-shadow:none;
+ color:var(--muted);font-size:.75rem;font-weight:500;line-height:1.4;white-space:nowrap;
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .filter-pills>button:hover {
+ background:color-mix(in srgb,var(--text) 4%,transparent);color:var(--text);
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .filter-pills>button.selected {
+ background:linear-gradient(135deg,var(--glass-sheen,#ffffff0a),transparent),var(--task-selection);
+ border-color:color-mix(in srgb,var(--accent) 24%,var(--task-rail-edge));
+ box-shadow:0 1px 4px #0000000a;color:var(--highlight,var(--accent));
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .filter-pills>button:focus-visible {
+ outline:2px solid var(--highlight,var(--accent));outline-offset:3px;
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-status-filters .task-filter-label {font-weight:600}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-count {
+ display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-width:10px;
+ margin:0;padding:0;border:0;background:none;font-size:.625rem;font-weight:600;
+ font-variant-numeric:tabular-nums;line-height:1.4;opacity:.7;
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-quick-filters {
+ display:flex;align-items:center;gap:3px;width:auto;margin-left:auto;padding:4px;
+ border:1px solid var(--task-rail-edge);border-radius:14px;background:var(--task-rail-surface);
+ box-shadow:inset 0 1px 0 var(--glass-sheen,#ffffff0a);
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .task-quick-filters>button {
+ height:34px;min-height:34px;padding:6px 12px;border-color:transparent;border-radius:10px;
+}
+:root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .filter-pills>button>svg {width:15px;height:15px;flex-shrink:0;opacity:.85}
+:root[data-ui=v26] .task-toolbar.toolbar .search-input.task-search {
+ grid-row:1;display:flex;align-items:center;gap:10px;width:100%;max-width:none;min-width:0;min-height:44px;padding:0 14px;
+ border:1px solid var(--task-rail-edge);border-radius:14px;background:var(--task-rail-surface);
+ box-shadow:inset 0 1px 0 var(--glass-sheen,#ffffff0a);
+}
+:root[data-ui=v26] .task-toolbar.toolbar .search-input.task-search:focus-within {
+ border-color:color-mix(in srgb,var(--accent) 50%,var(--task-rail-edge));
+}
+:root[data-ui=v26] .task-toolbar.toolbar .search-input.task-search input {
+ height:42px;min-height:42px;padding:10px 0;border:0;background:transparent;box-shadow:none;font-size:.8125rem;
+}
+:root[data-ui=v26][data-glass=on] .task-toolbar.toolbar :is(.task-status-filters,.task-quick-filters,.task-search) {
+ background:var(--glass-reflection,linear-gradient(145deg,var(--glass-sheen),transparent 60%)),var(--glass-panel);
+ border-color:var(--glass-edge);box-shadow:var(--glass-shadow);
+ backdrop-filter:blur(var(--glass-blur)) saturate(130%);
+ -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(130%);
+}
+:root[data-ui=v26][data-glass=on][data-theme=dark] .task-toolbar.toolbar :is(.task-status-filters,.task-quick-filters,.task-search) {
+ border-top-color:color-mix(in srgb,#d5e2f27a var(--glass-reflection-opacity,100%),transparent);
+ border-bottom-color:color-mix(in srgb,#c1d2e872 var(--glass-reflection-opacity,100%),transparent);
+}
+@media(max-width:700px) {
+ :root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups {display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+ :root[data-ui=v26] .task-toolbar.toolbar .task-status-filters {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:2px}
+ :root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .filter-pills>button {width:100%;height:44px;min-height:44px;gap:5px;padding:7px 5px}
+ :root[data-ui=v26] .task-toolbar.toolbar .task-quick-filters {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
+ :root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .task-quick-filters>button {height:44px;min-height:44px;gap:7px;padding:7px 10px}
+ :root[data-ui=v26] .task-toolbar.toolbar .task-quick-filters .task-filter-count {margin-left:auto}
+ :root[data-ui=v26] .task-toolbar.toolbar .search-input.task-search {min-height:48px}
+ :root[data-ui=v26] .task-toolbar.toolbar .search-input.task-search input {height:46px;min-height:46px!important;font-size:16px}
+}
+@media(max-width:360px) {
+ :root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .task-status-filters>button {gap:3px;padding-inline:3px;font-size:.6875rem}
+ :root[data-ui=v26] .task-toolbar.toolbar .task-filter-groups .task-status-filters>button>svg {width:13px;height:13px}
+ :root[data-ui=v26] .task-toolbar.toolbar .task-status-filters .task-filter-count {min-width:8px;font-size:.5625rem}
+}
+@media(prefers-reduced-transparency:reduce) {
+ :root[data-ui=v26][data-glass=on] .task-toolbar.toolbar :is(.task-status-filters,.task-quick-filters,.task-search) {
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+ }
+}

@@ -4,7 +4,7 @@ import {edgeGestureIntent,edgeGestureProgress,settleEdgeGesture} from './edgeDoc
 import './mobileEdgeDock.css';
 
 export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabel,onNavigate,onAdd}){
- const [open,setOpen]=useState(false),[dragging,setDragging]=useState(false),[focused,setFocused]=useState(null);
+ const [open,setOpen]=useState(false),[dragging,setDragging]=useState(false);
  const root=useRef(null),handle=useRef(null),rail=useRef(null),stack=useRef(null),gesture=useRef(null),frame=useRef(0),progress=useRef(0),ignoredClick=useRef(null),previousFocus=useRef(null),navigationRef=useRef(null);
  const id=useId(),engaged=open||dragging;
  const current=useRef({open,page,engaged});current.current={open,page,engaged};
@@ -152,10 +152,10 @@ export default function MobileEdgeDock({nav,page,t,taskCount,busy,canAdd,addLabe
   <div className="mobile-edge-overlay" aria-hidden={!open} inert={!open?true:undefined}>
    <button type="button" className="mobile-edge-scrim" tabIndex={-1} aria-label={t('closeMenu')} onClick={close}/>
    <div className="mobile-edge-position" ref={stack}><nav className="mobile-edge-dock" ref={rail} id={id} aria-label={t('workspace')}>
-    {nav.map(([key,Icon],index)=><React.Fragment key={key}><div className="mobile-edge-item"><button type="button" className={'mobile-edge-button'+(page===key?' active':'')} aria-label={t(key)+(key==='tasks'&&taskCount?' · '+taskCount:'')} title={t(key)} aria-current={page===key?'page':undefined} onFocus={()=>setFocused(key)} onBlur={()=>setFocused(null)} onClick={()=>navigate(key)}><Icon size={24} strokeWidth={1.7} aria-hidden="true"/>{key==='tasks'&&taskCount>0&&<span className="mobile-edge-count" aria-hidden="true">{taskCount>99?'99+':taskCount}</span>}</button></div>{index===3&&<span className="mobile-edge-divider" aria-hidden="true"/>}</React.Fragment>)}
+    {nav.map(([key,Icon],index)=><React.Fragment key={key}><div className="mobile-edge-item"><button type="button" className={'mobile-edge-button'+(page===key?' active':'')} aria-label={t(key)+(key==='tasks'&&taskCount?' · '+taskCount:'')} aria-current={page===key?'page':undefined} onClick={()=>navigate(key)}><Icon size={24} strokeWidth={1.7} aria-hidden="true"/>{key==='tasks'&&taskCount>0&&<span className="mobile-edge-count" aria-hidden="true">{taskCount>99?'99+':taskCount}</span>}</button></div>{index===3&&<span className="mobile-edge-divider" aria-hidden="true"/>}</React.Fragment>)}
    </nav>
-   {canAdd&&<button type="button" className="mobile-edge-add" disabled={busy} aria-label={addLabel} title={addLabel} onClick={()=>{close();onAdd();}}><Plus size={22} aria-hidden="true"/></button>}
-   <span className="mobile-edge-tooltip" aria-hidden="true">{focused?t(focused):''}</span></div>
+   {canAdd&&<button type="button" className="mobile-edge-add" disabled={busy} aria-label={addLabel} onClick={()=>{close();onAdd();}}><Plus size={22} aria-hidden="true"/></button>}
+   </div>
   </div>
  </div>;
 }

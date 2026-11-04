@@ -1,5 +1,5 @@
 import React from 'react';
-import {Search, X, Flag, Clock} from 'lucide-react';
+import {Search, X, Flag, Clock, ListTodo, CircleDashed, CircleCheck} from 'lucide-react';
 
 export default function TaskToolbar({tasks, today, taskFilter, setTaskFilter, query, setQuery, t}) {
   const matchingTasks = tasks.filter(task => (task.text + ' ' + task.tag).toLowerCase().includes(query.toLowerCase()));
@@ -15,7 +15,7 @@ export default function TaskToolbar({tasks, today, taskFilter, setTaskFilter, qu
     return <button
       type="button"
       key={key}
-      className={(Icon ? 'task-quick-filter ' : '') + (taskFilter === key ? 'selected' : '')}
+      className={(key === 'high' || key === 'overdue' ? 'task-quick-filter ' : '') + (taskFilter === key ? 'selected' : '')}
       aria-label={label}
       aria-pressed={taskFilter === key}
       onClick={() => setTaskFilter(key)}
@@ -29,7 +29,7 @@ export default function TaskToolbar({tasks, today, taskFilter, setTaskFilter, qu
   return <div className="toolbar wrap task-toolbar">
     <div className="task-filter-groups">
       <div className="filter-pills task-status-filters" role="group" aria-label={t('taskStatus')}>
-        {['all', 'active', 'completed'].map(key => filterButton(key))}
+        {[['all', ListTodo], ['active', CircleDashed], ['completed', CircleCheck]].map(([key, Icon]) => filterButton(key, Icon))}
       </div>
       <div className="filter-pills task-quick-filters" role="group" aria-label={t('taskFilters')}>
         {filterButton('high', Flag)}

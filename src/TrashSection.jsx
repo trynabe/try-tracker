@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {Trash2,RotateCcw,Search} from 'lucide-react';
 import {trashEntries,trashLabel} from './trash';
+import SettingsSectionHeading from './SettingsSectionHeading.jsx';
 import './trash.css';
 
 const kindLabels={habits:'habits',tasks:'tasks',subjects:'categories',timeblocks:'schedule',notes:'notes',focusSessions:'history'};
@@ -9,7 +10,7 @@ export default function TrashSection({data,t,language,busy,onRestore,onDelete}){
  const entries=trashEntries(data);
  const filtered=entries.filter(({kind,item})=>(trashLabel(item)+' '+t(kindLabels[kind])).toLowerCase().includes(query.trim().toLowerCase()));
  return <section className="panel trash-panel" aria-labelledby="trash-heading">
-  <div className="section-head"><h2 id="trash-heading"><Trash2 size={20}/>{t('trash')}</h2><span className="tag">{entries.length}</span></div>
+  <SettingsSectionHeading icon={Trash2} title={t('trash')} id="trash-heading" badge={entries.length}/>
   <p className="muted">{t('trashDesc')}</p>
   {entries.length>0&&<div className="search-input trash-search"><Search size={17}/><input aria-label={t('searchTrash')} placeholder={t('searchTrash')} value={query} onChange={e=>setQuery(e.target.value)}/></div>}
   <div className="trash-list">{filtered.map(({kind,item})=><article className="trash-row" key={kind+':'+item.id}>

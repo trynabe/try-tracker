@@ -86,10 +86,10 @@ function OverviewCards({stats,t,language}){
 }
 
 function TrendChart({stats,previousStats,series,previousSeries,metric,setMetric,t,language}){
- const [active,setActive]=useState(null),[showTooltip,setShowTooltip]=useState(false);
- const root=useRef(null),plot=useRef(null),pointRefs=useRef([]),id=useId(),width=usePlotWidth(plot);
+ const [active,setActive]=useState(null);
+ const plot=useRef(null),pointRefs=useRef([]),id=useId(),width=usePlotWidth(plot);
  const rangeKey=series.map(point=>point.date).join('|');
- useEffect(()=>{setActive(null);setShowTooltip(false);},[metric,rangeKey]);
+ useEffect(()=>{setActive(null);},[metric,rangeKey]);
  const selected=metrics.find(item=>item.key===metric),SelectedIcon=selected.icon;
  const max=axisMaximum(Math.max(0,...series.map(point=>point[metric]??0),...previousSeries.map(point=>point[metric]??0)),metric);
  const height=230,left=40,right=16,top=20,bottom=30,plotWidth=width-left-right,plotHeight=height-top-bottom,step=plotWidth/Math.max(1,series.length-1);
@@ -102,15 +102,15 @@ function TrendChart({stats,previousStats,series,previousSeries,metric,setMetric,
  const comparable=metric!=='habits'||previousSeries.some(point=>point.habits!==null);
  const labelCount=width<430?3:5;
  const labelIndexes=new Set(Array.from({length:Math.min(series.length,labelCount)},(_,index)=>Math.round(index*(series.length-1)/(Math.min(series.length,labelCount)-1))));
- const move=(next,focus=false)=>{const index=Math.max(0,Math.min(points.length-1,next));setActive(index);setShowTooltip(focus);if(focus)pointRefs.current[index]?.focus({preventScroll:true});};
- const inspect=index=>{setActive(index);setShowTooltip(true);};
- const keys=(event,index)=>{const next={ArrowLeft:index-1,ArrowRight:index+1,Home:0,End:points.length-1}[event.key];if(next!==undefined){event.preventDefault();move(next,true);}else if(event.key==='Escape'){event.preventDefault();setShowTooltip(false);}};
+ const move=(next,focus=false)=>{const index=Math.max(0,Math.min(points.length-1,next));setActive(index);if(focus)pointRefs.current[index]?.focus({preventScroll:true});};
+ const inspect=index=>setActive(index);
+ const keys=(event,index)=>{const next={ArrowLeft:index-1,ArrowRight:index+1,Home:0,End:points.length-1}[event.key];if(next!==undefined){event.preventDefault();move(next,true);}};
  const format=value=>valueText(value,metric,t,language);
- return <section className="panel insights-performance" ref={root} aria-labelledby={id+'-title'} onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setShowTooltip(false);}}>
+ return <section className="panel insights-performance" aria-labelledby={id+'-title'}>
   <header className="insights-performance-heading"><div><h2 id={id+'-title'}><Activity size={17}/>{t('insightsPerformance')}</h2><p>{series.length?dateText(series[0].date,language)+' – '+dateText(series.at(-1).date,language):t('noData')}</p></div><div className="insights-chart-switches" role="group" aria-label={t('insightsChartMetric')}>{metrics.map(({key,label,tab})=><button key={key} type="button" aria-label={t(label)} aria-pressed={key===metric} className={key===metric?'selected':''} onClick={()=>setMetric(key)}>{t(tab)}</button>)}</div></header>
   <div className="insights-performance-summary"><div><span>{t(selected.label)}</span><strong>{format(total)}</strong></div><div className="insights-comparison-summary">{comparable?<><span className={'insights-delta '+(delta>0?'positive':delta<0?'negative':'neutral')}><DeltaIcon size={14}/>{delta>0?'+':delta<0?'−':''}{number(Math.abs(delta),language)} {metric==='habits'?t('insightsPercentagePoints'):t(metric==='focus'?'minutes':'insightsTaskUnit')}</span><span>{t('insightsVersusPrevious')}</span></>:<span>{t('insightsNoPreviousData')}</span>}</div></div>
   <div className="insights-chart-legend"><span><i/>{t('insightsCurrentPeriod')}</span><span><i/>{t('insightsPreviousPeriod')}</span></div>
-  <div className="insights-line-plot" ref={plot} onPointerLeave={()=>setShowTooltip(false)}>
+  <div className="insights-line-plot" ref={plot}>
    <svg width="100%" height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
     <defs>{['current','previous'].map(kind=><linearGradient id={id+'-'+kind} key={kind} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={kind==='current'?'var(--insight-cyan)':'var(--insight-green)'} stopOpacity={kind==='current'?'.36':'.20'}/><stop offset="1" stopColor={kind==='current'?'var(--insight-cyan)':'var(--insight-green)'} stopOpacity=".025"/></linearGradient>)}</defs>
     {[0,1,2,3,4].map(tick=>{const value=max*tick/4,y=top+(1-tick/4)*plotHeight;return <g key={tick} className="insights-chart-axis"><line x1={left} x2={width-right} y1={y} y2={y}/><text x={left-10} y={y+4} textAnchor="end">{number(value,language)}{metric==='habits'?'%':''}</text></g>;})}
@@ -121,7 +121,6 @@ function TrendChart({stats,previousStats,series,previousSeries,metric,setMetric,
    </svg>
    <p className="visually-hidden" id={id+'-help'}>{t('insightsChartKeys')}</p>
    {points.map((point,index)=><button key={point.date} ref={node=>{pointRefs.current[index]=node;}} type="button" className="insights-point-hit" aria-label={dateText(point.date,language,true)+': '+format(point.value)+(previousPoints[index]?', '+t('insightsPreviousPeriod')+' '+dateText(previousPoints[index].date,language)+': '+format(previousPoints[index].value):'')} aria-describedby={id+'-help'} tabIndex={index===shownIndex?0:-1} style={{left:Math.max(left,point.x-step/2)/width*100+'%',width:(Math.min(width-right,point.x+step/2)-Math.max(left,point.x-step/2))/width*100+'%'}} onPointerEnter={()=>inspect(index)} onFocus={()=>inspect(index)} onClick={()=>inspect(index)} onKeyDown={event=>keys(event,index)}/>)}
-   {showTooltip&&active!==null&&shown&&!empty&&<div className="insights-chart-tooltip" aria-hidden="true" style={{left:Math.max(4,Math.min(width-176,shown.x-82))}}><span>{dateText(shown.date,language)}</span><div><i/>{t('insightsCurrentPeriod')}<strong>{format(shown.value)}</strong></div>{previousShown&&<div><i/>{dateText(previousShown.date,language)}<strong>{format(previousShown.value)}</strong></div>}</div>}
    {empty&&<div className="insights-chart-empty"><SelectedIcon size={22}/><span>{t({habits:'insightsEmptyHabits',tasks:'insightsEmptyTasks',focus:'insightsEmptyFocus'}[metric])}</span></div>}
   </div>
   <footer className="insights-point-detail"><div aria-live="polite" aria-atomic="true"><span>{shown?dateText(shown.date,language,true):'—'}</span><strong>{shown?format(shown.value):'—'}</strong><small>{previousShown?t('insightsPreviousPeriod')+': '+format(previousShown.value):''}</small></div><div className="insights-point-controls"><button type="button" aria-label={t('insightsPreviousPoint')} disabled={shownIndex<=0} onClick={()=>move(shownIndex-1)}><ChevronLeft size={16}/></button><button type="button" aria-label={t('insightsNextPoint')} disabled={shownIndex>=points.length-1} onClick={()=>move(shownIndex+1)}><ChevronRight size={16}/></button></div></footer>

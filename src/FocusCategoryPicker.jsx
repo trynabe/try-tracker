@@ -13,12 +13,12 @@ export default function FocusCategoryPicker({subjects,sessions,timer,today,activ
     return <div className={'focus-picker-row'+(selected?' is-selected':'')} key={subject.id} style={{'--item-color':habitColor(subject)}}>
      <button type="button" className="focus-picker-option" aria-pressed={selected} disabled={busy} onClick={()=>onSelect(subject)}>
       <span className="focus-picker-icon"><EntityIcon value={subject.emoji} size={22}/></span>
-      <span className="focus-picker-name"><strong title={subject.name}>{subject.name}</strong><small>{t('today')} · {formatClock(seconds)}</small></span>
+      <span className="focus-picker-name"><strong>{subject.name}</strong><small>{t('today')} · {formatClock(seconds)}</small></span>
       {selected?<Check size={18}/>:<Play size={18}/>}
      </button>
      <div className="focus-picker-tools">
-      <button type="button" className="icon-btn" aria-label={t('edit')+': '+subject.name} title={t('edit')} disabled={busy||selected} onClick={()=>onEdit(subject)}><Pencil size={17}/></button>
-      <button type="button" className="icon-btn" aria-label={t('delete')+': '+subject.name} title={t('delete')} disabled={busy} onClick={()=>onDelete(subject)}><Trash2 size={17}/></button>
+      <button type="button" className="icon-btn" aria-label={t('edit')+': '+subject.name} disabled={busy||selected} onClick={()=>onEdit(subject)}><Pencil size={17}/></button>
+      <button type="button" className="icon-btn" aria-label={t('delete')+': '+subject.name} disabled={busy} onClick={()=>onDelete(subject)}><Trash2 size={17}/></button>
      </div>
     </div>;
    })}

@@ -8,6 +8,10 @@ import './spacing.css';
 import './desktop26.css';
 import './creationDialogs.css';
 import './mobile26.css';
+import './settings.css';
+import './glass.css';
+import './taskToolbar.css';
+import './dialogMotion.css';
 
 const uiVariant=uiVariantForPath(location.pathname);
 document.documentElement.dataset.ui=uiVariant;

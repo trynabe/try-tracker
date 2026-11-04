@@ -1,5 +1,15 @@
 # Verification — 2026-10-10
 
+## Try-Tracker 3.0 release — 2026-11-05
+
+- Updated the app badge and browser title to 3.0, and package/lockfile versions to 3.0.0. Checked these values for consistency. The existing preview and classic routes remain covered by the release routing tests.
+- All **105 tests passed**, including glass preference backup round trips, legacy defaults, 0–200% bounds and non-negative material opacity. Production build and `git diff --check` passed. The existing large JavaScript chunk warning remains.
+- Local browser at 1280 × 720: confirmed the 3.0 badge, `Try-Tracker 3.0` title, optional glass settings with slider maximum 200, and no horizontal overflow. Add Task opened through the body portal with zoom-in and a 12px blurred backdrop; closing it restored body scrolling.
+- Settings at 390 × 844 and 320 × 844 had no horizontal document overflow. The mobile menu opened with eight navigation buttons and closed with Escape. Browser console warnings/errors: none. Release checks did not save workspace records, change preferences or start timers.
+- During this UI iteration, verified grouped task filters and status icons at desktop/390px/320px, matching glass surfaces and aligned rail edges, three-column home habit cards at 1780px, and compact date-number keyboard focus without the outer weekday frame.
+- Local release screenshot: `work/release-3.0/desktop-settings.jpg` (not committed). Physical-device Safari and full authentication/cross-device synchronization were not revalidated in this UI release.
+- See [3.0 release notes](docs/RELEASE_3_0.md). Historical verification entries below retain their original scope and dates.
+
 ## Rightward mobile menu swipe — 2026-11-02
 
 - Changed the page gesture to open the mobile Dock by swiping right from the middle or left edge. Swiping left closes the open Dock. Vertical scrolling, editable controls, dialogs and horizontally scrollable areas retain their existing handling.

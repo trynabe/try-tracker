@@ -1,4 +1,10 @@
 const strings={
+settingsAccountDescription:['รายละเอียดส่วนตัวที่ใช้ในพื้นที่ของคุณ','Your personal details, all in one place.'],
+settingsAppearanceDescription:['เลือกบรรยากาศที่เข้ากับคุณ','Set the mood for your space.'],
+settingsLanguageDescription:['ภาษาที่คุณใช้งานได้อย่างสบายใจ','Feel at home in your preferred language.'],
+glassTransparency:['ความใส','Transparency'],glassOpaque:['ทึบ','Opaque'],glassClear:['ใสมาก','Very clear'],
+glassDescription:['พื้นผิวกระจกโปร่งแสง พร้อมพื้นหลังสีละมุนทั่วทั้งแอป','Translucent glass surfaces with a soft, tinted background across the app.'],
+glassEnabled:['เปิดใช้งาน','Enabled'],glassDisabled:['ปิดอยู่','Off'],glassPreview:['ตัวอย่างพื้นผิว','Material preview'],
 mobileDockLabel:['เมนูนำทาง','Navigation menu'],mobileDockOpen:['เปิดเมนู · ปัดหน้าจอไปทางขวา','Open menu · swipe right on the page'],
 insightsViewAll:['ดูสถิติทั้งหมด','View all statistics'],
 insightsPerformance:['ภาพรวมความก้าวหน้า','Performance overview'],insightsShowMetric:['เลือกกราฟ','View chart'],insightsPeriodSnapshot:['ช่วงที่เลือก','This period'],

@@ -41,9 +41,12 @@
  :root[data-ui=v26] .mobile-edge-button:active:not(.active) {background:color-mix(in srgb,var(--accent) 12%,var(--surface-2))}
  :root[data-ui=v26] .mobile-edge-button:focus-visible {outline:2px solid var(--highlight);outline-offset:3px}
  :root[data-ui=v26] .mobile-edge-divider {width:28px;height:1px;min-height:1px;margin:4px 0;background:var(--border);flex-shrink:0}
- :root[data-ui=v26] .mobile-edge-count {position:absolute;top:-3px;right:-3px;display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;font-size:9px;font-weight:700;line-height:1;border:2px solid var(--surface);border-radius:7px;background:var(--accent);color:var(--accent-contrast,#fff)}
- :root[data-ui=v26] .mobile-edge-tooltip {position:absolute;left:98px;transform:translateY(-50%);top:50%;width:max-content;max-width:calc(100vw - 140px);padding:7px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text);font-size:.75rem;line-height:1.6;white-space:normal;visibility:hidden;opacity:0;pointer-events:none}
- :root[data-ui=v26] .mobile-edge-position:has(.mobile-edge-button:focus-visible)>.mobile-edge-tooltip {visibility:visible;opacity:1}
+ :root[data-ui=v26] .mobile-edge-count {
+  position:absolute;top:-5px;right:-5px;z-index:1;display:grid;place-items:center;min-width:16px;height:16px;padding:0 4px;
+  font-size:9px;font-weight:600;line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;
+  border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,var(--surface));color:var(--highlight,var(--accent));
+  box-shadow:0 2px 6px #00000014;pointer-events:none;
+ }
  :root[data-ui=v26] .mobile-edge-navigation[data-dragging] :is(.mobile-edge-position,.mobile-edge-scrim) {transition:none}
  :root[data-ui=v26] .mobile-edge-add {
   position:relative;flex:0 0 var(--edge-control);display:grid;place-items:center;box-sizing:border-box;aspect-ratio:1;width:var(--edge-control);height:var(--edge-control);min-width:var(--edge-control);min-height:var(--edge-control);max-width:var(--edge-control);max-height:var(--edge-control);padding:0;pointer-events:auto;

@@ -1,10 +1,10 @@
-# Try-Tracker 2.8 — Development guide
+# Try-Tracker 3.0 — Development guide
 
 [กลับไปหน้า README](../README.md)
 
 A bilingual personal discipline workspace built with React + Vite and Supabase. Designed for desktop and iPhone 13 (390 × 844 CSS pixels).
 
-Version 2.8 uses the redesigned interface at `/` on desktop and mobile. `/preview/2.6` remains a compatibility alias; `/classic` selects the original presentation. These paths share the same account, records and synchronization. The internal `v26` presentation identifier is retained to keep the existing styles and components stable. See [release notes](RELEASE_2_8.md) for the UI changes and validation.
+Version 3.0 adds optional glass surfaces, a 0–200% transparency control, grouped settings and task filters, and animated dialogs with a blurred backdrop. The main interface remains at `/` on desktop and mobile. `/preview/2.6` remains a compatibility alias; `/classic` selects the original presentation. These paths share the same account, records and synchronization. The internal `v26` presentation identifier is retained to keep the existing styles and components stable. See [release notes](RELEASE_3_0.md) for the UI changes and validation.
 
 ## Run locally
 
@@ -57,7 +57,7 @@ In the original app, export your JSON backup. In Try-Tracker, open Settings → 
 - Notes: create/edit/delete, search, date, expand/collapse and clipboard copy.
 - Insights: 7/30-day periods, discipline score, habit rate, completed tasks, best weekday, completion chart, actual versus planned time, grouped session history.
 - Profile: profile-photo and cover-image upload with 1–4× zoom, drag positioning, keyboard adjustment, reset and a preview before saving. Existing pictures can be adjusted again. Each picture's zoom and position persist with the profile and in backups; older pictures keep their centered framing. Includes account details, joined date, quick statistics and score levels. Account editing and password changes are available in Settings.
-- Settings: Thai/English, light/dark/system, nine accent colors plus a custom color picker with HEX input, JSON backup/import and browser notifications. Custom accents persist per account and in backups; the former rainbow option retains its original color as a custom accent when imported.
+- Settings: Thai/English, light/dark/system, nine accent colors plus a custom color picker with HEX input, optional Glassmorphism UI with 0–200% transparency, JSON backup/import and browser notifications. Custom accents and glass preferences persist per account and in backups; the former rainbow option retains its original color as a custom accent when imported. Profiles without glass preferences keep the effect disabled and use a default transparency of 55% when it is enabled.
 - Settings → Trash: deleted habits, tasks, notes, schedule activities and focus categories retain their original data until restored or permanently deleted. Search by name/type, see deletion dates and confirm permanent deletion. There is no automatic expiry. Trash is included in JSON backups and uses existing per-account cloud records without a database migration. Restoring overlapping activities or duplicate category names is blocked until the active item is adjusted. Saved focus sessions remain intact when a category is deleted.
 - Supabase Auth: account creation, email/password login, session persistence, sign-out and email-verified password recovery.
 

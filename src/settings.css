@@ -1,0 +1,263 @@
+/* Match text controls while keeping icon controls and color choices compact. */
+:root[data-ui]:has(.page-settings) :is(.page-settings,.modal) {
+ --settings-control-height:44px;
+ --settings-icon-size:36px;
+ --settings-slider-height:36px;
+}
+@media(max-width:700px) {
+ :root[data-ui]:has(.page-settings) :is(.page-settings,.modal) {
+  --settings-control-height:48px;
+  --settings-icon-size:44px;
+  --settings-slider-height:44px;
+ }
+}
+
+:root[data-ui]:has(.page-settings) :is(.page-settings,.modal) :where(
+ button,
+ input:where(:not([type=checkbox],[type=radio],[type=hidden],[type=file])),
+ select,
+ textarea,
+ .native-date-field,
+ .native-select-field,
+ .search-input
+) {
+ box-sizing:border-box;
+ height:var(--settings-control-height);
+ min-height:var(--settings-control-height);
+ max-height:var(--settings-control-height);
+}
+
+:root[data-ui]:has(.page-settings) :is(.page-settings,.modal) button {
+ padding-block:0;
+ line-height:1.35;
+}
+
+/* Date, select and search wrappers own the border and overall height. */
+:root[data-ui]:has(.page-settings) :is(.page-settings,.modal) :is(
+ .native-date-field>input,
+ .native-select-field>select,
+ .search-input>input
+) {
+ height:100%;
+ min-height:0;
+ max-height:100%;
+ padding-block:0;
+}
+
+:root[data-ui]:has(.page-settings) :is(.page-settings,.modal) .icon-btn {
+ width:var(--settings-icon-size);
+ min-width:var(--settings-icon-size);
+ height:var(--settings-icon-size);
+ min-height:var(--settings-icon-size);
+ max-height:var(--settings-icon-size);
+ padding:0;
+}
+
+:root[data-ui] .page-settings .accent-picker {
+ grid-template-columns:repeat(5,minmax(0,1fr));
+ width:100%;
+ max-width:280px;
+}
+@media(min-width:701px) {
+ :root[data-ui] .page-settings .accent-picker {
+  grid-template-columns:repeat(10,minmax(0,1fr));
+  gap:4px;
+  max-width:512px;
+  margin-inline:auto;
+ }
+}
+:root[data-ui] .page-settings .accent-picker button {
+ width:min(44px,100%);
+ height:44px;
+ min-height:44px;
+ max-height:44px;
+}
+:root[data-ui] .page-settings .accent-dot {
+ width:32px;
+ height:32px;
+}
+
+:root[data-ui] .page-settings .glass-switch {
+ width:48px;
+ min-width:48px;
+ padding:0;
+}
+:root[data-ui] .page-settings .glass-switch::before {inset:calc((var(--settings-control-height) - 28px) / 2) 0}
+:root[data-ui] .page-settings .glass-switch[aria-checked=true]>span {transform:translateX(20px)}
+
+:root[data-ui]:has(.page-settings) :is(.page-settings,.modal) input[type=range] {
+ height:var(--settings-slider-height);
+ min-height:var(--settings-slider-height);
+ max-height:var(--settings-slider-height);
+}
+
+:root[data-ui] .page-settings .segmented {
+ box-sizing:border-box;
+ height:var(--settings-control-height);
+ min-height:var(--settings-control-height);
+ padding:3px;
+ border-width:1px;
+ border-style:solid;
+ align-items:center;
+}
+:root[data-ui] .page-settings .segmented>button {
+ min-width:0;
+ height:calc(var(--settings-control-height) - 8px);
+ min-height:calc(var(--settings-control-height) - 8px);
+ max-height:calc(var(--settings-control-height) - 8px);
+ padding-inline:10px;
+ white-space:nowrap;
+ gap:6px;
+}
+@media(max-width:400px) {
+ :root[data-ui] .page-settings .segmented>button {
+  gap:4px;
+  padding-inline:4px;
+  font-size:.75rem;
+ }
+ :root[data-ui] .page-settings .segmented>button>svg {width:14px;height:14px}
+}
+
+/* A quiet, consistent frame for personal settings. Surfaces keep the glass opacity. */
+:root[data-ui] .page-settings {
+ --settings-edge:color-mix(in srgb,var(--text) 11%,transparent);
+ --settings-soft-edge:color-mix(in srgb,var(--text) 7%,transparent);
+}
+:root[data-ui] .page-settings>.page-heading {
+ align-items:center;
+ flex-wrap:nowrap;
+ padding-block:8px 12px;
+}
+:root[data-ui] .page-settings>.page-heading h1 {
+ font-size:2rem;
+ font-weight:600;
+ letter-spacing:-.045em;
+ margin:0 0 8px;
+}
+:root[data-ui] .page-settings>.page-heading p {font-size:.8125rem;line-height:1.7;margin:0}
+:root[data-ui] .page-settings .settings-layout.settings-only {
+ gap:24px;
+ align-items:start;
+}
+:root[data-ui] .page-settings .settings-layout :is(.stack,.profile-form-stack) {gap:24px}
+:root[data-ui] .page-settings .settings-layout .panel {
+ padding:26px;
+ border-radius:24px;
+ border-color:var(--settings-edge);
+ background:linear-gradient(135deg,color-mix(in srgb,var(--text) 2%,transparent),transparent 60%),var(--surface);
+ box-shadow:0 8px 28px #00000008,inset 0 1px 0 color-mix(in srgb,var(--text) 4%,transparent);
+}
+.settings-section-heading {display:flex;align-items:flex-start;gap:13px;margin-bottom:24px;min-width:0}
+.settings-section-icon {
+ display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;
+ border:1px solid var(--settings-edge);border-radius:13px;
+ background:var(--surface-2);color:var(--highlight,var(--accent));
+ box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 3%,transparent);
+}
+.settings-section-copy {min-width:0;flex:1;padding-top:1px}
+:root[data-ui] .page-settings .settings-section-copy h2 {font-size:.9375rem;font-weight:600;line-height:1.5;letter-spacing:-.02em;margin:0}
+.settings-section-copy p {font-size:.75rem;line-height:1.75;color:var(--muted);margin:4px 0 0;overflow-wrap:anywhere}
+.settings-section-badge {
+ display:grid;place-items:center;flex-shrink:0;min-width:27px;height:27px;
+ padding-inline:7px;border:1px solid var(--settings-edge);border-radius:9px;
+ font-size:.6875rem;color:var(--muted);font-variant-numeric:tabular-nums;
+}
+:root[data-ui] .page-settings .field-grid {gap:18px 16px}
+:root[data-ui] .page-settings .field {gap:9px;margin-bottom:0}
+:root[data-ui] .page-settings .field>span {font-size:.6875rem;font-weight:500;color:var(--muted);line-height:1.6}
+:root[data-ui] .page-settings .profile-edit-panel form>fieldset {row-gap:20px}
+:root[data-ui] .page-settings .field>:is(input,.native-date-field,.native-select-field) {
+ min-width:0;
+ border:1px solid var(--settings-edge);
+ border-radius:11px;
+ background:var(--surface-2);
+ box-shadow:inset 0 1px 2px #00000003;
+ font-size:.8125rem;
+ padding-inline:13px;
+}
+:root[data-ui] .page-settings .field>input[readonly] {color:var(--muted);font-variant-numeric:tabular-nums}
+:root[data-ui] .page-settings .form-footer {
+ display:flex;justify-content:flex-end;gap:10px;
+ margin:0;padding-top:18px;border-top:1px solid var(--settings-soft-edge);
+}
+:root[data-ui] .page-settings .form-footer button {min-width:112px;flex:none}
+:root[data-ui] .page-settings .settings-layout :is(.primary,.secondary) {
+ border-radius:11px;font-size:.8125rem;font-weight:500;
+}
+:root[data-ui] .page-settings .settings-layout .secondary {border-color:var(--settings-edge);background:var(--surface);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 3%,transparent)}
+:root[data-ui] .page-settings .settings-layout .primary {box-shadow:inset 0 1px 0 #ffffff12,0 3px 9px #0000000a}
+:root[data-ui] .page-settings .settings-appearance {position:relative;isolation:isolate}
+.settings-appearance::before {
+ content:'';position:absolute;top:-1px;left:26px;right:26px;height:1px;pointer-events:none;
+ background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--highlight,var(--accent)) 55%,transparent),transparent);
+}
+.settings-preference-group+.settings-preference-group {margin-top:24px}
+:root[data-ui] .page-settings .settings-preference-group .setting-label {font-size:.6875rem;font-weight:500;margin:0 0 12px;color:var(--muted)}
+:root[data-ui] .page-settings .segmented {gap:4px;border-radius:12px;border-color:var(--settings-edge);background:var(--surface-2)}
+:root[data-ui] .page-settings .segmented>button {border-radius:8px;font-size:.75rem;font-weight:500}
+:root[data-ui] .page-settings .segmented>button.selected {
+ color:var(--text);background:var(--surface);
+ box-shadow:0 2px 5px #00000008,inset 0 0 0 1px var(--settings-edge);
+}
+:root[data-ui] .page-settings .accent-picker button {background:transparent;border-color:transparent}
+:root[data-ui] .page-settings .accent-dot {box-shadow:inset 0 0 0 1px #ffffff12;max-width:100%;aspect-ratio:1;height:auto}
+:root[data-ui] .page-settings .accent-dot.selected {outline:1px solid color-mix(in srgb,var(--text) 65%,transparent);outline-offset:3px;box-shadow:inset 0 0 0 1px #00000014}
+:root[data-ui] .page-settings .glass-setting {margin-top:24px;padding-top:22px;border-color:var(--settings-soft-edge)}
+:root[data-ui] .page-settings .glass-setting-icon {background:var(--surface-2);color:var(--highlight,var(--accent));border:1px solid var(--settings-edge);border-radius:11px;width:34px;height:34px}
+:root[data-ui] .page-settings .glass-setting-copy h3 {font-size:.8125rem;font-weight:500}
+:root[data-ui] .page-settings .glass-setting-copy p {font-size:.6875rem;line-height:1.7;margin-top:4px}
+:root[data-ui] .page-settings .glass-material-preview {height:128px;border-radius:16px;border-color:var(--settings-edge);margin-top:20px}
+:root[data-ui] .page-settings .glass-preview-back {top:16px;left:12%;width:64%;height:80px;border-radius:14px}
+:root[data-ui] .page-settings .glass-preview-front {top:46px;left:18%;width:74%;height:62px;border-radius:14px;padding:13px;box-shadow:0 10px 24px #00000012}
+:root[data-ui] .page-settings .glass-setting-caption {font-size:.625rem;margin-top:10px}
+:root[data-ui] .page-settings .glass-transparency-control {margin-top:20px;padding-top:16px;border-color:var(--settings-soft-edge)}
+:root[data-ui] .page-settings .glass-range-heading {font-size:.75rem;font-weight:500}
+:root[data-ui] .page-settings .glass-range-heading output {font-size:.6875rem;border:0;background:transparent;padding:0;min-width:0;color:var(--text)}
+:root[data-ui] .page-settings .glass-range-ends {font-size:.625rem}
+:root[data-ui] .page-settings .settings-language .settings-section-heading {margin-bottom:20px}
+:root[data-ui] .page-settings .settings-notifications>.secondary {margin-top:0}
+:root[data-ui] .page-settings .backup-actions {margin-top:0;gap:12px}
+:root[data-ui] .page-settings .backup-actions button {flex:1;min-width:0}
+:root[data-ui] .page-settings .trash-panel>.muted {font-size:.75rem;line-height:1.8;margin:0}
+:root[data-ui] .page-settings .trash-panel .settings-section-heading {margin-bottom:16px}
+:root[data-ui] .page-settings .trash-panel .empty {flex-direction:row;justify-content:flex-start;gap:12px;padding:16px;margin-top:18px;border-radius:13px;background:var(--surface-2);text-align:left}
+:root[data-ui] .page-settings .trash-panel .empty>svg {width:20px;height:20px;flex-shrink:0;color:var(--muted)}
+:root[data-ui] .page-settings .trash-panel .empty p {font-size:.75rem;line-height:1.7}
+:root[data-ui] .page-settings .settings-session {display:flex;align-items:center;justify-content:space-between;gap:24px;grid-column:1/-1}
+.settings-session-copy {flex:1;min-width:0}
+:root[data-ui] .page-settings .settings-session .settings-section-heading {margin-bottom:0}
+:root[data-ui] .page-settings .settings-session-note {font-size:.6875rem;line-height:1.8;margin:8px 0 0 53px}
+:root[data-ui] .page-settings .settings-session-actions {display:flex;gap:10px;margin:0;flex-shrink:0}
+:root[data-ui] .page-settings .settings-session-actions button {min-width:132px}
+@media(min-width:701px) and (max-width:1199px) {
+ :root[data-ui] .page-settings .settings-layout.settings-only {grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:700px) {
+ :root[data-ui] .page-settings>.page-heading {padding-block:2px 8px;gap:14px}
+ :root[data-ui] .page-settings>.page-heading h1 {font-size:1.625rem}
+ :root[data-ui] .page-settings .settings-layout.settings-only,:root[data-ui] .page-settings .settings-layout :is(.stack,.profile-form-stack) {gap:18px}
+ :root[data-ui] .page-settings .settings-layout .panel {padding:20px;border-radius:21px}
+ .settings-section-heading {gap:11px;margin-bottom:22px}
+ .settings-section-icon {width:36px;height:36px;border-radius:12px}
+ :root[data-ui] .page-settings .settings-section-copy h2 {font-size:.875rem}
+ .settings-section-copy p {font-size:.6875rem}
+ :root[data-ui] .page-settings .field-grid {gap:16px 12px}
+ :root[data-ui] .page-settings .field>:is(input,.native-date-field,.native-select-field) {font-size:.875rem;padding-inline:12px}
+ :root[data-ui] .page-settings .form-footer {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding-top:16px}
+ :root[data-ui] .page-settings .form-footer button {min-width:0;width:100%}
+ :root[data-ui] .page-settings .settings-layout .segmented>button {font-size:.75rem}
+ :root[data-ui] .page-settings .accent-picker {margin-inline:auto}
+ :root[data-ui] .page-settings .glass-setting-heading {gap:9px}
+ :root[data-ui] .page-settings .glass-setting-icon {width:30px;height:30px;border-radius:10px}
+ :root[data-ui] .page-settings .glass-setting-copy h3 {font-size:.75rem}
+ :root[data-ui] .page-settings .glass-material-preview {height:120px}
+ :root[data-ui] .page-settings .glass-preview-front {top:42px;left:16%;width:76%;height:59px}
+ :root[data-ui] .page-settings .settings-session {flex-direction:column;align-items:stretch;gap:20px}
+ :root[data-ui] .page-settings .settings-session-note {margin-left:47px}
+ :root[data-ui] .page-settings .settings-session-actions {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:10px}
+ :root[data-ui] .page-settings .settings-session-actions:not(.has-demo-reset) {grid-template-columns:minmax(0,1fr)}
+ :root[data-ui] .page-settings .settings-session-actions button {min-width:0;padding-inline:8px;font-size:.75rem}
+}
+@media(max-width:480px) {
+ :root[data-ui] .page-settings .profile-details-grid>.field:nth-child(n+5) {grid-column:1/-1}
+}

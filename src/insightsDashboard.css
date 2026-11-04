@@ -50,8 +50,8 @@
 :root[data-ui=v26] .insights-delta.negative {color:var(--muted)}
 :root[data-ui=v26] .insights-chart-legend {display:flex;flex-wrap:wrap;align-items:center;gap:16px;font-size:.625rem;color:var(--muted);margin-bottom:8px}
 :root[data-ui=v26] .insights-chart-legend>span {display:flex;align-items:center;gap:6px}
-:root[data-ui=v26] .insights-chart-legend i,:root[data-ui=v26] .insights-chart-tooltip i {width:7px;height:7px;flex-shrink:0;border-radius:50%;background:var(--insight-cyan)}
-:root[data-ui=v26] .insights-chart-legend>span:nth-child(2) i,:root[data-ui=v26] .insights-chart-tooltip>div:last-child i {background:var(--insight-green)}
+:root[data-ui=v26] .insights-chart-legend i {width:7px;height:7px;flex-shrink:0;border-radius:50%;background:var(--insight-cyan)}
+:root[data-ui=v26] .insights-chart-legend>span:nth-child(2) i {background:var(--insight-green)}
 :root[data-ui=v26] .insights-line-plot {position:relative;width:100%;min-width:0;margin-top:auto;color:var(--insight-cyan)}
 :root[data-ui=v26] .insights-line-plot>svg {display:block;overflow:visible}
 :root[data-ui=v26] .insights-chart-axis,:root[data-ui=v26] .insights-x-label {fill:var(--muted);font-size:10px}
@@ -66,10 +66,6 @@
 :root[data-ui=v26] .insights-cursor-halo {fill:currentColor;fill-opacity:.2}
 :root[data-ui=v26] .insights-point-hit {position:absolute;top:20px;height:180px;padding:0;min-height:0;border:0;border-radius:3px;background:transparent;cursor:crosshair}
 :root[data-ui=v26] .insights-point-hit:focus-visible {outline:2px solid var(--insight-cyan);outline-offset:-2px;background:color-mix(in srgb,var(--insight-cyan) 4%,transparent)}
-:root[data-ui=v26] .insights-chart-tooltip {position:absolute;top:8px;width:172px;z-index:2;pointer-events:none;padding:11px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);box-shadow:0 4px 18px #00000012;color:var(--text);font-size:.625rem}
-:root[data-ui=v26] .insights-chart-tooltip>span {display:block;color:var(--muted);margin-bottom:9px}
-:root[data-ui=v26] .insights-chart-tooltip>div {display:flex;align-items:center;gap:6px;margin-top:7px;line-height:1.6}
-:root[data-ui=v26] .insights-chart-tooltip strong {font-weight:600;margin-left:auto;max-width:85px;overflow-wrap:anywhere}
 :root[data-ui=v26] .insights-chart-empty {position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:9px;max-width:85%;width:max-content;padding:12px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--muted);font-size:.6875rem;text-align:center;pointer-events:none}
 :root[data-ui=v26] .insights-chart-empty>svg {color:var(--insight-cyan)}
 :root[data-ui=v26] .insights-point-detail {display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid var(--border);margin-top:4px}

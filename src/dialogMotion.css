@@ -1,0 +1,55 @@
+/* Blur the page independently of the glass transparency slider. */
+:root[data-ui] .overlay:has(>.modal),
+:root[data-ui] dialog.modal[open]::backdrop {
+ backdrop-filter:blur(12px);
+ -webkit-backdrop-filter:blur(12px);
+}
+/* Animate the popup surface, keeping its content and glass effects intact. */
+:root[data-ui] .overlay {
+ animation:popup-backdrop-in 220ms ease-out both;
+}
+:root[data-ui] .overlay>.modal,
+:root[data-ui] dialog.modal[open] {
+ transform-origin:center;
+ animation:popup-zoom-in 260ms cubic-bezier(.22,1,.36,1) both;
+}
+:root[data-ui] .overlay.is-closing {
+ animation:popup-backdrop-out var(--dialog-exit-duration,160ms) ease-in both;
+}
+:root[data-ui] .overlay.is-closing>.modal {
+ animation:popup-zoom-out var(--dialog-exit-duration,160ms) cubic-bezier(.4,0,1,1) both;
+ pointer-events:none;
+}
+:root[data-ui] dialog.modal[open]::backdrop {
+ animation:popup-backdrop-in 180ms ease-out both;
+}
+:root[data-ui] :is(.notes-select-menu,.profile-action-menu) {
+ transform-origin:top center;
+ animation:popup-menu-in 160ms cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes popup-zoom-in {
+ from {opacity:0;transform:translateY(14px) scale(.91)}
+ to {opacity:1;transform:none}
+}
+@keyframes popup-zoom-out {
+ from {opacity:1;transform:none}
+ to {opacity:0;transform:translateY(8px) scale(.95)}
+}
+@keyframes popup-backdrop-in {from {opacity:0}to {opacity:1}}
+@keyframes popup-backdrop-out {from {opacity:1}to {opacity:0}}
+@keyframes popup-menu-in {
+ from {opacity:0;transform:translateY(-4px) scale(.96)}
+ to {opacity:1;transform:none}
+}
+@media(prefers-reduced-motion:reduce) {
+ :root[data-ui] :is(.overlay,.overlay>.modal,dialog.modal[open],.notes-select-menu,.profile-action-menu),
+ :root[data-ui] dialog.modal[open]::backdrop {animation:none!important}
+}
+@media(prefers-reduced-transparency:reduce) {
+ :root[data-ui] .overlay:has(>.modal),
+ :root[data-ui] dialog.modal[open]::backdrop {
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);
+ }
+}
