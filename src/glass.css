@@ -86,7 +86,7 @@
 :root[data-ui][data-glass=on] :is(
  .panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,
  .desktop-dock,.desktop-topbar,.topbar,.sidebar,.mobile-tabbar,
- .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview
+ .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches
 ) {
  background:linear-gradient(145deg,var(--glass-sheen),transparent 60%),var(--glass-panel);
  border-color:var(--glass-edge);box-shadow:var(--glass-shadow);
@@ -100,12 +100,13 @@
 :root[data-ui][data-glass=on] :is(.panel .panel,.panel .habit-card,.panel .dashboard-note-preview,.desktop-header-controls,.sidebar-focus,.task-toolbar,.notes-toolbar) {background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:inset 0 1px 0 var(--glass-sheen)}
 :root[data-ui][data-glass=on] :is(
  .desktop-habit-dates .date-strip,.desktop-date-icon,
- .filter-pills button,.day-picker button,.notes-folder-row,.desktop-header-controls
+ .filter-pills button,.day-picker button,.notes-folder-row,.desktop-header-controls,.level-badge
 ) {
  background:linear-gradient(145deg,var(--glass-sheen),transparent 60%),var(--surface-2);
  border-color:var(--glass-edge);
  box-shadow:inset 0 1px 0 var(--glass-sheen);
 }
+:root[data-ui][data-glass=on] .level-badge {border:1px solid var(--glass-edge)}
 :root[data-ui][data-glass=on] :is(.desktop-profile-button,.desktop-language:hover,.desktop-account-button:hover) {
  background:var(--surface-2);border-color:var(--glass-edge);box-shadow:inset 0 1px 0 var(--glass-sheen);
 }
@@ -119,7 +120,7 @@
 :root[data-ui][data-glass=on] .mobile-edge-dock {background:linear-gradient(145deg,var(--glass-sheen),transparent 60%),var(--glass-raised);border-color:var(--glass-edge);box-shadow:var(--glass-shadow);backdrop-filter:blur(calc(16px * var(--glass-blur-multiplier,1)));-webkit-backdrop-filter:blur(calc(16px * var(--glass-blur-multiplier,1)))}
 
 /* Active and accent-filled controls use tinted glass instead of solid paint. */
-:root[data-ui][data-glass=on] :is(.dock-button.active,.mobile-edge-button.active,.desktop-account-button.active,.segmented>button.selected,.filter-pills button.selected,.day-picker button.selected,.date-days button.selected) {
+:root[data-ui][data-glass=on] :is(.dock-button.active,.mobile-edge-button.active,.desktop-account-button.active,.segmented>button.selected,.insights-chart-switches>button.selected,.filter-pills button.selected,.day-picker button.selected,.date-days button.selected) {
  background:var(--glass-selected);color:var(--highlight,var(--accent));border-color:color-mix(in srgb,var(--accent) 55%,var(--glass-edge));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent);
 }
 :root[data-ui][data-glass=on] :is(button.primary,button.page-add-button:where(:not([data-appearance=quiet])),button.mobile-add-item,button.mobile-nav-add,button.mobile-edge-add,button.profile-avatar-edit,.creation-dialog button.primary) {
@@ -164,7 +165,7 @@
  .panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,
  .desktop-dock,.desktop-topbar,.topbar,.sidebar,.mobile-tabbar,.mobile-edge-dock,
  .modal,.icon-more-dialog,.toast,.floating-timer,.glass-preview-sheet,
- .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview
+ .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches
 ) {
  background:var(--glass-reflection),var(--glass-panel);
  border-color:var(--glass-edge);
@@ -175,10 +176,10 @@
 :root[data-ui][data-glass=on][data-theme=dark] :is(
  .secondary,.dock-button,.mobile-edge-button,.avatar.small,.desktop-header-controls,.desktop-profile-button,
  .settings-section-icon,.glass-setting-icon,
- .native-date-field,.native-select-field,.search-input,.segmented,
+ .native-date-field,.native-select-field,.search-input,.segmented,.insights-chart-switches,
  .desktop-habit-dates .date-strip,.desktop-date-icon,
  .filter-pills button,.day-picker button,.notes-folder-row,
- .account-detail,.profile-overview-stats>div,
+ .account-detail,.profile-overview-stats>div,.level-badge,
  .field>input:where(:not([type=range],[type=checkbox],[type=radio],[type=hidden],[type=file])),
  .field>textarea
 ) {
@@ -190,7 +191,7 @@
 }
 :root[data-ui][data-glass=on][data-theme=dark] :is(
  button.primary:where(:not(.danger-button)),button.page-add-button:where(:not([data-appearance=quiet])),
- .dock-button.active,.mobile-edge-button.active,.desktop-account-button.active,.segmented>button.selected,
+ .dock-button.active,.mobile-edge-button.active,.desktop-account-button.active,.segmented>button.selected,.insights-chart-switches>button.selected,
  .filter-pills button.selected,.day-picker button.selected,.date-days button.selected strong,
  .notes-folder-row.selected
 ) {
@@ -253,7 +254,7 @@
 }
 @media(prefers-reduced-transparency:reduce) {
  :root[data-ui][data-glass=on] {--glass-material-opacity:100%;--glass-edge:var(--border)}
- :root[data-ui][data-glass=on] :is(.panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,.desktop-dock,.desktop-topbar,.sidebar,.mobile-tabbar,.mobile-edge-dock,.modal,.icon-more-dialog,.toast,.floating-timer,.desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.dock-count,.mobile-edge-count),.glass-setting[data-enabled=true] .glass-preview-sheet {backdrop-filter:none;-webkit-backdrop-filter:none}
+ :root[data-ui][data-glass=on] :is(.panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,.desktop-dock,.desktop-topbar,.sidebar,.mobile-tabbar,.mobile-edge-dock,.modal,.icon-more-dialog,.toast,.floating-timer,.desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches,.dock-count,.mobile-edge-count),.glass-setting[data-enabled=true] .glass-preview-sheet {backdrop-filter:none;-webkit-backdrop-filter:none}
  .glass-setting[data-enabled=true] .glass-preview-sheet {background:var(--surface)}
  :root[data-ui][data-glass=on] :is(.notes-select-menu,.profile-action-menu,[role=listbox],[role=menu]) {backdrop-filter:none;-webkit-backdrop-filter:none}
 }
