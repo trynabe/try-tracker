@@ -86,7 +86,7 @@
 :root[data-ui][data-glass=on] :is(
  .panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,
  .desktop-dock,.desktop-topbar,.topbar,.sidebar,.mobile-tabbar,
- .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches
+ .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches,:where(.focus-panel) .timer-orbit
 ) {
  background:linear-gradient(145deg,var(--glass-sheen),transparent 60%),var(--glass-panel);
  border-color:var(--glass-edge);box-shadow:var(--glass-shadow);
@@ -100,7 +100,7 @@
 :root[data-ui][data-glass=on] :is(.panel .panel,.panel .habit-card,.panel .dashboard-note-preview,.desktop-header-controls,.sidebar-focus,.task-toolbar,.notes-toolbar) {background:var(--surface);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:inset 0 1px 0 var(--glass-sheen)}
 :root[data-ui][data-glass=on] :is(
  .desktop-habit-dates .date-strip,.desktop-date-icon,
- .filter-pills button,.day-picker button,.notes-folder-row,.desktop-header-controls,.level-badge
+ .filter-pills button,.day-picker button,.notes-folder-row,.desktop-header-controls,.level-badge,.focus-category-trigger
 ) {
  background:linear-gradient(145deg,var(--glass-sheen),transparent 60%),var(--surface-2);
  border-color:var(--glass-edge);
@@ -165,7 +165,7 @@
  .panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,
  .desktop-dock,.desktop-topbar,.topbar,.sidebar,.mobile-tabbar,.mobile-edge-dock,
  .modal,.icon-more-dialog,.toast,.floating-timer,.glass-preview-sheet,
- .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches
+ .desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches,:where(.focus-panel) .timer-orbit
 ) {
  background:var(--glass-reflection),var(--glass-panel);
  border-color:var(--glass-edge);
@@ -176,7 +176,7 @@
 :root[data-ui][data-glass=on][data-theme=dark] :is(
  .secondary,.dock-button,.mobile-edge-button,.avatar.small,.desktop-header-controls,.desktop-profile-button,
  .settings-section-icon,.glass-setting-icon,
- .native-date-field,.native-select-field,.search-input,.segmented,.insights-chart-switches,
+ .native-date-field,.native-select-field,.search-input,.segmented,.insights-chart-switches,.focus-category-trigger,
  .desktop-habit-dates .date-strip,.desktop-date-icon,
  .filter-pills button,.day-picker button,.notes-folder-row,
  .account-detail,.profile-overview-stats>div,.level-badge,
@@ -224,6 +224,10 @@
  box-shadow:inset 0 1px 0 color-mix(in srgb,#cbdcf02c var(--glass-reflection-opacity,100%),transparent),inset 0 -1px 0 color-mix(in srgb,#b4c9e32c var(--glass-reflection-opacity,100%),transparent);
 }
 
+:root[data-ui=v26][data-glass=on] .focus-panel .timer-orbit.is-active {
+ border-color:color-mix(in srgb,var(--highlight,var(--accent)) 45%,var(--glass-edge));box-shadow:var(--glass-shadow);
+}
+
 /* Keep date selection and keyboard focus around the number tile. */
 :root[data-ui=v26] .desktop-habit-dates .date-days>button.selected {
  background:transparent;border:0;box-shadow:none;
@@ -254,7 +258,7 @@
 }
 @media(prefers-reduced-transparency:reduce) {
  :root[data-ui][data-glass=on] {--glass-material-opacity:100%;--glass-edge:var(--border)}
- :root[data-ui][data-glass=on] :is(.panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,.desktop-dock,.desktop-topbar,.sidebar,.mobile-tabbar,.mobile-edge-dock,.modal,.icon-more-dialog,.toast,.floating-timer,.desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches,.dock-count,.mobile-edge-count),.glass-setting[data-enabled=true] .glass-preview-sheet {backdrop-filter:none;-webkit-backdrop-filter:none}
+ :root[data-ui][data-glass=on] :is(.panel,.stat-card,.habit-card,.notes-item,.note-card,.small-panel,.desktop-dock,.desktop-topbar,.sidebar,.mobile-tabbar,.mobile-edge-dock,.modal,.icon-more-dialog,.toast,.floating-timer,.desktop-habit-dates,.notes-browser,.notes-empty,.insights-metric-card,.dashboard-note-preview,.insights-chart-switches,:where(.focus-panel) .timer-orbit,.dock-count,.mobile-edge-count),.glass-setting[data-enabled=true] .glass-preview-sheet {backdrop-filter:none;-webkit-backdrop-filter:none}
  .glass-setting[data-enabled=true] .glass-preview-sheet {background:var(--surface)}
  :root[data-ui][data-glass=on] :is(.notes-select-menu,.profile-action-menu,[role=listbox],[role=menu]) {backdrop-filter:none;-webkit-backdrop-filter:none}
 }

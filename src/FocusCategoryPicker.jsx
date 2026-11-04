@@ -5,7 +5,7 @@ import {EntityIcon} from './icons';
 import {habitColor} from './habitVisuals';
 
 export default function FocusCategoryPicker({subjects,sessions,timer,today,activeFocusSeconds,t,busy,Modal,onClose,onSelect,onEdit,onDelete,onAdd}){
- return <Modal title={t('selectFocusCategory')} onClose={onClose} footer={<button type="button" className="secondary" disabled={busy} onClick={onAdd}><Plus size={16}/>{t('addSubject')}</button>}>
+ return <Modal title={t('selectFocusCategory')} onClose={onClose} footer={<button type="button" className="secondary focus-picker-add" disabled={busy} onClick={onAdd}><Plus size={16}/>{t('addSubject')}</button>}>
   <div className="focus-picker-list">
    {subjects.map(subject=>{
     const selected=timer?.subjectId===subject.id&&timer.phase!=='break';

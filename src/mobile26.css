@@ -135,21 +135,21 @@
  :root[data-ui=v26] .desktop-habit-dates .date-days strong {width:32px;height:30px;font-size:16px}
  :root[data-ui=v26] .desktop-habit-dates .date-days .selected strong {width:32px;border-radius:9px}
  :root[data-ui=v26] .desktop-habit-dates .date-days small {font-size:9px}
- :root[data-ui=v26] .focus-panel {padding:18px;gap:16px;border-radius:18px}
+ :root[data-ui=v26] .focus-panel {padding:16px;gap:16px;border-radius:18px}
  :root[data-ui=v26] .focus-panel>.section-head h2 {font-size:13px}
  :root[data-ui=v26] .focus-panel>.section-head>.accent-text {font-size:11px}
  :root[data-ui=v26] .focus-timer-pane {gap:16px}
  :root[data-ui=v26] .focus-panel .segmented {display:flex;padding:4px;gap:4px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border)}
  :root[data-ui=v26] .focus-panel .segmented button {flex:1;min-height:36px;font-size:12px;border-radius:8px;padding:6px}
  :root[data-ui=v26] .focus-panel .segmented button.selected {background:var(--surface);color:var(--text)}
- :root[data-ui=v26] .focus-panel .timer-orbit {min-height:230px;padding:24px 12px;border-radius:14px}
+ :root[data-ui=v26] .focus-panel .timer-orbit {min-height:230px;padding:24px 16px;border-radius:14px}
  :root[data-ui=v26] .focus-panel .timer-circle {gap:18px}
  :root[data-ui=v26] .focus-panel .timer-circle>strong {font-size:clamp(36px,10vw,48px)}
  :root[data-ui=v26] .focus-panel .timer-circle .eyebrow {font-size:11px}
- :root[data-ui=v26] .focus-category-trigger {max-width:100%;min-height:54px;padding:9px 10px;gap:9px}
- :root[data-ui=v26] .focus-category-trigger strong {font-size:12px}
- :root[data-ui=v26] .focus-category-trigger small {font-size:10px}
- :root[data-ui=v26] .focus-trigger-icon {width:30px;height:30px}
+ :root[data-ui=v26] .focus-category-trigger {max-width:100%;min-height:60px;padding:10px 12px;gap:12px}
+ :root[data-ui=v26] .focus-category-trigger strong {font-size:13px;line-height:1.4}
+ :root[data-ui=v26] .focus-category-trigger small {font-size:11px;line-height:1.4}
+ :root[data-ui=v26] .focus-trigger-icon {width:32px;height:32px}
  :root[data-ui=v26] .focus-layout>.usage-history>.panel {padding:18px;border-radius:18px}
  :root[data-ui=v26] .focus-layout .history-list .row-main>strong {font-size:12px}
  :root[data-ui=v26] .focus-layout .history-list .row-meta,:root[data-ui=v26] .focus-layout .history-duration {font-size:11px}

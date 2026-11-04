@@ -99,5 +99,3 @@
 
 .calendar-day-count {font-size:.8rem;margin-bottom:16px}
 .calendar-day-dialog .calendar-agenda-list {max-height:50dvh;overflow-y:auto}
-
-.modal>footer>.calendar-day-add {grid-column:2}
